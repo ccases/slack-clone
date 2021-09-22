@@ -1,10 +1,10 @@
-import logo from "./logo.svg";
 import "./App.css";
+import SignUp from "./components/SignUp/SignUp";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">Login</header>
+      <SignUp />
     </div>
   );
 }
