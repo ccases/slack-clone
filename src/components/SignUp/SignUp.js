@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from "react";
 // import slack-logo from "../../assets/slack-logo.png"
+import axios from "axios";
 import "./SignUp.css";
 
 function SignUp(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isLoading, setLoading] = useState(false);
-  const [error, setError] = useState({ errorMsg: "", error: false });
-
-  async function postData(url = "", data = {}) {
-    const response = await fetch(url, {
-      method: "POST",
-      redirect: "follow",
-      body: JSON.stringify(data),
-    });
-    return response.json();
-  }
+  // const [isLoading, setLoading] = useState(false);
+  // const [error, setError] = useState({ errorMsg: "", error: false });
 
   useEffect(() => {
     // validate here
@@ -30,21 +22,19 @@ function SignUp(props) {
   };
   const submitHandler = (e) => {
     // put fetch here
+    const url = "http://206.189.91.54//api/v1/auth/";
     e.preventDefault();
-    if (isMatching(password, confirmPassword)) {
-      alert("Matching");
-      postData("http://206.189.91.54//api/v1/auth/", {
-        email: { email },
-        password: { password },
-        password_confirmation: { confirmPassword },
+    axios
+      .post(url, {
+        email: email,
+        password: password,
       })
-        .then((data) => {
-          console.log(data); // JSON data parsed by `data.json()` call
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    } else alert("Not matching");
+      .then((res) => {
+        console.log("success: " + res);
+      })
+      .catch((e) => {
+        console.log("error: " + e);
+      });
   };
 
   return (
@@ -91,3 +81,15 @@ function SignUp(props) {
 }
 
 export default SignUp;
+
+// postData("http://206.189.91.54//api/v1/auth/", {
+//   email: { email },
+//   password: { password },
+//   password_confirmation: { confirmPassword },
+// })
+//   .then((data) => {
+//     console.log("Success: " + data); // JSON data parsed by `data.json()` call
+//   })
+//   .catch((e) => {
+//     console.log(e);
+//   });
