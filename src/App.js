@@ -1,12 +1,13 @@
 import "./App.css";
 import SignUp from "./components/SignUp/SignUp";
-import Chat from "./components/Chat/Chat";
-import LoginMock from "./components/LoginMock";
+import LogIn from "./components/LogIn/LogIn";
 import { useEffect, useState } from "react";
 import APIHeaders from "./APIContext";
+import AllUsers from "./AllUsersContext";
 
 function App() {
   const [appAPIHeaders, setAppAPIHeaders] = useState(APIHeaders);
+  const [allUsers, setAllUsers] = useState(AllUsers);
 
   useEffect(() => {
     console.log(appAPIHeaders["access-token"]);
@@ -16,8 +17,9 @@ function App() {
     <div className="App">
       <SignUp />
       <APIHeaders.Provider value={[appAPIHeaders, setAppAPIHeaders]}>
-        <LoginMock />
-        <Chat />
+        <AllUsers.Provider value={[allUsers, setAllUsers]}>
+          <LogIn />
+        </AllUsers.Provider>
       </APIHeaders.Provider>
     </div>
   );
