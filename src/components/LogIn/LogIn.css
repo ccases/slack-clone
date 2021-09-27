@@ -47,6 +47,7 @@ h1 {
 
 .login-container {
   display: flex;
+
   flex-direction: column;
   justify-content: space-evenly;
   height: 50%;
