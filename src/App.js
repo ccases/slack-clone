@@ -8,6 +8,11 @@ import AllUsers from "./AllUsersContext";
 function App() {
   const [appAPIHeaders, setAppAPIHeaders] = useState(APIHeaders);
   const [allUsers, setAllUsers] = useState(AllUsers);
+  //modal
+  const [showModal, setShowModal] = useState(false);
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
 
   useEffect(() => {
     console.log(appAPIHeaders["access-token"]);
@@ -15,7 +20,12 @@ function App() {
 
   return (
     <div className="App">
-      <SignUp />
+      <button onClick={openModal}>Create an account</button>
+      <SignUp
+        onclick={openModal}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
       <APIHeaders.Provider value={[appAPIHeaders, setAppAPIHeaders]}>
         <AllUsers.Provider value={[allUsers, setAllUsers]}>
           <LogIn />
