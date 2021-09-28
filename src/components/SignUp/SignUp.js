@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 // import slack-logo from "../../assets/slack-logo.png"
 import { useSpring, animated } from "react-spring";
-import styled from "styled-components";
 import axios from "axios";
 import "./SignUp.css";
 import signupImage from "../../assets/signup.jpg";

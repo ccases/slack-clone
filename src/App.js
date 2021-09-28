@@ -20,12 +20,13 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={openModal}>Create an account</button>
+      {/* <button onClick={openModal}>Create an account</button>
       <SignUp
         onclick={openModal}
         showModal={showModal}
         setShowModal={setShowModal}
-      />
+
+      /> */}
       <APIHeaders.Provider value={[appAPIHeaders, setAppAPIHeaders]}>
         <AllUsers.Provider value={[allUsers, setAllUsers]}>
           <LogIn />

@@ -1,11 +1,20 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import APIHeaders from "../../APIContext";
+import SignUp from "../../components/SignUp/SignUp";
+import "./LogIn.css";
+import slackLogo from "../../assets/slack-logo.png";
 
 function LogIn() {
   const [username, setUsername] = useState("");
   const [pw, setPw] = useState("");
   const [header, setHeader] = useContext(APIHeaders);
+  //modal
+  const [showModal, setShowModal] = useState(false);
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
+
   useEffect(() => {
     if (header["access-token"] == null) return;
     setTimeout(() => {
@@ -51,27 +60,39 @@ function LogIn() {
   };
 
   return (
-    <div>
-      <strong>Login</strong>
-      <form onSubmit={submitHandler}>
-        <input
-          type="email"
-          placeholder="Email"
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e) => {
-            setPw(e.target.value);
-          }}
-          required
-        />
-        <input type="submit" value="Log In" />
-      </form>
+    <div className="container">
+      <SignUp
+        onclick={openModal}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
+      <img src={slackLogo} alt="Slack Logo" />
+      <div className="login-container">
+        <strong>Login</strong>
+
+        <form onSubmit={submitHandler}>
+          <input
+            type="email"
+            className="email-input"
+            placeholder="Email"
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+            required
+          />
+          <input
+            type="password"
+            className="password-input"
+            placeholder="Password"
+            onChange={(e) => {
+              setPw(e.target.value);
+            }}
+            required
+          />
+          <input type="submit" value="Log In" />
+          <button onClick={openModal}>Create an account</button>
+        </form>
+      </div>
     </div>
   );
 }
