@@ -3,24 +3,35 @@ import ChatMsg from "./ChatMsg";
 import * as UserAPI from "../../UserAPI";
 import APIHeaders from "../../APIContext";
 
-function ChatArea() {
+function ChatArea(props) {
+  const { userId } = props;
   const [header, setHeader] = useContext(APIHeaders);
-  const [userId, setUserId] = useState(-1);
-  const [convo, setConvo] = useState();
+  const [convo, setConvo] = useState([]);
 
   useEffect(() => {
     if (header["access-token"] === undefined) return;
-    setUserId(474);
     retrieveMsgs(userId);
-  }, [header, userId, convo]);
+  }, [userId, header, convo]);
 
   const retrieveMsgs = (userId) => {
     if (userId === -1) return;
 
     UserAPI.getMsgs(header, userId)
       .then((res) => {
-        setConvo(res.data.data); // hah idk bakit ganito pero mukhang ok naman
+        console.log("retrieveMsgs");
+        console.log(res.data.data);
+        console.log("Convo");
         console.log(convo);
+        if (res.data.data.length === convo.length) {
+          console.log("Nochange");
+          setTimeout((userId) => {
+            retrieveMsgs(userId);
+          }, 2000);
+          return;
+        } else {
+          console.log("di pumasok");
+        }
+        setConvo(res.data.data); // hah idk bakit ganito pero mukhang ok naman
       })
       .catch((e) => console.log(e));
   };

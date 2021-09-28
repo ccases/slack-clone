@@ -9,19 +9,27 @@ import APIHeaders from "../../APIContext";
 function Chat() {
   const [header, setHeader] = useContext(APIHeaders);
   const [chatWith, setChatWith] = useState("");
+  const [userSearch, setUserSearch] = useState("");
 
-  useEffect(() => {});
-  const clickHandler = () => {
-    UserAPI.getMsgs(header, 474)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
+  const submitHandler = () => {
+    // get ID ng sesendan pati username
   };
-
   return (
     <div>
       {/* <button onClick={clickHandler}>Get Chat</button> */}
       {/* <SearchBar type="user" placeholder="Type an email..." /> */}
-      <ChatArea />
+      <form onSubmit={submitHandler}>
+        <input
+          type="text"
+          value={userSearch}
+          onChange={(e) => {
+            setUserSearch(e.target.value);
+          }}
+          placeholder="Search Avion School"
+        />
+        <input type="submit" value="search" />
+      </form>
+      <ChatArea userId={474} />
       <ChatForm />
     </div>
   );
