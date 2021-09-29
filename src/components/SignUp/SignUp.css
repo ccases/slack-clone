@@ -48,7 +48,7 @@ button {
   border: none;
 }
 
-.close-button {
+.close-modal-button {
   cursor: pointer;
   position: absolute;
   top: 20px;
@@ -57,4 +57,9 @@ button {
   height: 32px;
   padding: 0;
   z-index: 10;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
 }

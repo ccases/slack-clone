@@ -4,6 +4,7 @@ import { useSpring, animated } from "react-spring";
 import axios from "axios";
 import "./SignUp.css";
 import signupImage from "../../assets/signup.jpg";
+import { MdClose } from "react-icons/md";
 
 function SignUp(props) {
   const { onClick, showModal, setShowModal } = props;
@@ -78,7 +79,7 @@ function SignUp(props) {
   return (
     <>
       {showModal ? (
-        <div className="background">
+        <div className="background" onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
             <div className="modal-wrapper">
               <img className="modal-img" src={signupImage} alt="Sign Up" />
@@ -125,6 +126,11 @@ function SignUp(props) {
                     />
                   </form>
                 </div>
+                <MdClose
+                  className="close-modal-button"
+                  aria-label="Close modal"
+                  onClick={() => setShowModal((prev) => !prev)}
+                />
               </div>
             </div>
           </animated.div>
