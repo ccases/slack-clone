@@ -5,15 +5,24 @@ import SearchBar from "../SearchBar/SearchBar";
 import "./Chat.css";
 import * as UserAPI from "../../UserAPI";
 import APIHeaders from "../../APIContext";
+import AllUsers from "../../AllUsersContext";
 
 function Chat() {
   const [header, setHeader] = useContext(APIHeaders);
+  const [allUsers, setAllUsers] = useContext(AllUsers);
   const [chatWith, setChatWith] = useState("");
   const [userSearch, setUserSearch] = useState("");
 
   const submitHandler = () => {
     // get ID ng sesendan pati username
+    const foundUser = allUsers.find((user) => user.uid === userSearch);
+    if (foundUser) {
+      setChatWith(foundUser);
+    } else {
+      alert("No users with the given email!");
+    }
   };
+
   return (
     <div>
       {/* <button onClick={clickHandler}>Get Chat</button> */}
@@ -27,10 +36,10 @@ function Chat() {
           }}
           placeholder="Search Avion School"
         />
-        <input type="submit" value="search" />
+        <input type="submit" value="Search" />
       </form>
-      <ChatArea userId={474} />
-      <ChatForm />
+      <ChatArea userId={chatWith.id} />
+      <ChatForm userId={chatWith.id} />
     </div>
   );
 }

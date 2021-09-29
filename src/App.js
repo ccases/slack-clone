@@ -3,7 +3,7 @@ import Chat from "./components/Chat/Chat";
 import { useEffect, useState } from "react";
 import APIHeaders from "./APIContext";
 import AllUsers from "./AllUsersContext";
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const [appAPIHeaders, setAppAPIHeaders] = useState(APIHeaders);
@@ -15,10 +15,10 @@ function App() {
   }, [appAPIHeaders]);
 
   return (
-    
     <div className="App">
       <Router>
-        <Login {/* if logged in or no errors, redirect else stay dito */}/>
+        {/* <Login /> */}
+        {/* if logged in or no errors, redirect else stay dito */}
         <APIHeaders.Provider value={[appAPIHeaders, setAppAPIHeaders]}>
           <AllUsers.Provider value={[allUsers, setAllUsers]}>
             {/* <LoginMock /> */}

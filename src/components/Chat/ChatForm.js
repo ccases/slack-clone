@@ -3,11 +3,12 @@ import * as UserAPI from "../../UserAPI";
 import APIHeaders from "../../APIContext";
 
 function ChatForm(props) {
+  const { userId } = props;
   const [header, setHeader] = useContext(APIHeaders);
   const [chatInput, setChatInput] = useState("");
 
   var raw = {
-    receiver_id: 474,
+    receiver_id: userId,
     receiver_class: "User",
     body: `${chatInput}`,
   };
