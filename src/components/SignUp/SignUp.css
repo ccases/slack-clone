@@ -61,5 +61,15 @@ button {
 
 .form-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+}
+input {
+  width: 100%;
+}
+label {
+  width: 100%;
+}
+
+.sign-up-button {
+  margin-top: 20px;
 }

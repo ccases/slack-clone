@@ -121,7 +121,7 @@ function SignUp(props) {
                     </label>
                     <input
                       type="submit"
-                      className="submit-button"
+                      className="sign-up-button"
                       value="Sign up"
                     />
                   </form>
