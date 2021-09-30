@@ -16,16 +16,16 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
-        {/* <Login /> */}
-        {/* if logged in or no errors, redirect else stay dito */}
-        <APIHeaders.Provider value={[appAPIHeaders, setAppAPIHeaders]}>
-          <AllUsers.Provider value={[allUsers, setAllUsers]}>
-            {/* <LoginMock /> */}
-            <Chat />
-          </AllUsers.Provider>
-        </APIHeaders.Provider>
-      </Router>
+      {/* <Router> */}
+      {/* <LogIn /> */}
+      {/* if logged in or no errors, redirect else stay dito */}
+      <APIHeaders.Provider value={[appAPIHeaders, setAppAPIHeaders]}>
+        <AllUsers.Provider value={[allUsers, setAllUsers]}>
+          {/* <LoginMock /> */}
+          <Chat />
+        </AllUsers.Provider>
+      </APIHeaders.Provider>
+      {/* </Router> */}
     </div>
   );
 }

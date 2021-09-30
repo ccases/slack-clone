@@ -4,50 +4,47 @@ import * as UserAPI from "../../UserAPI";
 import APIHeaders from "../../APIContext";
 
 function ChatArea(props) {
-  const { userId } = props;
+  const { userId, userEmail } = props;
   const [header, setHeader] = useContext(APIHeaders);
   const [convo, setConvo] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    if (header["access-token"] === undefined) return;
+    if (header["access-token"] === undefined && userId === undefined) {
+      setIsLoggedIn(false);
+      return;
+    }
+    setIsLoggedIn(true);
     retrieveMsgs(userId);
-  }, [userId, header, convo]);
+  }, [userId, header]);
 
   const retrieveMsgs = (userId) => {
-    if (userId === -1) return;
+    if (userId === -1 || !isLoggedIn) {
+      return;
+    }
 
     UserAPI.getMsgs(header, userId)
       .then((res) => {
-        console.log("retrieveMsgs");
-        console.log(res.data.data);
-        console.log("Convo");
-        console.log(convo);
-        if (res.data.data.length === convo.length) {
-          console.log("Nochange");
-          setTimeout((userId) => {
-            retrieveMsgs(userId);
-          }, 2000);
-          return;
-        } else {
-          console.log("di pumasok");
-        }
         setConvo(res.data.data); // hah idk bakit ganito pero mukhang ok naman
+        console.log(convo);
       })
       .catch((e) => console.log(e));
   };
-  const displayMsgs = convo.map((msg) => (
-    <ChatMsg
-      key={msg.id}
-      sender={msg.sender.uid}
-      msg={msg.body}
-      time={msg.created_at}
-    />
-  ));
+  const displayMsgs = convo
+    ? convo.map((msg) => (
+        <ChatMsg
+          key={msg.id}
+          sender={msg.sender.uid}
+          msg={msg.body}
+          time={msg.created_at}
+        />
+      ))
+    : null;
 
   return (
     <div>
-      Chatting with: testestest@hello.com, ID 474 as testhello@test.com
-      <div>{displayMsgs} </div>
+      Chatting with: {userEmail}, ID {userId} as testhello@test.com
+      <div>{displayMsgs}</div>
     </div>
   );
 }

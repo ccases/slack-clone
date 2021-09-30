@@ -13,7 +13,7 @@ export const signUp = (body) => {
 export const logIn = (body) => {
   // ACCEPTS "body" (object w email and password)
   // example : UserAPI.signUp.then((response)=>response.header)
-  const url = BASEURL + "sign_in/";
+  const url = BASEURL + "auth/sign_in";
   return axios.post(url, body);
 };
 
@@ -56,11 +56,11 @@ export const addChannelMember = (header, channelID, userID) => {
 
 export const listOfUsers = (header) => {
   const url = BASEURL + `users`;
-  return axios.get(url, header);
+  return axios.get(url, { headers: header });
 };
 
 export const getRecent = (header) => {
   const url = BASEURL + `users/recent`;
-  return axios.get(url, header);
+  return axios.get(url, { headers: header });
 };
 // }
