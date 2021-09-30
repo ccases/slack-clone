@@ -1,8 +1,7 @@
 import React from "react";
 
-function SearchResult(props) {
-  const { result } = props;
-  return <div className="result">{result}</div>;
+function SearchResult({ userEmail }) {
+  return <div className="result">{userEmail}</div>;
 }
 
 export default SearchResult;
