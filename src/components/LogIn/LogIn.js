@@ -4,11 +4,20 @@ import APIHeaders from "../../APIContext";
 import SignUp from "../../components/SignUp/SignUp";
 import "./LogIn.css";
 import slackLogo from "../../assets/slack-logo.png";
+import { useAuth } from "../../Auth";
+import { Redirect } from "react-router";
 
-function LogIn() {
+function LogIn(props) {
   const [username, setUsername] = useState("");
   const [pw, setPw] = useState("");
   const [header, setHeader] = useContext(APIHeaders);
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const { setAuthTokens } = useAuth();
+
+  let referer =
+    props.location.state !== undefined ? props.location.state.referer : "/";
+
   //modal
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
@@ -21,6 +30,7 @@ function LogIn() {
       getAllUsers(header);
     }, 200);
   }, [header]);
+
   const getAllUsers = (header) => {
     axios({
       method: "get",
@@ -28,9 +38,12 @@ function LogIn() {
       headers: header,
       redirect: "follow",
     })
-      .then((res) => console.log(`Success: ${res}`))
+      .then((res) => {
+        console.log(`Success: ${res}`);
+      })
       .catch((e) => console.log(`Error: ${e}`));
   };
+
   const submitHandler = (e) => {
     const url = "http://206.189.91.54//api/v1/auth/sign_in";
     e.preventDefault();
@@ -41,23 +54,24 @@ function LogIn() {
         password: pw,
       })
       .then((res) => {
-        console.log("success: " + res);
         setHeader({
           "access-token": res.headers["access-token"],
           client: res.headers["client"],
           expiry: res.headers["expiry"],
           uid: res.headers["uid"],
         });
-
-        console.log("headers: " + header);
-        console.log("res.headers: " + res.headers);
+        setAuthTokens(res.data);
+        setLoggedIn(true);
       })
       .catch((e) => {
+        setIsError(true);
         console.log("error: " + e);
       });
-
-    console.log(username);
   };
+
+  if (isLoggedIn) {
+    return <Redirect to={referer} />;
+  }
 
   return (
     <div className="container">
@@ -90,6 +104,9 @@ function LogIn() {
             required
           />
           <input type="submit" value="Log In" />
+
+          {isError && <div>The username or password is incorrect</div>}
+
           <button onClick={openModal}>Create an account</button>
         </form>
       </div>

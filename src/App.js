@@ -1,37 +1,52 @@
 import "./App.css";
-import SignUp from "./components/SignUp/SignUp";
 import LogIn from "./components/LogIn/LogIn";
 import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { Redirect } from "react-router";
+
 import APIHeaders from "./APIContext";
 import AllUsers from "./AllUsersContext";
+import ProtectedRoute from "./ProtectedRoute";
+import Dashboard from "../src/components/Dashboard/Dashboard";
+import { AuthContext } from "./Auth";
 
-function App() {
+function App(props) {
+  const [authTokens, setAuthTokens] = useState(
+    localStorage.getItem("tokens") || ""
+  );
   const [appAPIHeaders, setAppAPIHeaders] = useState(APIHeaders);
   const [allUsers, setAllUsers] = useState(AllUsers);
-  //modal
-  const [showModal, setShowModal] = useState(false);
-  const openModal = () => {
-    setShowModal((prev) => !prev);
-  };
 
   useEffect(() => {
     console.log(appAPIHeaders["access-token"]);
   }, [appAPIHeaders]);
 
+  const setTokens = (data) => {
+    localStorage.setItem("tokens", JSON.stringify(data));
+    setAuthTokens(data);
+  };
+
   return (
     <div className="App">
-      {/* <button onClick={openModal}>Create an account</button>
-      <SignUp
-        onclick={openModal}
-        showModal={showModal}
-        setShowModal={setShowModal}
+      <AuthContext.Provider
+        value={{
+          authTokens,
+          setAuthTokens: setTokens,
+        }}
+      >
+        <Router>
+          {!localStorage.getItem("token") ? <Redirect from="/" to="/" /> : ""}
+          <Route path="/" exact>
+            <APIHeaders.Provider value={[appAPIHeaders, setAppAPIHeaders]}>
+              <AllUsers.Provider value={[allUsers, setAllUsers]}>
+                <LogIn />
+              </AllUsers.Provider>
+            </APIHeaders.Provider>
+          </Route>
 
-      /> */}
-      <APIHeaders.Provider value={[appAPIHeaders, setAppAPIHeaders]}>
-        <AllUsers.Provider value={[allUsers, setAllUsers]}>
-          <LogIn />
-        </AllUsers.Provider>
-      </APIHeaders.Provider>
+          <ProtectedRoute path="/Dashboard" component={Dashboard} />
+        </Router>
+      </AuthContext.Provider>
     </div>
   );
 }
