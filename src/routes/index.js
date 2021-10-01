@@ -1,10 +1,10 @@
 import React from "react";
-import { Router, Redirect, Switch, withRouter } from "router-react-dom";
+import { Switch, withRouter } from "router-react-dom";
 
 import LogIn from "../components/LogIn/LogIn";
 import Dashboard from "../components/Dashboard/Dashboard";
 
-import ProtectedRoute from "./ProtectedRoutes";
+import ProtectedRoutes from "./ProtectedRoutes";
 import AuthRoutes from "./AuthRoutes";
 
 const routes = () => {
