@@ -7,7 +7,8 @@ import slackLogo from "../../assets/slack-logo.png";
 import { useAuth } from "../../Auth";
 import { Redirect } from "react-router";
 
-function LogIn(props) {
+function LogIn({ props }) {
+  console.log(props);
   const [username, setUsername] = useState("");
   const [pw, setPw] = useState("");
   const [header, setHeader] = useContext(APIHeaders);
@@ -15,9 +16,7 @@ function LogIn(props) {
   const [isError, setIsError] = useState(false);
   const { setAuthTokens } = useAuth();
 
-  let referer =
-    props.location.state !== undefined ? props.location.state.referer : "/";
-
+  // const referer = props.location.state ? props.location.state.referer : "/";
   //modal
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
@@ -69,9 +68,9 @@ function LogIn(props) {
       });
   };
 
-  if (isLoggedIn) {
-    return <Redirect to={referer} />;
-  }
+  // if (isLoggedIn) {
+  //   return <Redirect to={referer} />;
+  // }
 
   return (
     <div className="container">
