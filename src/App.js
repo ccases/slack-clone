@@ -10,7 +10,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Dashboard from "../src/components/Dashboard/Dashboard";
 import { AuthContext } from "./Auth";
 
-function App(props) {
+function App() {
   const [authTokens, setAuthTokens] = useState(
     localStorage.getItem("tokens") || ""
   );
@@ -28,7 +28,8 @@ function App(props) {
 
   return (
     <div className="App">
-      <AuthContext.Provider
+      <ProtectedRoute path="/Dashboard" component={Dashboard} />
+      {/* <AuthContext.Provider
         value={{
           authTokens,
           setAuthTokens: setTokens,
@@ -44,9 +45,9 @@ function App(props) {
             </APIHeaders.Provider>
           </Route>
 
-          <ProtectedRoute path="/Dashboard" component={Dashboard} />
+          <ProtectedRoute exact path="/Dashboard" component={Dashboard} />
         </Router>
-      </AuthContext.Provider>
+      </AuthContext.Provider> */}
     </div>
   );
 }
