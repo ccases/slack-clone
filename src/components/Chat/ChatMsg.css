@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+.container:hover {
+  background-color: #eeeeee;
+}
+.avatarContainer {
+  margin-right: 10px;
+}
+.sender {
+  /* font-size: large; */
+}
+
+.time {
+  color: gray;
+  font-size: small;
+  margin-left: 10px;
+  margin-bottom: 1px;
+}
+.sender:hover,
+.time:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.body {
+  margin: 3px 0 5px;
+}
+.titleWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+.msgWrapper {
+  display: flex;
+  flex-direction: column;
+}

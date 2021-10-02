@@ -3,8 +3,8 @@ import * as UserAPI from "../../UserAPI";
 import APIHeaders from "../../APIContext";
 
 function ChatForm(props) {
-  const { userId } = props;
-  const [header, setHeader] = useContext(APIHeaders);
+  const { userId, setConvo } = props;
+  const [header] = useContext(APIHeaders);
   const [chatInput, setChatInput] = useState("");
 
   var raw = {
@@ -20,6 +20,11 @@ function ChatForm(props) {
     UserAPI.sendMsg(header, raw)
       .then((res) => {
         console.log("Message sent!");
+        UserAPI.getMsgs(header, userId)
+          .then((res) => {
+            setConvo(res.data.data);
+          })
+          .catch((e) => console.log("Failed to get messages"));
       })
       .catch((e) => console.log(e));
     setChatInput("");

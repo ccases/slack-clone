@@ -6,16 +6,14 @@ import { useEffect } from "react/cjs/react.development";
 import * as UserAPI from "../../UserAPI";
 
 function SearchBar(props) {
-  const { type, placeholder, setChatWith } = props;
+  const { placeholder, setChatWith } = props;
   const [searchEntry, setSearchEntry] = useState("");
   const [userDb, setUserDb] = useContext(AllUsers);
-  const [header, setHeader] = useContext(APIHeaders);
+  const [header] = useContext(APIHeaders);
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    // const found = userDb.find((user) => user.uid === searchEntry);
-    // if (!found) return;
     if (header["access-token"] === undefined) return;
     if (userDb[0] === undefined) {
       alert("still loading db");
@@ -24,12 +22,13 @@ function SearchBar(props) {
     setSearchSuggestions(
       userDb.filter((user) => user.uid.includes(searchEntry))
     );
-  }, [searchEntry, userDb]);
+  }, [searchEntry, userDb, header]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (userDb[0] === undefined) return;
     let found = userDb.find((user) => user.uid === searchEntry);
+    console.log("FOUND " + found.uid);
     if (found) setChatWith(found);
     else alert("no users with that id!");
   };
@@ -49,7 +48,7 @@ function SearchBar(props) {
           <SearchResult
             key={user.id}
             userEmail={user.uid}
-            setChatWith={setChatWith}
+            setSearchEntry={setSearchEntry}
           />
         );
       })
@@ -67,7 +66,7 @@ function SearchBar(props) {
             getAllUsers();
             setIsActive(true);
           }}
-          onBlur={(e) => setIsActive(false)}
+          value={searchEntry}
         />
         <input type="submit" value="Search" />
       </form>
