@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import * as UserAPI from "../../UserAPI";
 import APIHeaders from "../../APIContext";
-
+import "./ChatForm.css";
 function ChatForm(props) {
   const { userId, setConvo } = props;
   const [header] = useContext(APIHeaders);
@@ -30,16 +30,16 @@ function ChatForm(props) {
     setChatInput("");
   };
   return (
-    <div>
+    <div className="form-container">
       <form onSubmit={handleSubmit}>
-        <input
+        <textarea
           type="text"
           onChange={(e) => {
             setChatInput(e.target.value);
           }}
           value={chatInput}
         />
-        <input type="submit" value="send" />
+        <input type="submit" value="send" className="send" />
       </form>
     </div>
   );

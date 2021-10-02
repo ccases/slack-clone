@@ -1,11 +1,13 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useRef } from "react";
 import ChatMsg from "./ChatMsg";
 import * as UserAPI from "../../UserAPI";
 import APIHeaders from "../../APIContext";
+import "./ChatArea.css";
 
 function ChatArea(props) {
   const { userId, userEmail, convo, setConvo, chatType } = props;
   const [header] = useContext(APIHeaders);
+  const msgEnd = useRef(null);
 
   useEffect(() => {
     if (header["access-token"] === undefined || userId === undefined) {
@@ -14,6 +16,14 @@ function ChatArea(props) {
     setConvo([]); // reset all messages before going into the next one
     retrieveMsgs(userId, chatType);
   }, [userId, header]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [convo]);
+
+  const scrollToBottom = () => {
+    msgEnd.current.scrollIntoView({ behavior: "smooth" });
+  };
 
   const retrieveMsgs = (userId, chatType) => {
     UserAPI.getMsgs(header, userId, chatType)
@@ -46,10 +56,33 @@ function ChatArea(props) {
         />
       ));
 
+  const messagesHeader = (userEmail) => {
+    if (userEmail === header.uid)
+      return (
+        <div>
+          <strong>This is your space.</strong> Draft messages, list your to-dos,
+          or keep links and files handy. You can also talk to yourself here, but
+          please bear in mind you’ll have to supply both sides of the
+          conversation.
+        </div>
+      );
+
+    return (
+      <div>
+        This is the very beginning of your direct message history with{" "}
+        <button className="name">{userEmail}</button> Only the two of you are in
+        this conversation, and no one else can join it.{" "}
+        <a href="https://get.slack.help/hc/articles/360002063088">
+          Learn more{" "}
+        </a>
+      </div>
+    );
+  };
   return (
     <div>
-      Chatting with: {userEmail}, ID {userId} as {header.uid}
+      {messagesHeader(userEmail)}
       <div>{displayMsgs} </div>
+      <div style={{ visibility: "none" }} ref={msgEnd}></div>
     </div>
   );
 }

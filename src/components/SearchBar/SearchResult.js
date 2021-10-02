@@ -1,7 +1,7 @@
 import React from "react";
 import "./SearchResult.css";
 
-function SearchResult({ userEmail, setSearchEntry }) {
+function SearchResult({ userEmail, setSearchEntry, submitHandler }) {
   return (
     <div
       className="result"

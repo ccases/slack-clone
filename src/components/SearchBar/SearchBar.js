@@ -29,8 +29,10 @@ function SearchBar(props) {
     if (userDb[0] === undefined) return;
     let found = userDb.find((user) => user.uid === searchEntry);
     console.log("FOUND " + found.uid);
-    if (found) setChatWith(found);
-    else alert("no users with that id!");
+    if (found) {
+      setChatWith(found);
+      setIsActive(false);
+    } else alert("no users with that id!");
   };
 
   const getAllUsers = () => {
@@ -49,6 +51,7 @@ function SearchBar(props) {
             key={user.id}
             userEmail={user.uid}
             setSearchEntry={setSearchEntry}
+            submitHandler={submitHandler}
           />
         );
       })
