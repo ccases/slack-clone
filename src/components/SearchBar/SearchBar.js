@@ -41,7 +41,7 @@ function SearchBar(props) {
         setUserDb(res.data.data);
       })
       .catch((e) => {
-        console.log("failed to get all users");
+        console.log("[SearchBar.js: getAllUsers] failed to get all users");
       });
   };
   let suggestions = searchSuggestions
