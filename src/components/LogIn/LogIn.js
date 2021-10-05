@@ -67,6 +67,7 @@ function LogIn() {
         setShowModal={setShowModal}
       />
       <img src={slackLogo} alt="Slack Logo" />
+
       <div className="login-container">
         <strong>Login</strong>
 
@@ -90,6 +91,7 @@ function LogIn() {
             required
           />
           <input type="submit" value="Log In" />
+
           <button onClick={openModal}>Create an account</button>
         </form>
       </div>
