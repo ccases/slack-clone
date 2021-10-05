@@ -1,33 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ChatMsg.css";
 
 function ChatMsg(props) {
-  const { sender, time, msg } = props;
-
+  const { sender, time, msg, isSameDay, isWithin3Mins } = props;
+  const [month] = useState([
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ]);
+  const [day] = useState([
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ]);
   const formatTime = (time) => {
-    const month = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const day = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
     let dateReceived = new Date(time);
     let dispString = "";
     let hrs = dateReceived.getHours();
@@ -38,30 +37,53 @@ function ChatMsg(props) {
     dispString += `:${mins < 10 ? "0" + mins : mins} `;
     if (hrs >= 12) dispString += "PM";
     else dispString += "AM";
-    // if (dateReceived.getDate() === today.getDate()) {
-    //   dispString += "Today at ";
-    // } else if (dateReceived.getDate() === today.getDate() - 1) {
-    //   dispString += "Yesterday at ";
-    // } else {
-    //   dispString += `${
-    //     month[dateReceived.getMonth()]
-    //   } ${dateReceived.getDate()}, ${day[dateReceived.getDay()]} at `;
-    // }
+    return dispString;
+  };
+
+  const formatDay = (time, day, month) => {
+    let dateRx = new Date(time);
+    let dayRx = day[dateRx.getDay()];
+    let monthRx = month[dateRx.getMonth()];
+    let dRx = dateRx.getDate();
+    let dispString = `${dayRx}, ${monthRx} ${dRx}`;
+
+    if (dRx % 10 === 1) dispString += "st";
+    else if (dRx % 10 === 2) dispString += "nd";
+    else if (dRx % 10 === 3) dispString += "rd";
+    else dispString += "th";
     return dispString;
   };
 
   return (
-    <div className="container">
-      <div className="avatarContainer">A</div>
-      <div className="msgWrapper">
-        <div className="titleWrapper">
-          <p className="sender">
-            <strong>{sender}</strong>
-          </p>
-          <p className="time">{formatTime(time)}</p>
+    <div className="msg-container-parent">
+      {!isSameDay ? (
+        <div className="date-divider-wrapper">
+          <div className="date-divider">
+            <p className="date-divider-text">
+              {formatDay(time, day, month)} &nbsp; ˅
+            </p>
+          </div>
         </div>
-        <div className="body">{msg}</div>
-      </div>
+      ) : null}
+      {!isWithin3Mins ? (
+        <div className="first-container">
+          <div className="avatarContainer">A</div>
+          <div className="msgWrapper">
+            <div className="titleWrapper">
+              <p className="sender">
+                <strong>{sender}</strong>
+              </p>
+              <p className="time">{formatTime(time)}</p>
+            </div>
+            <div className="body">{msg}</div>
+          </div>
+        </div>
+      ) : (
+        <div className="second-container">
+          <div className="time-div">{formatTime(time).slice(0, -3)}</div>
+          <div className="body-second">{msg}</div>
+        </div>
+      )}
     </div>
   );
 }

@@ -9,3 +9,6 @@
 .name:hover {
   cursor: pointer;
 }
+.ChatArea {
+  margin-bottom: 100px;
+}

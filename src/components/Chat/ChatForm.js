@@ -3,7 +3,7 @@ import * as UserAPI from "../../UserAPI";
 import APIHeaders from "../../APIContext";
 import "./ChatForm.css";
 function ChatForm(props) {
-  const { userId, setConvo } = props;
+  const { userId, setConvo, chatType } = props;
   const [header] = useContext(APIHeaders);
   const [chatInput, setChatInput] = useState("");
 
@@ -20,7 +20,7 @@ function ChatForm(props) {
     UserAPI.sendMsg(header, raw)
       .then((res) => {
         console.log("Message sent!");
-        UserAPI.getMsgs(header, userId)
+        UserAPI.getMsgs(header, userId, chatType)
           .then((res) => {
             setConvo(res.data.data);
           })
@@ -30,17 +30,19 @@ function ChatForm(props) {
     setChatInput("");
   };
   return (
-    <div className="form-container">
-      <form onSubmit={handleSubmit}>
-        <textarea
-          type="text"
-          onChange={(e) => {
-            setChatInput(e.target.value);
-          }}
-          value={chatInput}
-        />
-        <input type="submit" value="send" className="send" />
-      </form>
+    <div className="ChatForm">
+      <div className="form-container">
+        <form onSubmit={handleSubmit}>
+          <textarea
+            type="text"
+            onChange={(e) => {
+              setChatInput(e.target.value);
+            }}
+            value={chatInput}
+          />
+          <input type="submit" value="send" className="send" />
+        </form>
+      </div>
     </div>
   );
 }

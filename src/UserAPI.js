@@ -24,7 +24,7 @@ export const sendMsg = (header, body) => {
 };
 
 export const getMsgs = (header, id, type) => {
-  // ACCEPTS id = yung user_id ng kukunan mo ng messages (NOT EMAIL!), type is either "user" or "channel"
+  // ACCEPTS id = yung user_id ng kukunan mo ng messages (NOT EMAIL!), type is either "User" or "Channel"
   const url = BASEURL + `messages?receiver_class=${type}&receiver_id=${id}`;
   return axios.get(url, { headers: header });
 };

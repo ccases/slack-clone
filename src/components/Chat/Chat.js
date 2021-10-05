@@ -26,7 +26,6 @@ function Chat() {
         password: "Hello12345",
       })
       .then((res) => {
-        console.log("success: " + res);
         setHeader({
           "access-token": res.headers["access-token"],
           client: res.headers["client"],
@@ -73,6 +72,7 @@ function Chat() {
         setConvo={setConvo}
         convo={convo}
         userEmail={chatWith.uid}
+        chatType={chatType}
       />
     </div>
   );

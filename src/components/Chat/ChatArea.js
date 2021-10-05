@@ -24,6 +24,39 @@ function ChatArea(props) {
   const scrollToBottom = () => {
     msgEnd.current.scrollIntoView({ behavior: "smooth" });
   };
+  // checker if same day, or wihtin a certain timeframe
+  // helper for map functions
+  const timeChecker = (arr, idx) => {
+    let isWithin3Mins = false;
+    let isSameDay = false;
+
+    if (idx !== 0) {
+      let currentMsgTime = new Date(arr[idx].created_at);
+      let prevMsgTime = new Date(arr[idx - 1].created_at);
+      let curr = {
+        date: currentMsgTime.getDate(),
+        month: currentMsgTime.getMonth(),
+        year: currentMsgTime.getFullYear(),
+      };
+      let prev = {
+        date: prevMsgTime.getDate(),
+        month: prevMsgTime.getMonth(),
+        year: prevMsgTime.getFullYear(),
+      };
+
+      if (
+        curr.date === prev.date &&
+        curr.month === prev.month &&
+        curr.year === prev.year
+      ) {
+        isSameDay = true;
+        if (currentMsgTime - prevMsgTime <= 180000) {
+          isWithin3Mins = true;
+        }
+      }
+    }
+    return [isSameDay, isWithin3Mins];
+  };
 
   const retrieveMsgs = (userId, chatType) => {
     UserAPI.getMsgs(header, userId, chatType)
@@ -35,7 +68,8 @@ function ChatArea(props) {
   const displayMsgs = !convo
     ? "Loading messages..."
     : header.uid === userEmail
-    ? convo.map((msg, idx) => {
+    ? convo.map((msg, idx, arr) => {
+        let [isSameDay, isWithin3Mins] = timeChecker(arr, idx);
         if (idx % 2 === 0)
           return (
             <ChatMsg
@@ -43,18 +77,25 @@ function ChatArea(props) {
               sender={msg.sender.uid}
               msg={msg.body}
               time={msg.created_at}
+              isSameDay={isSameDay}
+              isWithin3Mins={isWithin3Mins}
             />
           );
         else return null;
       })
-    : convo.map((msg) => (
-        <ChatMsg
-          key={msg.id}
-          sender={msg.sender.uid}
-          msg={msg.body}
-          time={msg.created_at}
-        />
-      ));
+    : convo.map((msg, idx, arr) => {
+        let [isSameDay, isWithin3Mins] = timeChecker(arr, idx);
+        return (
+          <ChatMsg
+            key={msg.id}
+            sender={msg.sender.uid}
+            msg={msg.body}
+            time={msg.created_at}
+            isSameDay={isSameDay}
+            isWithin3Mins={isWithin3Mins}
+          />
+        );
+      });
 
   const messagesHeader = (userEmail) => {
     if (userEmail === header.uid)
@@ -79,7 +120,7 @@ function ChatArea(props) {
     );
   };
   return (
-    <div>
+    <div className="ChatArea">
       {messagesHeader(userEmail)}
       <div>{displayMsgs} </div>
       <div style={{ visibility: "none" }} ref={msgEnd}></div>
