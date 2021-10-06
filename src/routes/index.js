@@ -1,9 +1,7 @@
-import React, { useContext, useState } from "react";
-import APIHeaders from "../APIContext";
+import React from "react";
 import { Switch, withRouter } from "react-router-dom";
 
 import LogIn from "../components/LogIn/LogIn.js";
-import SignUp from '../components/SignUp/SignUp.js'
 import Dashboard from "../components/Dashboard/Dashboard.js";
 
 import ProtectedRoutes from "./ProtectedRoutes";
