@@ -7,20 +7,13 @@ import signupImage from "../../assets/signup.jpg";
 import { MdClose } from "react-icons/md";
 
 function SignUp(props) {
-  const { onClick, showModal, setShowModal } = props;
+  const { onclick, showModal, setShowModal } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  // const [isLoading, setLoading] = useState(false);
-  // const [error, setError] = useState({ errorMsg: "", error: false });
-
-  // useEffect(() => {
-  //   // validate here
-  // }, [confirmPassword, password]);
-
-  const isMatching = (pw, confirmPw) => {
-    if (pw === confirmPw) {
+  const isMatching = (pw, confirmPassword) => {
+    if (pw === confirmPassword) {
       return true;
     }
     return false;
@@ -30,18 +23,29 @@ function SignUp(props) {
     // put fetch here
     const url = "http://206.189.91.54//api/v1/auth/";
     e.preventDefault();
-    axios
+
+    if(isMatching){
+      axios
       .post(url, {
         email: email,
         password: password,
+        password_confirmation: confirmPassword,
       })
       .then((res) => {
-        console.log("success: " + res);
-      })
+        
+          localStorage.setItem("access-token", res.headers["access-token"]);
+          localStorage.setItem("client",res.headers ["client"]);
+          localStorage.setItem("uid", res.headers["uid"]);
+          localStorage.setItem("expiry", res.headers["expiry"]);
+          window.location = '/Dashboard'
+        }
+      )
       .catch((e) => {
         console.log("error: " + e);
       });
   };
+
+    }
 
   //modal
 
