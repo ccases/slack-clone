@@ -4,31 +4,16 @@ import APIHeaders from "../../APIContext";
 import SignUp from "../../components/SignUp/SignUp";
 import "./LogIn.css";
 import slackLogo from "../../assets/slack-logo.png";
-import { useAuth } from "../../Auth";
-import { Redirect } from "react-router";
 
-function LogIn({ props }) {
-  console.log(props);
+function LogIn() {
   const [username, setUsername] = useState("");
   const [pw, setPw] = useState("");
-  const [header, setHeader] = useContext(APIHeaders);
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const { setAuthTokens } = useAuth();
 
-  // const referer = props.location.state ? props.location.state.referer : "/";
-  //modal
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setShowModal((prev) => !prev);
   };
 
-  useEffect(() => {
-    if (header["access-token"] == null) return;
-    setTimeout(() => {
-      getAllUsers(header);
-    }, 200);
-  }, [header]);
 
   const getAllUsers = (header) => {
     axios({
@@ -43,6 +28,27 @@ function LogIn({ props }) {
       .catch((e) => console.log(`Error: ${e}`));
   };
 
+  const handleEmailChange = (e) => {
+    setUsername(e.target.value)
+  }
+
+  const handlePasswordChange = (e) => {
+    setPw(e.target.value)
+  }
+
+  const handleHeader = (res) => {
+
+    if (res.data) {
+      localStorage.setItem("access-token", JSON.stringify(res.headers["access-token"]));
+      localStorage.setItem("client",JSON.stringify(res.headers ["client"]));
+      localStorage.setItem("uid", JSON.stringify(res.headers["uid"]));
+      localStorage.setItem("expiry", JSON.stringify(res.headers["expiry"]));
+
+      window.location = '/Dashboard'
+    }
+
+  }
+
   const submitHandler = (e) => {
     const url = "http://206.189.91.54//api/v1/auth/sign_in";
     e.preventDefault();
@@ -52,25 +58,11 @@ function LogIn({ props }) {
         email: username,
         password: pw,
       })
-      .then((res) => {
-        setHeader({
-          "access-token": res.headers["access-token"],
-          client: res.headers["client"],
-          expiry: res.headers["expiry"],
-          uid: res.headers["uid"],
-        });
-        setAuthTokens(res.data);
-        setLoggedIn(true);
-      })
+      .then((res) => handleHeader(res))
       .catch((e) => {
-        setIsError(true);
         console.log("error: " + e);
       });
   };
-
-  // if (isLoggedIn) {
-  //   return <Redirect to={referer} />;
-  // }
 
   return (
     <div className="container">
@@ -88,23 +80,17 @@ function LogIn({ props }) {
             type="email"
             className="email-input"
             placeholder="Email"
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
+            onChange={handleEmailChange}
             required
           />
           <input
             type="password"
             className="password-input"
             placeholder="Password"
-            onChange={(e) => {
-              setPw(e.target.value);
-            }}
+            onChange={handlePasswordChange}
             required
           />
           <input type="submit" value="Log In" />
-
-          {isError && <div>The username or password is incorrect</div>}
 
           <button onClick={openModal}>Create an account</button>
         </form>
