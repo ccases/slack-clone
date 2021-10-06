@@ -15,9 +15,9 @@ function SignUp(props) {
   // const [isLoading, setLoading] = useState(false);
   // const [error, setError] = useState({ errorMsg: "", error: false });
 
-  useEffect(() => {
-    // validate here
-  }, [confirmPassword, password]);
+  // useEffect(() => {
+  //   // validate here
+  // }, [confirmPassword, password]);
 
   const isMatching = (pw, confirmPw) => {
     if (pw === confirmPw) {
