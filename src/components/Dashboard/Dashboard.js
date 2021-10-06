@@ -1,12 +1,14 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 
-function Dashboard() {
+const Dashboard = () => {
+
+  const uid = localStorage.getItem('uid')
   return (
     <div>
       <h1>DASHBOARD HERE</h1>
+      {uid}
     </div>
-  );
+  )
 }
 
-export default withRouter(Dashboard);
+export default Dashboard;
