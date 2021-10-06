@@ -30,6 +30,7 @@ function ChatArea(props) {
     let isWithin3Mins = false;
     let isSameDay = false;
 
+    // if()
     if (idx !== 0) {
       let currentMsgTime = new Date(arr[idx].created_at);
       let prevMsgTime = new Date(arr[idx - 1].created_at);
