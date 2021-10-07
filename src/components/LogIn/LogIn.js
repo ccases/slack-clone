@@ -78,9 +78,8 @@ function LogIn() {
             required
           />
           <input type="submit" value="Log In" />
-
-          <button onClick={openModal}>Create an account</button>
         </form>
+        <button onClick={openModal}>Create an account</button>
       </div>
     </div>
   );
