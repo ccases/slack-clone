@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import ChatArea from "./ChatArea";
 import ChatForm from "./ChatForm";
 import SearchBar from "../SearchBar/SearchBar";
 import "./Chat.css";
 import * as UserAPI from "../../UserAPI";
-import APIHeaders from "../../APIContext";
+import Headers from "../../Helpers/Headers";
 import axios from "axios";
 
 function Chat() {
-  const [header, setHeader] = useContext(APIHeaders);
+  const [header, setHeader] = useState(Headers);
   const [chatWith, setChatWith] = useState("");
   const [convo, setConvo] = useState([]);
   const [chatType, setChatType] = useState("User"); // can be Channel, CAPITALIZE FIRST LETTER!

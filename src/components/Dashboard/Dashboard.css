@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+.dashboard {
+  display: flex;
+  flex-flow: column;
+}
+
+.main-container {
+  display: flex;
+  flex-flow: row;
+}

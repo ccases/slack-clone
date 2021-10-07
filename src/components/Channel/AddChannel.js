@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react";
-import axios from "axios";
-import APIHeaders from "../../APIContext";
+import React, { useState } from "react";
 import * as UserAPI from "../../UserAPI";
+import Headers from "../../Helpers/Headers";
 
 const AddChannel = (props) => {
   const { userId, setUserChannels } = props;
@@ -9,7 +8,7 @@ const AddChannel = (props) => {
   const [channelName, setChannelName] = useState("");
   const { userName, setUserName } = props;
   const [userArray, setUserArray] = useState([]);
-  const [header, setHeader] = useContext(APIHeaders);
+  const [header, setHeader] = useState(Headers);
   const [tempUsers, setTempUser] = useState([]);
   const [newMember, setNewMember] = useState("");
   const [channelId, setChannelId] = useState("1224");
