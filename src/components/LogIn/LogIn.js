@@ -23,13 +23,10 @@ function LogIn() {
 
   const handleHeader = (res) => {
     if (res.data) {
-      localStorage.setItem(
-        "access-token",
-        JSON.stringify(res.headers["access-token"])
-      );
-      localStorage.setItem("client", JSON.stringify(res.headers["client"]));
-      localStorage.setItem("uid", JSON.stringify(res.headers["uid"]));
-      localStorage.setItem("expiry", JSON.stringify(res.headers["expiry"]));
+      localStorage.setItem("access-token", res.headers["access-token"]);
+      localStorage.setItem("client", res.headers["client"]);
+      localStorage.setItem("uid", res.headers["uid"]);
+      localStorage.setItem("expiry", res.headers["expiry"]);
 
       window.location = "/Dashboard";
     }
