@@ -40,7 +40,9 @@ function ChatForm(props) {
             }}
             value={chatInput}
           />
-          <input type="submit" value="send" className="send" />
+          <div className="chat-form-icons-container">
+            <input type="submit" value="send" className="send" />
+          </div>
         </form>
       </div>
     </div>

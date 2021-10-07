@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 .name {
   color: #5890bcff;
   background-color: #e8f5faff;
@@ -8,7 +11,4 @@
 }
 .name:hover {
   cursor: pointer;
-}
-.ChatArea {
-  margin-bottom: 100px;
 }

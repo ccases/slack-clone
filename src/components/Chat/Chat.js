@@ -60,20 +60,26 @@ function Chat() {
       <button onClick={recentlyDms}> RecentlyDms </button>
 
       <SearchBar placeholder="Search Avion School" setChatWith={setChatWith} />
-      <ChatArea
-        userId={chatWith.id}
-        userEmail={chatWith.uid}
-        convo={convo}
-        setConvo={setConvo}
-        chatType={chatType}
-      />
-      <ChatForm
-        userId={chatWith.id}
-        setConvo={setConvo}
-        convo={convo}
-        userEmail={chatWith.uid}
-        chatType={chatType}
-      />
+      <div className="chat-wrapper">
+        <div className="chat-area-wrapper">
+          <ChatArea
+            userId={chatWith.id}
+            userEmail={chatWith.uid}
+            convo={convo}
+            setConvo={setConvo}
+            chatType={chatType}
+          />
+        </div>
+        <div className="chat-form-wrapper">
+          <ChatForm
+            userId={chatWith.id}
+            setConvo={setConvo}
+            convo={convo}
+            userEmail={chatWith.uid}
+            chatType={chatType}
+          />
+        </div>
+      </div>
     </div>
   );
 }

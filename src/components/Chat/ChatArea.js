@@ -121,10 +121,12 @@ function ChatArea(props) {
     );
   };
   return (
-    <div className="ChatArea">
+    <div className="ChatArea ">
+      {/* <div className="chat-wrapper"> */}
       {messagesHeader(userEmail)}
       <div>{displayMsgs} </div>
       <div style={{ visibility: "none" }} ref={msgEnd}></div>
+      {/* </div> */}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./ChatMsg.css";
+import { FaAngleDown } from "react-icons/fa";
 
 function ChatMsg(props) {
   const { sender, time, msg, isSameDay, isWithin3Mins } = props;
@@ -42,11 +43,21 @@ function ChatMsg(props) {
 
   const formatDay = (time, day, month) => {
     let dateRx = new Date(time);
+    let yMonth = dateRx.getMonth();
     let dayRx = day[dateRx.getDay()];
-    let monthRx = month[dateRx.getMonth()];
+    let monthRx = month[yMonth];
+    let yearRx = dateRx.getFullYear();
     let dRx = dateRx.getDate();
     let dispString = `${dayRx}, ${monthRx} ${dRx}`;
 
+    let today = new Date();
+    let tDate = today.getDate();
+    let tMonth = today.getMonth();
+    let tYear = today.getFullYear();
+    if (tDate === dRx && tMonth === yMonth && tYear === yearRx) {
+      return "Today";
+    } else if (tDate - 1 === dRx && tMonth === yMonth && tYear === yearRx)
+      return "Yesterday";
     if (dRx % 10 === 1) dispString += "st";
     else if (dRx % 10 === 2) dispString += "nd";
     else if (dRx % 10 === 3) dispString += "rd";
@@ -59,9 +70,12 @@ function ChatMsg(props) {
       {!isSameDay ? (
         <div className="date-divider-wrapper">
           <div className="date-divider">
-            <p className="date-divider-text">
-              {formatDay(time, day, month)} &nbsp; ˅
-            </p>
+            <div className="date-divider-text">
+              {formatDay(time, day, month)}{" "}
+              <p className="down-icon-divider">
+                <FaAngleDown />
+              </p>
+            </div>
           </div>
         </div>
       ) : null}
