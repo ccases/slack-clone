@@ -24,28 +24,25 @@ function SignUp(props) {
     const url = "http://206.189.91.54//api/v1/auth/";
     e.preventDefault();
 
-    if(isMatching){
+    if (isMatching) {
       axios
-      .post(url, {
-        email: email,
-        password: password,
-        password_confirmation: confirmPassword,
-      })
-      .then((res) => {
-        
+        .post(url, {
+          email: email,
+          password: password,
+          password_confirmation: confirmPassword,
+        })
+        .then((res) => {
           localStorage.setItem("access-token", res.headers["access-token"]);
-          localStorage.setItem("client",res.headers ["client"]);
+          localStorage.setItem("client", res.headers["client"]);
           localStorage.setItem("uid", res.headers["uid"]);
           localStorage.setItem("expiry", res.headers["expiry"]);
-          window.location = '/Dashboard'
-        }
-      )
-      .catch((e) => {
-        console.log("error: " + e);
-      });
-  };
-
+          window.location = "/Dashboard";
+        })
+        .catch((e) => {
+          console.log("error: " + e);
+        });
     }
+  };
 
   //modal
 
@@ -94,7 +91,7 @@ function SignUp(props) {
                   <strong>email address you use at work.</strong>
                 </p>
                 <div className="form-container">
-                  <form onSubmit={submitHandler}>
+                  <form onSubmit={submitHandler} autoComplete="off">
                     <label>
                       Email
                       <input
