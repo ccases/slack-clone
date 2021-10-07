@@ -1,14 +1,16 @@
 import React from "react";
+import Sidebar from "../Sidebar/Sidebar";
+import Chat from "../Chat/Chat";
 
-const Dashboard = () => {
-
-  const uid = localStorage.getItem('uid')
+function Dashboard() {
   return (
-    <div>
-      <h1>DASHBOARD HERE</h1>
-      {uid}
+    <div className="dashboard">
+      <div className="main-container">
+        <Sidebar />
+        <Chat />
+      </div>
     </div>
-  )
+  );
 }
 
 export default Dashboard;

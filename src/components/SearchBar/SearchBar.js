@@ -1,15 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import SearchResult from "./SearchResult";
-import APIHeaders from "../../APIContext";
-import AllUsers from "../../AllUsersContext";
+import Headers from "../../Helpers/Headers";
 import { useEffect } from "react/cjs/react.development";
 import * as UserAPI from "../../UserAPI";
 
 function SearchBar(props) {
   const { placeholder, setChatWith } = props;
   const [searchEntry, setSearchEntry] = useState("");
-  const [userDb, setUserDb] = useContext(AllUsers);
-  const [header] = useContext(APIHeaders);
+  const [userDb, setUserDb] = useState([]);
+  const [header] = useState(Headers);
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [isActive, setIsActive] = useState(false);
 

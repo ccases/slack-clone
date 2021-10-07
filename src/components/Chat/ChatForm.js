@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import * as UserAPI from "../../UserAPI";
-import APIHeaders from "../../APIContext";
+import Headers from "../../Helpers/Headers";
 import "./ChatForm.css";
 function ChatForm(props) {
   const { userId, setConvo, chatType } = props;
-  const [header] = useContext(APIHeaders);
+  const [header] = useState(Headers);
   const [chatInput, setChatInput] = useState("");
 
   var raw = {
