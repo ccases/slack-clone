@@ -6,16 +6,15 @@ import "./Chat.css";
 import * as UserAPI from "../../UserAPI";
 import APIHeaders from "../../APIContext";
 import axios from "axios";
-import AllUsers from "../../AllUsersContext";
 
 function Chat() {
   const [header, setHeader] = useContext(APIHeaders);
-  const [allUsers, setAllUsers] = useContext(AllUsers);
   const [chatWith, setChatWith] = useState("");
-  const [userSearch, setUserSearch] = useState("");
+  const [convo, setConvo] = useState([]);
+  const [chatType, setChatType] = useState("User"); // can be Channel, CAPITALIZE FIRST LETTER!
 
   useEffect(() => {
-    console.log(chatWith);
+    console.log(`Chatwith: ${chatWith.uid} ${chatWith.id}`);
   }, [chatWith]);
   // LOG IN BUTTON LANG DITO FOR TESTING AND GET USERS - START
   const logIn = () => {
@@ -27,7 +26,6 @@ function Chat() {
         password: "Hello12345",
       })
       .then((res) => {
-        console.log("success: " + res);
         setHeader({
           "access-token": res.headers["access-token"],
           client: res.headers["client"],
@@ -53,41 +51,35 @@ function Chat() {
       });
   };
   // LOG IN BUTTON LANG DITO FOR TESTING AND GET USERS - END
-  const submitHandler = (e) => {
-    // get ID ng sesendan pati username
-    e.preventDefault();
-    const foundUser = allUsers.find((user) => user.uid === userSearch);
-    if (foundUser) {
-      setChatWith(foundUser);
-    } else {
-      alert("No users with the given email!");
-    }
-  };
 
   // logIn();
 
   return (
     <div>
-      {/* TANGGALIN LAHAT NG NASA GITNA NETO PATI NUNG ISA */}
       <button onClick={logIn}> Login </button>
       <button onClick={recentlyDms}> RecentlyDms </button>
-      {/* ^ PAKITANGGAL TO MAMAYA TY */}
-      {/* <button onClick={clickHandler}>Get Chat</button> */}
-      {/* <SearchBar type="user" placeholder="Type an email..." /> */}
-      {/* <form onSubmit={submitHandler}>
-        <input
-          type="text"
-          value={userSearch}
-          onChange={(e) => {
-            setUserSearch(e.target.value);
-          }}
-          placeholder="Search Avion School"
-        />
-        <input type="submit" value="Search" />
-      </form> */}
+
       <SearchBar placeholder="Search Avion School" setChatWith={setChatWith} />
-      <ChatArea userId={chatWith.id} userEmail={chatWith.uid} />
-      <ChatForm userId={chatWith.id} />
+      <div className="chat-wrapper">
+        <div className="chat-area-wrapper">
+          <ChatArea
+            userId={chatWith.id}
+            userEmail={chatWith.uid}
+            convo={convo}
+            setConvo={setConvo}
+            chatType={chatType}
+          />
+        </div>
+        <div className="chat-form-wrapper">
+          <ChatForm
+            userId={chatWith.id}
+            setConvo={setConvo}
+            convo={convo}
+            userEmail={chatWith.uid}
+            chatType={chatType}
+          />
+        </div>
+      </div>
     </div>
   );
 }

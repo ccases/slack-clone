@@ -1,8 +1,18 @@
 import React from "react";
+import "./SearchResult.css";
 
-function SearchResult(props) {
-  const { result } = props;
-  return <div className="result">{result}</div>;
+function SearchResult({ userEmail, setSearchEntry, submitHandler }) {
+  return (
+    <div
+      className="result"
+      onClick={(e) => {
+        console.log(e.target.textContent);
+        setSearchEntry(e.target.textContent);
+      }}
+    >
+      {userEmail}
+    </div>
+  );
 }
 
 export default SearchResult;

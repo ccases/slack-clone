@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import * as UserAPI from "../../UserAPI";
 import APIHeaders from "../../APIContext";
-
+import "./ChatForm.css";
 function ChatForm(props) {
-  const { userId } = props;
-  const [header, setHeader] = useContext(APIHeaders);
+  const { userId, setConvo, chatType } = props;
+  const [header] = useContext(APIHeaders);
   const [chatInput, setChatInput] = useState("");
 
   var raw = {
@@ -20,22 +20,31 @@ function ChatForm(props) {
     UserAPI.sendMsg(header, raw)
       .then((res) => {
         console.log("Message sent!");
+        UserAPI.getMsgs(header, userId, chatType)
+          .then((res) => {
+            setConvo(res.data.data);
+          })
+          .catch((e) => console.log("Failed to get messages"));
       })
       .catch((e) => console.log(e));
     setChatInput("");
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          onChange={(e) => {
-            setChatInput(e.target.value);
-          }}
-          value={chatInput}
-        />
-        <input type="submit" value="send" />
-      </form>
+    <div className="ChatForm">
+      <div className="form-container">
+        <form onSubmit={handleSubmit}>
+          <textarea
+            type="text"
+            onChange={(e) => {
+              setChatInput(e.target.value);
+            }}
+            value={chatInput}
+          />
+          <div className="chat-form-icons-container">
+            <input type="submit" value="send" className="send" />
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

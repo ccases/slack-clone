@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  --header-height: 44px;
+}
+.chat-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--header-height));
+}
+.chat-area-wrapper {
+  flex: 1 1 auto;
+  overflow-y: scroll;
+}
+.chat-form-wrapper {
+  height: calc(200px-22px);
+  /* height: calc(200px - var(--header-height)); */
+}
