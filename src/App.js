@@ -21,7 +21,7 @@ function App() {
       <APIHeaders.Provider value={[appAPIHeaders, setAppAPIHeaders]}>
         <AllUsers.Provider value={[allUsers, setAllUsers]}>
           <Sidebar />
-          <LogIn />
+          {/* <LogIn /> */}
         </AllUsers.Provider>
       </APIHeaders.Provider>
       {/* </Router> */}

@@ -7,6 +7,7 @@ const AddChannel = (props) => {
   const { userId, setUserChannels } = props;
   const [channels, setChannels] = useState([]);
   const [channelName, setChannelName] = useState("");
+  const { userName, setUserName } = props;
   const [userArray, setUserArray] = useState([]);
   const [header, setHeader] = useContext(APIHeaders);
   const [tempUsers, setTempUser] = useState([]);
@@ -25,6 +26,7 @@ const AddChannel = (props) => {
           expiry: res.headers["expiry"],
           uid: res.headers["uid"],
         });
+        setUserName(res.data.data);
       })
       .catch((e) => {
         console.log("error: " + e);
@@ -108,11 +110,6 @@ const AddChannel = (props) => {
 
   return (
     <div>
-      <button onClick={mockLogin}>MockLogin TESTHELLO</button>
-      <button onClick={getAllChannels}>Get All Users Channel</button>
-      <button onClick={getAllUsers}>Get All Users</button>
-      <button onClick={getChannelDetails}>Channel Details</button>
-
       <form onSubmit={onSubmit}>
         <input
           type="text"
@@ -133,6 +130,10 @@ const AddChannel = (props) => {
         />
         <input type="submit" value="Add Members" />
       </form>
+      <button onClick={mockLogin}>MockLogin TESTHELLO</button>
+      <button onClick={getAllChannels}>Get All Users Channel</button>
+      <button onClick={getAllUsers}>Get All Users</button>
+      <button onClick={getChannelDetails}>Channel Details</button>
     </div>
   );
 };

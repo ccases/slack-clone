@@ -1,0 +1,57 @@
+.sidebar-container {
+  background-color: #4a154b;
+  color: white;
+  width: 30vw;
+  border-top: 1px solid #49274b;
+  max-width: 260px;
+  margin-top: 60px;
+  padding: 18px;
+  height: 100vh;
+}
+
+.sidbar-header {
+  display: flex;
+  padding-bottom: 10px;
+  padding: 13px;
+}
+
+.sidebar-info {
+  flex: 1;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #49274b;
+}
+
+.sidebar-options {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #49274b;
+}
+h2 {
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 5px;
+}
+
+h3 {
+  display: flex;
+  font-size: 15px;
+  font-weight: 400px;
+  align-items: center;
+  padding-left: 10px;
+}
+.channel-name {
+  font-size: 16px;
+  align-items: center;
+  cursor: pointer;
+  padding: 9px 12px;
+  display: flex;
+}
+.channel-name:hover {
+  opacity: 0.9;
+  background-color: #340e36;
+}
+
+.user-name {
+  padding-top: 3px;
+}
