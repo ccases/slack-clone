@@ -10,5 +10,4 @@
 .main-container {
   display: flex;
   flex-flow: row;
-  position: relative;
 }

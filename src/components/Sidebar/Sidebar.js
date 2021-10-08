@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import AddChannel from "../Channel/AddChannel";
-import Headers from "../../Helpers/Headers";
 import "./Sidebar.css";
 import {
   RiPencilFill,
@@ -17,8 +16,6 @@ import SidebarOptions from "./SidebarOptions";
 
 function Sidebar() {
   const [userChannels, setUserChannels] = useState([]);
-  const [userName, setUserName] = useState([]);
-
   const displayChannels = userChannels
     ? userChannels.map((channel) => {
         return (
@@ -28,6 +25,18 @@ function Sidebar() {
         );
       })
     : null;
+
+  const [userName, setUserName] = useState([]);
+
+  //   const displayName = userName
+  //     ? userName.map((uid) => {
+  //         return (
+  //           <div className="my-name" key={uid}>
+  //             {uid.name}
+  //           </div>
+  //         );
+  //       })
+  //     : null;
 
   return (
     <div className="sidebar-container">
@@ -56,7 +65,7 @@ function Sidebar() {
                   color: "green",
                 }}
               />{" "}
-              {Headers.uid}
+              testhello@test.com
               {/* {displayName} */}
             </h3>
           </div>

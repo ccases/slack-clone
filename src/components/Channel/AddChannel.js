@@ -13,6 +13,40 @@ const AddChannel = (props) => {
   const [newMember, setNewMember] = useState("");
   const [channelId, setChannelId] = useState("1224");
 
+  //mock login straight to testhello with 2 channels
+  const mockLogin = (e) => {
+    const url = "http://206.189.91.54//api/v1/channels";
+    e.preventDefault();
+    UserAPI.logIn({ email: "testhello@test.com", password: "Hello12345" })
+      .then((res) => {
+        setHeader({
+          "access-token": res.headers["access-token"],
+          client: res.headers["client"],
+          expiry: res.headers["expiry"],
+          uid: res.headers["uid"],
+        });
+        setUserName(res.data.data);
+      })
+      .catch((e) => {
+        console.log("error: " + e);
+      });
+  };
+
+  const getAllChannels = (e) => {
+    UserAPI.getAllUsersChannels(header)
+      .then((res) => {
+        e.preventDefault();
+        console.log(`response: ${res}`);
+        setChannels(res.data.data);
+        console.log(`${channels[0]}`);
+        //passes all owned channels to sidebar.js
+        setUserChannels(res.data.data);
+      })
+      .catch((e) => {
+        console.log("error: " + e);
+      });
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -95,9 +129,9 @@ const AddChannel = (props) => {
         />
         <input type="submit" value="Add Members" />
       </form>
-      {/* <button onClick={mockLogin}>MockLogin TESTHELLO</button> */}
-      {/* <button onClick={getAllChannels}>Get All Users Channel</button> */}
-      {/* <button onClick={getAllUsers}>Get All Users</button> */}
+      <button onClick={mockLogin}>MockLogin TESTHELLO</button>
+      <button onClick={getAllChannels}>Get All Users Channel</button>
+      <button onClick={getAllUsers}>Get All Users</button>
       <button onClick={getChannelDetails}>Channel Details</button>
     </div>
   );
