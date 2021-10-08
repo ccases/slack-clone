@@ -1,0 +1,8 @@
+* {
+  box-sizing: border-box;
+}
+
+.header {
+  background-color: #49274b;
+  height: 60px;
+}

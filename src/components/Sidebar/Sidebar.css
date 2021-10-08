@@ -1,12 +1,10 @@
 .sidebar-container {
   background-color: #4a154b;
   color: white;
-  width: 30vw;
   border-top: 1px solid #49274b;
-  max-width: 260px;
-  margin-top: 60px;
+  min-width: 260px;
   padding: 18px;
-  height: 100vh;
+  height: calc(100vh - 60px);
 }
 
 .sidbar-header {
