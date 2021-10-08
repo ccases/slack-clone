@@ -76,7 +76,9 @@ function LogIn() {
           />
           <input type="submit" value="Log In" />
         </form>
-        <button onClick={openModal}>Create an account</button>
+        <button className="login-button" onClick={openModal}>
+          Create an account
+        </button>
       </div>
     </div>
   );

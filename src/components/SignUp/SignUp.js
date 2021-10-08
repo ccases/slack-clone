@@ -86,7 +86,7 @@ function SignUp(props) {
               <img className="modal-img" src={signupImage} alt="Sign Up" />
               <div className="modal-content">
                 <h1>First, enter your email</h1>
-                <p>
+                <p className="sign-up-p">
                   We suggest using the{" "}
                   <strong>email address you use at work.</strong>
                 </p>
@@ -95,6 +95,7 @@ function SignUp(props) {
                     <label>
                       Email
                       <input
+                        className="sign-up-input"
                         type="email"
                         onChange={(e) => {
                           setEmail(e.target.value);
@@ -105,6 +106,7 @@ function SignUp(props) {
                     <label>
                       Password
                       <input
+                        className="sign-up-input"
                         type="password"
                         onChange={(e) => {
                           setPassword(e.target.value);
@@ -115,6 +117,7 @@ function SignUp(props) {
                     <label>
                       Confirm Password
                       <input
+                        className="sign-up-input"
                         type="password"
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required
@@ -140,17 +143,5 @@ function SignUp(props) {
     </>
   );
 }
-
-// postData("http://206.189.91.54//api/v1/auth/", {
-//   email: { email },
-//   password: { password },
-//   password_confirmation: { confirmPassword },
-// })
-//   .then((data) => {
-//     console.log("Success: " + data); // JSON data parsed by `data.json()` call
-//   })
-//   .catch((e) => {
-//     console.log(e);
-//   });
 
 export default SignUp;

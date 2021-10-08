@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import ChatArea from "./ChatArea";
 import ChatForm from "./ChatForm";
-import SearchBar from "../SearchBar/SearchBar";
 import "./Chat.css";
 import * as UserAPI from "../../UserAPI";
 import Headers from "../../Helpers/Headers";
 import axios from "axios";
 
-function Chat() {
+function Chat(props) {
+  const { chat } = props;
   const [header, setHeader] = useState(Headers);
   const [chatWith, setChatWith] = useState("");
   const [convo, setConvo] = useState([]);
@@ -55,30 +55,24 @@ function Chat() {
   // logIn();
 
   return (
-    <div>
-      <button onClick={logIn}> Login </button>
-      <button onClick={recentlyDms}> RecentlyDms </button>
-
-      <SearchBar placeholder="Search Avion School" setChatWith={setChatWith} />
-      <div className="chat-wrapper">
-        <div className="chat-area-wrapper">
-          <ChatArea
-            userId={chatWith.id}
-            userEmail={chatWith.uid}
-            convo={convo}
-            setConvo={setConvo}
-            chatType={chatType}
-          />
-        </div>
-        <div className="chat-form-wrapper">
-          <ChatForm
-            userId={chatWith.id}
-            setConvo={setConvo}
-            convo={convo}
-            userEmail={chatWith.uid}
-            chatType={chatType}
-          />
-        </div>
+    <div className="chat">
+      <div className="chat-area-wrapper">
+        <ChatArea
+          userId={chatWith.id}
+          userEmail={chatWith.uid}
+          convo={convo}
+          setConvo={setConvo}
+          chatType={chatType}
+        />
+      </div>
+      <div>
+        <ChatForm
+          userId={chatWith.id}
+          setConvo={setConvo}
+          convo={convo}
+          userEmail={chatWith.uid}
+          chatType={chatType}
+        />
       </div>
     </div>
   );
