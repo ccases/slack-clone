@@ -40,6 +40,11 @@ export const getAllUsersChannels = (header) => {
   return axios.get(url, { headers: header });
 };
 
+export const getAllOwnedChannels = (header) => {
+  const url = BASEURL + `channels/owned`;
+  return axios.get(url, { headers: header });
+};
+
 export const getChannelDetails = (header, ID) => {
   // accepts yung channel ID
   const url = BASEURL + `channels/${ID}`;
