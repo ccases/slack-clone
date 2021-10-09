@@ -6,7 +6,7 @@ import { MdClose } from "react-icons/md";
 import "./AddChannel.css";
 
 const AddChannel = (props) => {
-  const { userId, setUserChannels, ID } = props;
+  const { userId, setUserChannels, ID, channelDb } = props;
   const [channels, setChannels] = useState([]);
   const [channelName, setChannelName] = useState("");
   const { userName, setUserName } = props;
@@ -32,53 +32,7 @@ const AddChannel = (props) => {
         console.log("Create Channel Error " + e);
       });
   };
-  // // used in Add members onclick
-  // const getAllUsers = () => {
-  //   UserAPI.listOfUsers(header)
-  //     .then((res) => {
-  //       console.log("success");
-  //       setAllUsers(res.data.data);
-  //     })
-  //     .catch((e) => {
-  //       console.log("failed to get users");
-  //     });
-  // };
 
-  // const onAddMember = (e) => {
-  //   e.preventDefault();
-
-  //   let found = allUsers.find((user) => user.uid === newMember);
-  //   if (!channelId) {
-  //     if (!found) {
-  //       alert("user not found");
-  //     } else {
-  //       setUserArray(userArray.concat(found.id));
-  //       console.log(found.id);
-  //       console.log(userArray);
-  //     }
-  //   } else {
-  //     if (found) {
-  //       UserAPI.addChannelMember(header, channelId, found.id);
-  //       alert(`${found.id} is successfully added to the channel `);
-  //     } else {
-  //       alert("User does not exist");
-  //       console.log(newMember);
-  //     }
-  //   }
-  // };
-
-  // const getChannelDetails = () => {
-  //   UserAPI.getChannelDetails(header, ID)
-  //     .then((res) => {
-  //       console.log(res);
-  //       console.log(res.data.data.channel_members);
-  //     })
-  //     .catch((e) => {
-  //       console.log("no channel details");
-  //     });
-  // };
-
-  //modal
   const { showModal, setShowModal } = props;
   const animation = useSpring({
     config: {
@@ -110,6 +64,18 @@ const AddChannel = (props) => {
     return () => document.removeEventListener("keydown", keyPress);
   }, [keyPress]);
 
+  //not working!!!
+  const updateChannels = channelDb
+    ? channelDb.map((channel) => {
+        console.log(channel.name);
+        return (
+          <div className="channel-name" key={channel.id}>
+            {channel.name}
+          </div>
+        );
+      })
+    : null;
+
   return (
     <>
       {showModal ? (
@@ -133,9 +99,12 @@ const AddChannel = (props) => {
                         setChannelName(e.target.value);
                       }}
                       value={channelName}
+                      onClick={updateChannels}
                     />
                     <input type="submit" value="Add New Channel" />
                   </form>
+
+                  <button onClick={updateChannels}>UpdateChannels</button>
                   {/* <form onSubmit={onAddMember}>
                     <input
                       type="text"
