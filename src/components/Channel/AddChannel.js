@@ -1,7 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, {
+  useContext,
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+} from "react";
 import axios from "axios";
+import { useSpring, animated } from "react-spring";
 import APIHeaders from "../../APIContext";
 import * as UserAPI from "../../UserAPI";
+import { MdClose } from "react-icons/md";
+//modal css
+import "../SignUp/SignUp.css";
 
 const AddChannel = (props) => {
   const { userId, setUserChannels } = props;
@@ -13,6 +23,41 @@ const AddChannel = (props) => {
   const [tempUsers, setTempUser] = useState([]);
   const [newMember, setNewMember] = useState("");
   const [channelId, setChannelId] = useState("1224");
+
+  //modal
+
+  const { onClick, showModal, setShowModal } = props;
+
+  const animation = useSpring({
+    config: {
+      duration: 250,
+    },
+    opacity: showModal ? 1 : 0,
+    transform: showModal ? `translateY(0%)` : `translateY(-100%)`,
+  });
+
+  const modalRef = useRef();
+
+  const closeModal = (e) => {
+    if (modalRef.current === e.target) {
+      setShowModal(false);
+    }
+  };
+
+  const keyPress = useCallback(
+    (e) => {
+      if (e.key === "Escape" && showModal) {
+        setShowModal(false);
+        console.log("I pressed");
+      }
+    },
+    [setShowModal, showModal]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", keyPress);
+    return () => document.removeEventListener("keydown", keyPress);
+  }, [keyPress]);
 
   //mock login straight to testhello with 2 channels
   const mockLogin = (e) => {
@@ -109,32 +154,54 @@ const AddChannel = (props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          onChange={(e) => {
-            setChannelName(e.target.value);
-          }}
-          value={channelName}
-        />
-        <input type="submit" value="Add New Channel" />
-      </form>
-      <form onSubmit={onAddMember}>
-        <input
-          type="text"
-          onChange={(e) => {
-            setNewMember(e.target.value);
-          }}
-          value={newMember}
-        />
-        <input type="submit" value="Add Members" />
-      </form>
-      <button onClick={mockLogin}>MockLogin TESTHELLO</button>
-      <button onClick={getAllChannels}>Get All Users Channel</button>
-      <button onClick={getAllUsers}>Get All Users</button>
-      <button onClick={getChannelDetails}>Channel Details</button>
-    </div>
+    <>
+      {showModal ? (
+        <div clasname="background" onClick={closeModal} ref={modalRef}>
+          <animated.div style={animation}>
+            <div className="modal-wrapper">
+              <img className="modal-img" />
+              <div className="modal-content">
+                <h1>Add Channel Member</h1>
+
+                <div className="form-container">
+                  <form onSubmit={onSubmit}>
+                    <input
+                      type="text"
+                      onChange={(e) => {
+                        setChannelName(e.target.value);
+                      }}
+                      value={channelName}
+                    />
+                    <input type="submit" value="Add New Channel" />
+                  </form>
+                  <form onSubmit={onAddMember}>
+                    <input
+                      type="text"
+                      onChange={(e) => {
+                        setNewMember(e.target.value);
+                      }}
+                      value={newMember}
+                    />
+                    <input type="submit" value="Add Members" />
+                  </form>
+                  <button onClick={mockLogin}>MockLogin TESTHELLO</button>
+                  <button onClick={getAllChannels}>
+                    Get All Users Channel
+                  </button>
+                  <button onClick={getAllUsers}>Get All Users</button>
+                  <button onClick={getChannelDetails}>Channel Details</button>
+                </div>
+                <MdClose
+                  className="close-modal-button"
+                  aria-label="Close modal"
+                  onClick={() => setShowModal((prev) => !prev)}
+                />
+              </div>
+            </div>
+          </animated.div>
+        </div>
+      ) : null}
+    </>
   );
 };
 

@@ -28,15 +28,11 @@ function Sidebar() {
 
   const [userName, setUserName] = useState([]);
 
-  //   const displayName = userName
-  //     ? userName.map((uid) => {
-  //         return (
-  //           <div className="my-name" key={uid}>
-  //             {uid.name}
-  //           </div>
-  //         );
-  //       })
-  //     : null;
+  const [showModal, setShowModal] = useState(false);
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+    console.log("modal popup test");
+  };
 
   return (
     <div className="sidebar-container">
@@ -78,13 +74,29 @@ function Sidebar() {
           <SidebarOptions Icon={RiAtLine} title="Mentions & reactions" />
           <SidebarOptions Icon={RiBookmarkLine} title="Saved Items" />
           <SidebarOptions Icon={RiMore2Fill} title="More" />
+
+          <hr />
+          <SidebarOptions
+            title="Channels"
+            Icon={RiMore2Fill}
+            addChannelOption
+            onclick={openModal}
+          />
+          <hr />
         </div>
       </div>
-      <SidebarOptions title="Channels" />
 
       {displayChannels}
 
       <AddChannel setUserChannels={setUserChannels} setUserName={setUserName} />
+
+      <button
+        onclick={openModal}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      >
+        test
+      </button>
     </div>
   );
 }

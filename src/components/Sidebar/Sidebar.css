@@ -55,3 +55,7 @@ h3 {
 .user-name {
   padding-top: 3px;
 }
+
+hr {
+  height: 1px;
+}
