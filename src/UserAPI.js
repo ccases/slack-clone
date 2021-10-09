@@ -72,8 +72,8 @@ export const getRecent = (header) => {
   return axios.get(url, { headers: header });
 };
 
-export const getAllOwnedChannels = (header) => {
-  const url = BASEURL + `channels/owned`;
-  return axios.get(url, { headers: header });
-};
+// export const getAllOwnedChannels = (header) => {
+//   const url = BASEURL + `channels/owned`;
+//   return axios.get(url, { headers: header });
+// };
 // }

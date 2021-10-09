@@ -23,6 +23,7 @@ function Sidebar(props) {
   const [userChannels, setUserChannels] = useState([]);
   const [userName, setUserName] = useState([]);
   const [dmsExpanded, setDmsExpanded] = useState(true);
+  const [channelsExpanded, setChannelsExpanded] = useState(true);
 
   const displayChannels = channelDb
     ? channelDb.map((channel) => {
@@ -76,9 +77,24 @@ function Sidebar(props) {
           <SidebarOptions Icon={RiMore2Fill} title="More" />
         </div>
       </div>
-      <SidebarOptions title="Channels" />
-      {displayChannels}
+      <div
+        className="dms-expander-div"
+        onClick={() => setChannelsExpanded(!channelsExpanded)}
+      >
+        {channelsExpanded ? <RiArrowDownSFill /> : <RiArrowRightSFill />}{" "}
+        Channels
+      </div>
+      <div
+        className={
+          channelsExpanded ? "direct-messages expanded" : "direct-messages"
+        }
+      >
+        {displayChannels.map((channel) => {
+          return <div className="direct-message-user">{displayChannels}</div>;
+        })}
+      </div>
       <AddChannel setUserChannels={setUserChannels} setUserName={setUserName} />
+
       <div
         className="dms-expander-div"
         onClick={() => setDmsExpanded(!dmsExpanded)}
