@@ -14,6 +14,7 @@ import {
   RiLockLine,
   RiArrowDownSFill,
   RiArrowRightSFill,
+  RiAddFill,
 } from "react-icons/ri";
 import SidebarOptions from "./SidebarOptions";
 import DirectMessages from "../DirectMessages/DirectMessages";
@@ -25,6 +26,12 @@ function Sidebar(props) {
   const [dmsExpanded, setDmsExpanded] = useState(true);
   const [channelsExpanded, setChannelsExpanded] = useState(true);
 
+  //modal
+  const [showModal, setShowModal] = useState(false);
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
+
   const displayChannels = channelDb
     ? channelDb.map((channel) => {
         return (
@@ -35,8 +42,21 @@ function Sidebar(props) {
       })
     : null;
 
+  {
+    /* {displayChannels.map((channels) => {
+          return <div className="direct-message-user">{displayChannels}</div>;
+        })} */
+  }
+
   return (
     <div className="sidebar-container">
+      <AddChannel
+        setUserChannels={setUserChannels}
+        setUserName={setUserName}
+        onclick={openModal}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
       <div className="sidebar-header">
         <div className="sidebar-info">
           <h2>
@@ -69,12 +89,22 @@ function Sidebar(props) {
         </div>
 
         <div className="sidebar-options">
+          <button className="login-button" onClick={openModal}>
+            openModal
+          </button>
           <SidebarOptions Icon={RiMenu2Line} title="All unreads" />
           <SidebarOptions Icon={RiChat1Line} title="Threads" />
           <SidebarOptions Icon={RiQuestionAnswerLine} title="All DMs" />
           <SidebarOptions Icon={RiAtLine} title="Mentions & reactions" />
           <SidebarOptions Icon={RiBookmarkLine} title="Saved Items" />
           <SidebarOptions Icon={RiMore2Fill} title="More" />
+          <SidebarOptions
+            Icon={RiAddFill}
+            title="Add Channel"
+            onClick={openModal}
+            showModal={showModal}
+            setShowModal={setShowModal}
+          />
         </div>
       </div>
       <div
@@ -89,11 +119,8 @@ function Sidebar(props) {
           channelsExpanded ? "direct-messages expanded" : "direct-messages"
         }
       >
-        {displayChannels.map((channel) => {
-          return <div className="direct-message-user">{displayChannels}</div>;
-        })}
+        {displayChannels}
       </div>
-      <AddChannel setUserChannels={setUserChannels} setUserName={setUserName} />
 
       <div
         className="dms-expander-div"
