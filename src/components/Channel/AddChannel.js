@@ -11,9 +11,11 @@ const AddChannel = (props) => {
   const [header, setHeader] = useState(Headers);
   const [tempUsers, setTempUser] = useState([]);
   const [newMember, setNewMember] = useState("");
-  const [channelId, setChannelId] = useState("1224");
+  const [newChannel, setNewChannel] = useState("");
+  const [channelId, setChannelId] = useState("");
+  const [channelArray, setChannelArray] = useState("");
 
-  const onSubmit = (e) => {
+  const createNewChannel = (e) => {
     e.preventDefault();
 
     UserAPI.createChannel(header, {
@@ -27,6 +29,17 @@ const AddChannel = (props) => {
       })
       .catch((e) => {
         console.log("Create Channel Error " + e);
+      });
+  };
+
+  const getAllUsersChannels = () => {
+    UserAPI.getAllUsersChannels(header)
+      .then((res) => {
+        console.log(`success: ${res}`);
+        setChannelArray(res.data.data);
+      })
+      .catch((e) => {
+        console.log("failed to get owned channels");
       });
   };
 
@@ -62,20 +75,35 @@ const AddChannel = (props) => {
     }
   };
 
-  const getChannelDetails = () => {
-    UserAPI.getChannelDetails(header, 1224)
-      .then((res) => {
-        console.log(res);
-        console.log(res.data.data.channel_members);
-      })
-      .catch((e) => {
-        console.log("no channel details");
-      });
+  // for checking - gagamitin pa ba to?
+  const getChannelDetails = (e) => {
+    e.preventDefault();
+
+    let found = channelId.find((user) => user.id === newChannel);
+    if (!channelId) {
+      if (!found) {
+        alert("channel not found");
+      } else {
+        setChannelArray(channelArray.concat(found.id));
+        console.log(channelArray);
+      }
+    } else {
+      if (found) {
+        UserAPI.getChannelDetails(header, channelId)
+          .then((res) => {
+            console.log(res);
+            console.log(res.data.data.channel_members);
+          })
+          .catch((e) => {
+            console.log("no channel details");
+          });
+      }
+    }
   };
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={(createNewChannel, getAllUsersChannels)}>
         <input
           type="text"
           onChange={(e) => {
@@ -83,8 +111,17 @@ const AddChannel = (props) => {
           }}
           value={channelName}
         />
-        <input type="submit" value="Add New Channel" />
+        <input
+          type="submit"
+          value="Add New Channel"
+          onClick={getAllUsersChannels}
+          onChange={(e) => {
+            setNewChannel(e.target.value);
+          }}
+          value={newChannel}
+        />
       </form>
+
       <form onSubmit={onAddMember}>
         <input
           type="text"
@@ -98,7 +135,7 @@ const AddChannel = (props) => {
       {/* <button onClick={mockLogin}>MockLogin TESTHELLO</button> */}
       {/* <button onClick={getAllChannels}>Get All Users Channel</button> */}
       {/* <button onClick={getAllUsers}>Get All Users</button> */}
-      <button onClick={getChannelDetails}>Channel Details</button>
+      <button onClick={getAllUsersChannels}>Channel Details</button>
     </div>
   );
 };
