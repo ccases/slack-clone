@@ -10,10 +10,11 @@ function Chat(props) {
   const [chatType, setChatType] = useState("User"); // can be Channel, CAPITALIZE FIRST LETTER!
 
   useEffect(() => {
-    if (chat["owner_id"]) {
+    if (!chat) return;
+    if (chat["owner_id"] !== undefined) {
       // if object passed has owner id, set chat type to channel!
       setChatType("Channel");
-    } else if (chat["email"]) {
+    } else if (chat["email"] !== undefined) {
       // if chat has property: email, single user lang siya
       setChatType("User");
       setChatWith(chat);
