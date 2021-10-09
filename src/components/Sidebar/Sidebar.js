@@ -19,6 +19,7 @@ import {
 import SidebarOptions from "./SidebarOptions";
 import DirectMessages from "../DirectMessages/DirectMessages";
 import AddMembers from "../Channel/AddMembers";
+import ShowChannelMembers from "../Channel/ShowChannelMembers";
 
 function Sidebar(props) {
   const { userDb, recentDms, channelDb, setChat } = props;
@@ -37,6 +38,12 @@ function Sidebar(props) {
   const [showAddMembers, setShowAddMembers] = useState(false);
   const openMemberModal = () => {
     setShowAddMembers((prev) => !prev);
+  };
+
+  //modal show channel members
+  const [showMembers, setShowMembers] = useState(false);
+  const openAllMemberModal = () => {
+    setShowMembers((prev) => !prev);
   };
 
   const displayChannels = channelDb
@@ -68,6 +75,11 @@ function Sidebar(props) {
         onclick={openMemberModal}
         showAddMembers={showAddMembers}
         setShowAddMembers={setShowAddMembers}
+      />
+      <ShowChannelMembers
+        onclick={openAllMemberModal}
+        showMembers={showMembers}
+        setShowMembers={setShowMembers}
       />
       <div className="sidebar-header">
         <div className="sidebar-info">
@@ -103,19 +115,18 @@ function Sidebar(props) {
         <div className="sidebar-options">
           <button onClick={openModal}>Add Channel</button>
           <button onClick={openMemberModal}>Add Members</button>
+          <button onClick={openAllMemberModal}>View Channel Members</button>
           <SidebarOptions Icon={RiMenu2Line} title="All unreads" />
           <SidebarOptions Icon={RiChat1Line} title="Threads" />
           <SidebarOptions Icon={RiQuestionAnswerLine} title="All DMs" />
           <SidebarOptions Icon={RiAtLine} title="Mentions & reactions" />
           <SidebarOptions Icon={RiBookmarkLine} title="Saved Items" />
           <SidebarOptions Icon={RiMore2Fill} title="More" />
-          {/* <SidebarOptions
+          <SidebarOptions
+            onClick={openModal}
             Icon={RiAddFill}
             title="Add Channel"
-            onClick={openModal}
-            showModal={showModal}
-            setShowModal={setShowModal}
-          /> */}
+          />
         </div>
       </div>
       <div
