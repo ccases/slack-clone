@@ -12,8 +12,11 @@ function Dashboard() {
   const [userDb, setUserDb] = useState([]);
   const [recentDms, setRecentDms] = useState([]);
   const [channelDb, setChannelDb] = useState([]);
+
+  // const [ownedChannels, setOwnedChannels] = useState([]);
   const [chat, setChat] = useState("");
 
+  // const [ownChannelsAreLoaded, setOwnChannelsAreLoaded] = useState(false);
   const [usersAreLoaded, setUsersAreLoaded] = useState(false);
   const [recentsAreLoaded, setRecentsAreLoaded] = useState(false);
   const [channelsAreLoaded, setChannelsAreLoaded] = useState(false);
@@ -51,27 +54,44 @@ function Dashboard() {
     UserAPI.getAllUsersChannels(headers)
       .then((res) => {
         setChannelDb(res.data.data);
-
         setChannelsAreLoaded(true);
       })
       .catch((e) => {
         console.log("error: " + e);
         setIsErrorLoading(true);
       });
+
+    // UserAPI.getAllOwnedChannels(headers)
+    //   .then((res) => {
+    //     setOwnedChannels(res.data.data);
+    //     setOwnChannelsAreLoaded(true);
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //     setIsErrorLoading(true);
+    //   });
   }, [headers]);
 
   useEffect(() => {
+    //initialize
     let dependencies = 3;
     let n = 0;
     if (usersAreLoaded) n++;
     if (recentsAreLoaded) n++;
     if (channelsAreLoaded) n++;
+    // if (ownChannelsAreLoaded) n++;
 
     if (n === dependencies) setLoadingComplete(true);
+
     let found = userDb.find((user) => user.uid === headers.uid);
     console.log(headers.uid);
     setChat(found);
-  }, [usersAreLoaded, recentsAreLoaded, channelsAreLoaded]);
+  }, [
+    usersAreLoaded,
+    recentsAreLoaded,
+    channelsAreLoaded,
+    // ownChannelsAreLoaded,
+  ]);
 
   const displayErrorMsg = () => {
     return <div>Please log in again to continue</div>;

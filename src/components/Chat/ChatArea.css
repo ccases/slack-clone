@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box;
 }
+.ChatArea {
+  margin-bottom: 10px;
+}
 .name {
   color: #5890bcff;
   background-color: #e8f5faff;

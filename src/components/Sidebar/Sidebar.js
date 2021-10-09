@@ -12,15 +12,20 @@ import {
   RiBookmarkLine,
   RiMore2Fill,
   RiLockLine,
+  RiArrowDownSFill,
+  RiArrowRightSFill,
 } from "react-icons/ri";
 import SidebarOptions from "./SidebarOptions";
+import DirectMessages from "../DirectMessages/DirectMessages";
 
-function Sidebar() {
+function Sidebar(props) {
+  const { userDb, recentDms, channelDb, setChat } = props;
   const [userChannels, setUserChannels] = useState([]);
   const [userName, setUserName] = useState([]);
+  const [dmsExpanded, setDmsExpanded] = useState(true);
 
-  const displayChannels = userChannels
-    ? userChannels.map((channel) => {
+  const displayChannels = channelDb
+    ? channelDb.map((channel) => {
         return (
           <div className="channel-name" key={channel.id}>
             {channel.name}
@@ -72,10 +77,26 @@ function Sidebar() {
         </div>
       </div>
       <SidebarOptions title="Channels" />
-
       {displayChannels}
-
       <AddChannel setUserChannels={setUserChannels} setUserName={setUserName} />
+      <div
+        className="dms-expander-div"
+        onClick={() => setDmsExpanded(!dmsExpanded)}
+      >
+        {dmsExpanded ? <RiArrowDownSFill /> : <RiArrowRightSFill />} Direct
+        Messages
+      </div>
+      <div
+        className={dmsExpanded ? "direct-messages expanded" : "direct-messages"}
+      >
+        {recentDms.map((user) => {
+          return (
+            <div className="direct-message-user">
+              <DirectMessages key={user.id} user={user} setChat={setChat} />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

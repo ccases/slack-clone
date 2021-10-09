@@ -36,6 +36,7 @@ function ChatForm(props) {
   };
 
   const handleKeyUp = (e) => {
+    e.preventDefault();
     const isKeyEnter = (e) => {
       if (e.code === "Enter" || (e.location === 3 && e.key === "Enter"))
         //to also catch the numpad enter
@@ -44,15 +45,14 @@ function ChatForm(props) {
       return false;
     };
     if (isKeyEnter(e) && e.shiftKey) {
-      setChatInput(chatInput + "\n");
-      setChatInput(chatInput.substring(0, chatInput.length));
     } else if (isKeyEnter(e)) {
       handleSubmit(e);
     }
   };
+
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (chatInput == null) return;
+    let input = chatInput;
+    if (chatInput == null || input.trim().length === 0) return;
     if (header["access-token"] === undefined) return;
     UserAPI.sendMsg(header, raw)
       .then((res) => {

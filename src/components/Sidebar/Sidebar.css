@@ -53,3 +53,13 @@ h3 {
 .user-name {
   padding-top: 3px;
 }
+
+.direct-messages {
+  overflow: hidden;
+  height: 0;
+  transition: height 0.7s;
+}
+
+.expanded {
+  height: max-content;
+}
