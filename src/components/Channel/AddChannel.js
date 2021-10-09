@@ -32,51 +32,51 @@ const AddChannel = (props) => {
         console.log("Create Channel Error " + e);
       });
   };
-  // used in Add members onclick
-  const getAllUsers = () => {
-    UserAPI.listOfUsers(header)
-      .then((res) => {
-        console.log("success");
-        setAllUsers(res.data.data);
-      })
-      .catch((e) => {
-        console.log("failed to get users");
-      });
-  };
+  // // used in Add members onclick
+  // const getAllUsers = () => {
+  //   UserAPI.listOfUsers(header)
+  //     .then((res) => {
+  //       console.log("success");
+  //       setAllUsers(res.data.data);
+  //     })
+  //     .catch((e) => {
+  //       console.log("failed to get users");
+  //     });
+  // };
 
-  const onAddMember = (e) => {
-    e.preventDefault();
+  // const onAddMember = (e) => {
+  //   e.preventDefault();
 
-    let found = allUsers.find((user) => user.uid === newMember);
-    if (!channelId) {
-      if (!found) {
-        alert("user not found");
-      } else {
-        setUserArray(userArray.concat(found.id));
-        console.log(found.id);
-        console.log(userArray);
-      }
-    } else {
-      if (found) {
-        UserAPI.addChannelMember(header, channelId, found.id);
-        alert(`${found.id} is successfully added to the channel `);
-      } else {
-        alert("User does not exist");
-        console.log(newMember);
-      }
-    }
-  };
+  //   let found = allUsers.find((user) => user.uid === newMember);
+  //   if (!channelId) {
+  //     if (!found) {
+  //       alert("user not found");
+  //     } else {
+  //       setUserArray(userArray.concat(found.id));
+  //       console.log(found.id);
+  //       console.log(userArray);
+  //     }
+  //   } else {
+  //     if (found) {
+  //       UserAPI.addChannelMember(header, channelId, found.id);
+  //       alert(`${found.id} is successfully added to the channel `);
+  //     } else {
+  //       alert("User does not exist");
+  //       console.log(newMember);
+  //     }
+  //   }
+  // };
 
-  const getChannelDetails = () => {
-    UserAPI.getChannelDetails(header, ID)
-      .then((res) => {
-        console.log(res);
-        console.log(res.data.data.channel_members);
-      })
-      .catch((e) => {
-        console.log("no channel details");
-      });
-  };
+  // const getChannelDetails = () => {
+  //   UserAPI.getChannelDetails(header, ID)
+  //     .then((res) => {
+  //       console.log(res);
+  //       console.log(res.data.data.channel_members);
+  //     })
+  //     .catch((e) => {
+  //       console.log("no channel details");
+  //     });
+  // };
 
   //modal
   const { showModal, setShowModal } = props;
@@ -105,10 +105,10 @@ const AddChannel = (props) => {
     [setShowModal, showModal]
   );
 
-  // useEffect(() => {
-  //   document.addEventListener("keydown", keyPress);
-  //   return () => document.removeEventListener("keydown", keyPress);
-  // }, [keyPress]);
+  useEffect(() => {
+    document.addEventListener("keydown", keyPress);
+    return () => document.removeEventListener("keydown", keyPress);
+  }, [keyPress]);
 
   return (
     <>
@@ -136,7 +136,7 @@ const AddChannel = (props) => {
                     />
                     <input type="submit" value="Add New Channel" />
                   </form>
-                  <form onSubmit={onAddMember}>
+                  {/* <form onSubmit={onAddMember}>
                     <input
                       type="text"
                       onChange={(e) => {
@@ -151,7 +151,7 @@ const AddChannel = (props) => {
                   </form>
                   <button onClick={getChannelDetails}>
                     View Channel Members
-                  </button>{" "}
+                  </button>{" "} */}
                 </div>
                 <MdClose
                   className="close-modal-button"

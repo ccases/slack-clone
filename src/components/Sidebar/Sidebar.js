@@ -18,6 +18,7 @@ import {
 } from "react-icons/ri";
 import SidebarOptions from "./SidebarOptions";
 import DirectMessages from "../DirectMessages/DirectMessages";
+import AddMembers from "../Channel/AddMembers";
 
 function Sidebar(props) {
   const { userDb, recentDms, channelDb, setChat } = props;
@@ -26,10 +27,16 @@ function Sidebar(props) {
   const [dmsExpanded, setDmsExpanded] = useState(true);
   const [channelsExpanded, setChannelsExpanded] = useState(true);
 
-  //modal
+  //modal add channel
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setShowModal((prev) => !prev);
+  };
+
+  //modal add members
+  const [showAddMembers, setShowAddMembers] = useState(false);
+  const openMemberModal = () => {
+    setShowAddMembers((prev) => !prev);
   };
 
   const displayChannels = channelDb
@@ -56,6 +63,11 @@ function Sidebar(props) {
         onclick={openModal}
         showModal={showModal}
         setShowModal={setShowModal}
+      />
+      <AddMembers
+        onclick={openMemberModal}
+        showAddMembers={showAddMembers}
+        setShowAddMembers={setShowAddMembers}
       />
       <div className="sidebar-header">
         <div className="sidebar-info">
@@ -89,22 +101,21 @@ function Sidebar(props) {
         </div>
 
         <div className="sidebar-options">
-          <button className="login-button" onClick={openModal}>
-            openModal
-          </button>
+          <button onClick={openModal}>Add Channel</button>
+          <button onClick={openMemberModal}>Add Members</button>
           <SidebarOptions Icon={RiMenu2Line} title="All unreads" />
           <SidebarOptions Icon={RiChat1Line} title="Threads" />
           <SidebarOptions Icon={RiQuestionAnswerLine} title="All DMs" />
           <SidebarOptions Icon={RiAtLine} title="Mentions & reactions" />
           <SidebarOptions Icon={RiBookmarkLine} title="Saved Items" />
           <SidebarOptions Icon={RiMore2Fill} title="More" />
-          <SidebarOptions
+          {/* <SidebarOptions
             Icon={RiAddFill}
             title="Add Channel"
             onClick={openModal}
             showModal={showModal}
             setShowModal={setShowModal}
-          />
+          /> */}
         </div>
       </div>
       <div
