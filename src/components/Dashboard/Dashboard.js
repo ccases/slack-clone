@@ -14,17 +14,23 @@ function Dashboard() {
   const [channelDb, setChannelDb] = useState([]);
   const [chat, setChat] = useState("");
 
+  const [usersAreLoaded, setUsersAreLoaded] = useState(false);
+  const [recentsAreLoaded, setRecentsAreLoaded] = useState(false);
+  const [channelsAreLoaded, setChannelsAreLoaded] = useState(false);
+  const [loadingComplete, setLoadingComplete] = useState(false);
+
+  const [isErrorLoading, setIsErrorLoading] = useState(false);
   useEffect(() => {
     // get all users and set avatar for each(not implemented yet)
     console.log(headers);
     UserAPI.listOfUsers(headers)
       .then((res) => {
         setUserDb(res.data.data);
-        let found = userDb.find((user) => user.uid === headers.uid);
-        setChat(found);
+        setUsersAreLoaded(true);
       })
       .catch((e) => {
         console.log("[SearchBar.js: getAllUsers] failed to get all users");
+        setIsErrorLoading(true);
       });
 
     // set initial chat to drafts (NEEDS USER DB FIRST)
@@ -33,35 +39,60 @@ function Dashboard() {
     UserAPI.getRecent(headers)
       .then((res) => {
         setRecentDms(res.data.data);
+        setRecentsAreLoaded(true);
       })
       .catch((e) => {
         console.log(e);
+
+        setIsErrorLoading(true);
       });
 
     // get everyone signed up para lumabas sa searchbar
     UserAPI.getAllUsersChannels(headers)
       .then((res) => {
         setChannelDb(res.data.data);
+
+        setChannelsAreLoaded(true);
       })
       .catch((e) => {
         console.log("error: " + e);
+        setIsErrorLoading(true);
       });
-  }, []);
+  }, [headers]);
 
+  useEffect(() => {
+    let dependencies = 3;
+    let n = 0;
+    if (usersAreLoaded) n++;
+    if (recentsAreLoaded) n++;
+    if (channelsAreLoaded) n++;
+
+    if (n === dependencies) setLoadingComplete(true);
+    let found = userDb.find((user) => user.uid === headers.uid);
+    console.log(headers.uid);
+    setChat(found);
+  }, [usersAreLoaded, recentsAreLoaded, channelsAreLoaded]);
+
+  const displayErrorMsg = () => {
+    return <div>Please log in again to continue</div>;
+  };
   return (
     <div className="dashboard">
-      <Header userDb={userDb} channelDb={channelDb} />
+      {isErrorLoading ? displayErrorMsg() : null}
+      {loadingComplete && <Header userDb={userDb} channelDb={channelDb} />}
       <div className="main-container">
         <div className="sidebar-dashboard">
-          <Sidebar
-            userDb={userDb}
-            recentDms={recentDms}
-            channelDb={channelDb}
-            setChat={setChat}
-          />
+          {loadingComplete && (
+            <Sidebar
+              userDb={userDb}
+              recentDms={recentDms}
+              channelDb={channelDb}
+              setChat={setChat}
+            />
+          )}
         </div>
         <div className="chat-dashboard">
-          <Chat chat={chat} />
+          {loadingComplete && <Chat chat={chat} />}
         </div>
       </div>
     </div>
