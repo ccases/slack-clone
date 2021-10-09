@@ -88,6 +88,7 @@ function Dashboard() {
               recentDms={recentDms}
               channelDb={channelDb}
               setChat={setChat}
+              setChannelDb={setChannelDb}
             />
           )}
         </div>

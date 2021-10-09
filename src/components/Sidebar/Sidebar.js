@@ -15,7 +15,8 @@ import {
 } from "react-icons/ri";
 import SidebarOptions from "./SidebarOptions";
 
-function Sidebar() {
+function Sidebar(props) {
+  const { userDb, recentDms, channelDb, setChat, setChannelDb } = props;
   const [userChannels, setUserChannels] = useState([]);
   const [userName, setUserName] = useState([]);
 
@@ -75,7 +76,12 @@ function Sidebar() {
 
       {displayChannels}
 
-      <AddChannel setUserChannels={setUserChannels} setUserName={setUserName} />
+      <AddChannel
+        setUserChannels={setUserChannels}
+        setUserName={setUserName}
+        channelDb={channelDb}
+        setChannelDb={setChannelDb}
+      />
     </div>
   );
 }
