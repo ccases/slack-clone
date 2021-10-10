@@ -24,28 +24,25 @@ function SignUp(props) {
     const url = "http://206.189.91.54//api/v1/auth/";
     e.preventDefault();
 
-    if(isMatching){
+    if (isMatching) {
       axios
-      .post(url, {
-        email: email,
-        password: password,
-        password_confirmation: confirmPassword,
-      })
-      .then((res) => {
-        
+        .post(url, {
+          email: email,
+          password: password,
+          password_confirmation: confirmPassword,
+        })
+        .then((res) => {
           localStorage.setItem("access-token", res.headers["access-token"]);
-          localStorage.setItem("client",res.headers ["client"]);
+          localStorage.setItem("client", res.headers["client"]);
           localStorage.setItem("uid", res.headers["uid"]);
           localStorage.setItem("expiry", res.headers["expiry"]);
-          window.location = '/Dashboard'
-        }
-      )
-      .catch((e) => {
-        console.log("error: " + e);
-      });
-  };
-
+          window.location = "/Dashboard";
+        })
+        .catch((e) => {
+          console.log("error: " + e);
+        });
     }
+  };
 
   //modal
 
@@ -89,15 +86,16 @@ function SignUp(props) {
               <img className="modal-img" src={signupImage} alt="Sign Up" />
               <div className="modal-content">
                 <h1>First, enter your email</h1>
-                <p>
+                <p className="sign-up-p">
                   We suggest using the{" "}
                   <strong>email address you use at work.</strong>
                 </p>
                 <div className="form-container">
-                  <form onSubmit={submitHandler}>
+                  <form onSubmit={submitHandler} autoComplete="off">
                     <label>
                       Email
                       <input
+                        className="sign-up-input"
                         type="email"
                         onChange={(e) => {
                           setEmail(e.target.value);
@@ -108,6 +106,7 @@ function SignUp(props) {
                     <label>
                       Password
                       <input
+                        className="sign-up-input"
                         type="password"
                         onChange={(e) => {
                           setPassword(e.target.value);
@@ -118,6 +117,7 @@ function SignUp(props) {
                     <label>
                       Confirm Password
                       <input
+                        className="sign-up-input"
                         type="password"
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required
@@ -143,17 +143,5 @@ function SignUp(props) {
     </>
   );
 }
-
-// postData("http://206.189.91.54//api/v1/auth/", {
-//   email: { email },
-//   password: { password },
-//   password_confirmation: { confirmPassword },
-// })
-//   .then((data) => {
-//     console.log("Success: " + data); // JSON data parsed by `data.json()` call
-//   })
-//   .catch((e) => {
-//     console.log(e);
-//   });
 
 export default SignUp;

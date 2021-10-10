@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+.ChatArea {
+  margin-bottom: 10px;
+}
+.name {
+  color: #5890bcff;
+  background-color: #e8f5faff;
+  border: none;
+  height: 1.5em;
+  font-size: 0.9em;
+  padding: 0 5px;
+}
+.name:hover {
+  cursor: pointer;
+}

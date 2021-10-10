@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  --header-height: 60px;
+  --sidebar-width: 260px;
+}
+.chat {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--header-height));
+  width: calc(100vw - var(--sidebar-width));
+}
+.chat-area-wrapper {
+  flex: 1 1 auto;
+  overflow-y: scroll;
+}
