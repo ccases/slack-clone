@@ -83,7 +83,7 @@ function SignUp(props) {
         <div className="background" onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
             <div className="modal-wrapper">
-              <img className="modal-img" src={signupImage} alt="Sign Up" />
+              <img className="modal-img" src={signupImage} alt="Sign Up" />{" "}
               <div className="modal-content">
                 <h1>First, enter your email</h1>
                 <p className="sign-up-p">
