@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import * as UserAPI from "../../UserAPI";
 import Headers from "../../Helpers/Headers";
+import { useSpring, animated } from "react-spring";
+import { MdClose } from "react-icons/md";
+import "./AddChannel.css";
 
 const AddChannel = (props) => {
-  const { userId, setUserChannels } = props;
+  const { userId, setUserChannels, ID, channelDb } = props;
   const [channels, setChannels] = useState([]);
   const [channelName, setChannelName] = useState("");
   const { userName, setUserName } = props;
   const [userArray, setUserArray] = useState([]);
   const [header, setHeader] = useState(Headers);
-  const [tempUsers, setTempUser] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [newMember, setNewMember] = useState("");
   const [channelId, setChannelId] = useState("1224");
 
@@ -23,83 +26,113 @@ const AddChannel = (props) => {
 
       .then((res) => {
         console.log(res.data.data);
-        console.log("Channel Created");
+        alert("Channel Created");
       })
       .catch((e) => {
         console.log("Create Channel Error " + e);
       });
   };
 
-  const getAllUsers = () => {
-    UserAPI.listOfUsers(header)
-      .then((res) => {
-        console.log("success");
-        setTempUser(res.data.data);
-      })
-      .catch((e) => {
-        console.log("failed to get users");
-      });
-  };
+  const { showModal, setShowModal } = props;
+  const animation = useSpring({
+    config: {
+      duration: 250,
+    },
+    opacity: showModal ? 1 : 0,
+    transform: showModal ? `translateY(0%)` : `translateY(-100%)`,
+  });
 
-  const onAddMember = (e) => {
-    e.preventDefault();
+  const modalRef = useRef();
 
-    let found = tempUsers.find((user) => user.uid === newMember);
-    if (!channelId) {
-      if (!found) {
-        alert("user not found");
-      } else {
-        setUserArray(userArray.concat(found.id));
-        console.log(found.id);
-        console.log(userArray);
-      }
-    } else {
-      if (found) {
-        UserAPI.addChannelMember(header, channelId, found.id);
-      } else {
-        alert("not found");
-      }
+  const closeModal = (e) => {
+    if (modalRef.current === e.target) {
+      setShowModal(false);
     }
   };
 
-  const getChannelDetails = () => {
-    UserAPI.getChannelDetails(header, 1224)
-      .then((res) => {
-        console.log(res);
-        console.log(res.data.data.channel_members);
+  const keyPress = useCallback(
+    (e) => {
+      if (e.key === "Escape" && showModal) {
+        setShowModal(false);
+      }
+    },
+    [setShowModal, showModal]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", keyPress);
+    return () => document.removeEventListener("keydown", keyPress);
+  }, [keyPress]);
+
+  //not working!!!
+  const updateChannels = channelDb
+    ? channelDb.map((channel) => {
+        console.log(channel.name);
+        return (
+          <div className="channel-name" key={channel.id}>
+            {channel.name}
+          </div>
+        );
       })
-      .catch((e) => {
-        console.log("no channel details");
-      });
-  };
+    : null;
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          onChange={(e) => {
-            setChannelName(e.target.value);
-          }}
-          value={channelName}
-        />
-        <input type="submit" value="Add New Channel" />
-      </form>
-      <form onSubmit={onAddMember}>
-        <input
-          type="text"
-          onChange={(e) => {
-            setNewMember(e.target.value);
-          }}
-          value={newMember}
-        />
-        <input type="submit" value="Add Members" />
-      </form>
-      {/* <button onClick={mockLogin}>MockLogin TESTHELLO</button> */}
-      {/* <button onClick={getAllChannels}>Get All Users Channel</button> */}
-      {/* <button onClick={getAllUsers}>Get All Users</button> */}
-      <button onClick={getChannelDetails}>Channel Details</button>
-    </div>
+    <>
+      {showModal ? (
+        <div className="background" onClick={closeModal} ref={modalRef}>
+          <animated.div style={animation}>
+            <div className="modal-wrapper">
+              <div className="modal-content">
+                <h1>Create a private channel</h1>
+                <span className="add-channel-content">
+                  Channels are where your team communicates. They’re best when
+                  organized around a topic — #marketing, for example.
+                </span>
+
+                <span className="name-label">Name</span>
+
+                <div className="form-container">
+                  <form onSubmit={onSubmit}>
+                    <input
+                      type="text"
+                      onChange={(e) => {
+                        setChannelName(e.target.value);
+                      }}
+                      value={channelName}
+                      onClick={updateChannels}
+                    />
+                    <input type="submit" value="Add New Channel" />
+                  </form>
+
+                  <button onClick={updateChannels}>UpdateChannels</button>
+                  {/* <form onSubmit={onAddMember}>
+                    <input
+                      type="text"
+                      onChange={(e) => {
+                        setNewMember(e.target.value);
+                      }}
+                      onClick={(e) => {
+                        getAllUsers();
+                      }}
+                      value={newMember}
+                    />
+                    <input type="submit" value="Add Members" />
+                  </form>
+                  <button onClick={getChannelDetails}>
+                    View Channel Members
+                  </button>{" "} */}
+                </div>
+                <MdClose
+                  className="close-modal-button"
+                  aria-label="Close modal"
+                  onClick={() => setShowModal((prev) => !prev)}
+                />
+              </div>
+            </div>
+          </animated.div>{" "}
+        </div>
+      ) : null}
+    </>
   );
 };
 
