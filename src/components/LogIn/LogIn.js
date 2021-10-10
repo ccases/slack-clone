@@ -3,6 +3,9 @@ import axios from "axios";
 import SignUp from "../../components/SignUp/SignUp";
 import "./LogIn.css";
 import slackLogo from "../../assets/slack-logo.png";
+import {FcGoogle} from 'react-icons/fc'
+import {FaApple} from 'react-icons/fa'
+import {FiGlobe} from 'react-icons/fi'
 
 function LogIn() {
   const [username, setUsername] = useState("");
@@ -54,16 +57,29 @@ function LogIn() {
         showModal={showModal}
         setShowModal={setShowModal}
       />
-      <img className="login-slack-logo" src={slackLogo} alt="Slack Logo" />
 
+
+            <header className = 'header-container'>
+
+      <img src={slackLogo} alt="Slack Logo" />
+      <h1>Sign in to Slack</h1>
+      <p>We suggest using the <strong>email address you use at work.</strong></p>
+      </header>
+      <div className = 'dummy-btn-container'>
+        <button><FcGoogle /> Sign in with Google </button>
+        <button><FaApple /> Sign in with Apple </button>
+      </div>
+
+      <h4><span>OR</span></h4>
+      <div className="login-container">      
+      <h4><span>OR</span></h4>
       <div className="login-container">
-        <strong>Login</strong>
 
         <form onSubmit={submitHandler}>
           <input
             type="email"
             className="email-input"
-            placeholder="Email"
+            placeholder="name@work-email.com"
             onChange={handleEmailChange}
             required
           />
@@ -74,12 +90,18 @@ function LogIn() {
             onChange={handlePasswordChange}
             required
           />
-          <input type="submit" value="Log In" />
+          <input type="submit" className= 'submit-btn' value="Sign in with Email" />
         </form>
-        <button className="login-button" onClick={openModal}>
+        <button className="signup-btn" onClick={openModal}>
           Create an account
         </button>
       </div>
+      <footer>
+        <span>Privacy & Terms </span>
+        <span> Contact Us </span>
+        
+        <span> <FiGlobe /> Change region </span>
+      </footer>
     </div>
   );
 }
