@@ -1,3 +1,8 @@
+.modal-container {
+  z-index: 99;
+  height: 100vh;
+}
+
 .sidebar-container {
   background-color: #4a154b;
   color: white;

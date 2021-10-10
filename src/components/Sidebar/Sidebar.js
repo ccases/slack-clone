@@ -114,21 +114,23 @@ function Sidebar(props) {
           </div>
 
           <div className="sidebar-options">
-            <button onClick={openModal}>Add Channel</button>
-            <button onClick={openMemberModal}>Add Members</button>
-            <button onClick={openAllMemberModal}>View Channel Members</button>
             <SidebarOptions Icon={RiMenu2Line} title="All unreads" />
             <SidebarOptions Icon={RiChat1Line} title="Threads" />
             <SidebarOptions Icon={RiQuestionAnswerLine} title="All DMs" />
             <SidebarOptions Icon={RiAtLine} title="Mentions & reactions" />
             <SidebarOptions Icon={RiBookmarkLine} title="Saved Items" />
             <SidebarOptions Icon={RiMore2Fill} title="More" />
-            <SidebarOptions
-              onClick={openModal}
-              Icon={RiAddFill}
-              title="Add Channel"
-            />
+            <div className="add-channel" onClick={openModal}>
+              <SidebarOptions
+                onClick={openModal}
+                Icon={RiAddFill}
+                title="Add Channel"
+              />
+            </div>
           </div>
+          <button onClick={openModal}>Add Channel</button>
+          <button onClick={openMemberModal}>Add Members</button>
+          <button onClick={openAllMemberModal}>View Channel Members</button>
         </div>
         <div
           className="dms-expander-div"
