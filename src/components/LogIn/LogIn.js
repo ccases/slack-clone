@@ -74,7 +74,11 @@ function LogIn() {
         showModal={showModal}
         setShowModal={setShowModal}
       />
+<<<<<<< Updated upstream
       <header className = 'header-container'>
+=======
+            <header className = 'header-container'>
+>>>>>>> Stashed changes
       <img src={slackLogo} alt="Slack Logo" />
       <h1>Sign in to Slack</h1>
       <p>We suggest using the <strong>email address you use at work.</strong></p>
@@ -83,9 +87,14 @@ function LogIn() {
         <button><FcGoogle /> Sign in with Google </button>
         <button><FaApple /> Sign in with Apple </button>
       </div>
+<<<<<<< Updated upstream
 
       <h4><span>OR</span></h4>
       <div className="login-container">      
+=======
+      <h4><span>OR</span></h4>
+      <div className="login-container">
+>>>>>>> Stashed changes
         <form onSubmit={submitHandler}>
           <input
             type="email"
@@ -101,12 +110,20 @@ function LogIn() {
             onChange={handlePasswordChange}
             required
           />
+<<<<<<< Updated upstream
           <input type="submit" className= 'submit-btn' value="Sign in with Email" />
 
           <button className='signup-btn' onClick={openModal}>Create an account</button>
         </form>
       </div>
 
+=======
+          <input type="submit" className= 'submit-btn' value="Sign in with Email" />        </form>
+        <button className="signup-btn" onClick={openModal}>
+          Create an account
+        </button>
+      </div>
+>>>>>>> Stashed changes
       <footer>
         <span>Privacy & Terms </span>
         <span> Contact Us </span>

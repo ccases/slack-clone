@@ -30,6 +30,10 @@
   align-items: center;
 }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 img {
   transform:scale(0.3)
 }
@@ -75,6 +79,7 @@ button:nth-child(1){
   font-size:1.2rem;
   color: var(--darkblue);
 }
+<<<<<<< Updated upstream
 
 button:nth-child(2){
   border: 2px solid black;
@@ -98,6 +103,31 @@ h4 span {
    padding:0 10px; 
 }
 
+=======
+
+button:nth-child(2){
+  border: 2px solid black;
+  border-radius:5px;
+  font-weight:900;
+  font-size:1.2rem;
+  color: black;
+}
+
+h4 {
+  width: 50%; 
+  text-align: center; 
+  border-bottom: 1px solid gray; 
+  line-height: 0.1em;
+  margin: 10px 0 20px; 
+} 
+
+h4 span {
+  color: rgb(78, 78, 78);
+   background:#fff; 
+   padding:0 10px; 
+}
+
+>>>>>>> Stashed changes
 form {
   display: flex;
   flex-direction: column;
