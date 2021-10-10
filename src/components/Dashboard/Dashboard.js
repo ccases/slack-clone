@@ -11,6 +11,7 @@ function Dashboard() {
   const [headers] = useState(Headers);
   const [userDb, setUserDb] = useState([]);
   const [recentDms, setRecentDms] = useState([]);
+  const [filteredRecents, setFilteredRecents] = useState([]);
   const [channelDb, setChannelDb] = useState([]);
 
   const [chat, setChat] = useState("");
@@ -22,8 +23,8 @@ function Dashboard() {
 
   const [isErrorLoading, setIsErrorLoading] = useState(false);
   useEffect(() => {
-    // get all users and set avatar for each(not implemented yet)
-    console.log(headers);
+    // get all users
+
     UserAPI.listOfUsers(headers)
       .then((res) => {
         setUserDb(res.data.data);
@@ -59,12 +60,27 @@ function Dashboard() {
   }, [headers]);
 
   useEffect(() => {
+    // get rid of duplicates
+    let filteredUids = new Set();
+    recentDms.forEach((dm) => {
+      filteredUids.add(dm.uid);
+    });
+
+    let tempRecents = [];
+    filteredUids.forEach((email) => {
+      let found = recentDms.find((user) => user.uid === email);
+      tempRecents.push(found);
+    });
+
+    setFilteredRecents(tempRecents);
+  }, [recentDms]);
+
+  useEffect(() => {
     //initialize
     let dependencies = 3;
     let n = 0;
     if (usersAreLoaded) {
       n++;
-      setUserDb(assignAvatars(userDb));
     }
     if (recentsAreLoaded) n++;
     if (channelsAreLoaded) n++;
@@ -72,16 +88,8 @@ function Dashboard() {
     if (n === dependencies) setLoadingComplete(true);
 
     let found = userDb.find((user) => user.uid === headers.uid);
-    console.log(headers.uid);
     setChat(found);
   }, [usersAreLoaded, recentsAreLoaded, channelsAreLoaded]);
-
-  const assignAvatars = (userdb) => {
-    return userdb.map((user) => {
-      let image = `https://avatars.dicebear.com/api/micah/${user.id}.svg`;
-      return { ...user, image };
-    });
-  };
 
   const displayErrorMsg = () => {
     return <div>Please log in again to continue</div>;
@@ -95,7 +103,7 @@ function Dashboard() {
           {loadingComplete && (
             <Sidebar
               userDb={userDb}
-              recentDms={recentDms}
+              recentDms={filteredRecents}
               channelDb={channelDb}
               setChat={setChat}
             />
