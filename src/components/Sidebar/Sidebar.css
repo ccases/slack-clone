@@ -5,6 +5,7 @@
   min-width: 260px;
   padding: 18px;
   height: calc(100vh - 60px);
+  overflow-y: scroll;
 }
 
 .sidbar-header {
@@ -54,10 +55,19 @@ h3 {
   padding-top: 3px;
 }
 
+.dms-expander-div {
+  display: flex;
+  align-items: center;
+}
+
 .direct-messages {
   overflow: hidden;
   height: 0;
-  transition: height 0.7s;
+  transition: height 0.3s;
+}
+.direct-message-user {
+  margin: 0;
+  padding: 0;
 }
 
 .expanded {

@@ -54,7 +54,7 @@ function LogIn() {
         showModal={showModal}
         setShowModal={setShowModal}
       />
-      <img src={slackLogo} alt="Slack Logo" />
+      <img className="login-slack-logo" src={slackLogo} alt="Slack Logo" />
 
       <div className="login-container">
         <strong>Login</strong>

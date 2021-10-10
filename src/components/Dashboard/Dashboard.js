@@ -13,10 +13,8 @@ function Dashboard() {
   const [recentDms, setRecentDms] = useState([]);
   const [channelDb, setChannelDb] = useState([]);
 
-  // const [ownedChannels, setOwnedChannels] = useState([]);
   const [chat, setChat] = useState("");
 
-  // const [ownChannelsAreLoaded, setOwnChannelsAreLoaded] = useState(false);
   const [usersAreLoaded, setUsersAreLoaded] = useState(false);
   const [recentsAreLoaded, setRecentsAreLoaded] = useState(false);
   const [channelsAreLoaded, setChannelsAreLoaded] = useState(false);
@@ -35,8 +33,6 @@ function Dashboard() {
         console.log("[SearchBar.js: getAllUsers] failed to get all users");
         setIsErrorLoading(true);
       });
-
-    // set initial chat to drafts (NEEDS USER DB FIRST)
 
     // get all users with chat history with this guy
     UserAPI.getRecent(headers)
@@ -60,38 +56,32 @@ function Dashboard() {
         console.log("error: " + e);
         setIsErrorLoading(true);
       });
-
-    // UserAPI.getAllOwnedChannels(headers)
-    //   .then((res) => {
-    //     setOwnedChannels(res.data.data);
-    //     setOwnChannelsAreLoaded(true);
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //     setIsErrorLoading(true);
-    //   });
   }, [headers]);
 
   useEffect(() => {
     //initialize
     let dependencies = 3;
     let n = 0;
-    if (usersAreLoaded) n++;
+    if (usersAreLoaded) {
+      n++;
+      setUserDb(assignAvatars(userDb));
+    }
     if (recentsAreLoaded) n++;
     if (channelsAreLoaded) n++;
-    // if (ownChannelsAreLoaded) n++;
 
     if (n === dependencies) setLoadingComplete(true);
 
     let found = userDb.find((user) => user.uid === headers.uid);
     console.log(headers.uid);
     setChat(found);
-  }, [
-    usersAreLoaded,
-    recentsAreLoaded,
-    channelsAreLoaded,
-    // ownChannelsAreLoaded,
-  ]);
+  }, [usersAreLoaded, recentsAreLoaded, channelsAreLoaded]);
+
+  const assignAvatars = (userdb) => {
+    return userdb.map((user) => {
+      let image = `https://avatars.dicebear.com/api/micah/${user.id}.svg`;
+      return { ...user, image };
+    });
+  };
 
   const displayErrorMsg = () => {
     return <div>Please log in again to continue</div>;
