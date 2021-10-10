@@ -92,7 +92,7 @@ function SignUp(props) {
                 </p>
                 <div className="form-container">
                   <form onSubmit={submitHandler} autoComplete="off">
-                    <label>
+                    <label className="sign-up-label">
                       Email
                       <input
                         className="sign-up-input"
@@ -103,7 +103,7 @@ function SignUp(props) {
                         required
                       />
                     </label>
-                    <label>
+                    <label className="sign-up-label">
                       Password
                       <input
                         className="sign-up-input"
@@ -114,7 +114,7 @@ function SignUp(props) {
                         required
                       />
                     </label>
-                    <label>
+                    <label className="sign-up-label">
                       Confirm Password
                       <input
                         className="sign-up-input"
