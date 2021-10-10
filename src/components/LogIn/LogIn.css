@@ -126,6 +126,7 @@ form {
 }
 
 .submit-btn{
+  
   border:0;
   outline:0;
   border-radius:5px;
@@ -148,6 +149,5 @@ form {
 footer{
   display:flex;
   align-items: flex-end;
-  height:100vh;
   justify-content: space-evenly;
 }

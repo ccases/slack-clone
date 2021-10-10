@@ -110,6 +110,7 @@ function LogIn() {
       <footer>
         <span>Privacy & Terms </span>
         <span> Contact Us </span>
+        
         <span> <FiGlobe /> Change region </span>
       </footer>
     </div>
