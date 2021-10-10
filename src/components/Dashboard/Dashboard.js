@@ -11,12 +11,11 @@ function Dashboard() {
   const [headers] = useState(Headers);
   const [userDb, setUserDb] = useState([]);
   const [recentDms, setRecentDms] = useState([]);
+  const [filteredRecents, setFilteredRecents] = useState([]);
   const [channelDb, setChannelDb] = useState([]);
 
-  // const [ownedChannels, setOwnedChannels] = useState([]);
   const [chat, setChat] = useState("");
 
-  // const [ownChannelsAreLoaded, setOwnChannelsAreLoaded] = useState(false);
   const [usersAreLoaded, setUsersAreLoaded] = useState(false);
   const [recentsAreLoaded, setRecentsAreLoaded] = useState(false);
   const [channelsAreLoaded, setChannelsAreLoaded] = useState(false);
@@ -24,8 +23,8 @@ function Dashboard() {
 
   const [isErrorLoading, setIsErrorLoading] = useState(false);
   useEffect(() => {
-    // get all users and set avatar for each(not implemented yet)
-    console.log(headers);
+    // get all users
+
     UserAPI.listOfUsers(headers)
       .then((res) => {
         setUserDb(res.data.data);
@@ -35,8 +34,6 @@ function Dashboard() {
         console.log("[SearchBar.js: getAllUsers] failed to get all users");
         setIsErrorLoading(true);
       });
-
-    // set initial chat to drafts (NEEDS USER DB FIRST)
 
     // get all users with chat history with this guy
     UserAPI.getRecent(headers)
@@ -60,38 +57,39 @@ function Dashboard() {
         console.log("error: " + e);
         setIsErrorLoading(true);
       });
-
-    // UserAPI.getAllOwnedChannels(headers)
-    //   .then((res) => {
-    //     setOwnedChannels(res.data.data);
-    //     setOwnChannelsAreLoaded(true);
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //     setIsErrorLoading(true);
-    //   });
   }, [headers]);
+
+  useEffect(() => {
+    // get rid of duplicates
+    let filteredUids = new Set();
+    recentDms.forEach((dm) => {
+      filteredUids.add(dm.uid);
+    });
+
+    let tempRecents = [];
+    filteredUids.forEach((email) => {
+      let found = recentDms.find((user) => user.uid === email);
+      tempRecents.push(found);
+    });
+
+    setFilteredRecents(tempRecents);
+  }, [recentDms]);
 
   useEffect(() => {
     //initialize
     let dependencies = 3;
     let n = 0;
-    if (usersAreLoaded) n++;
+    if (usersAreLoaded) {
+      n++;
+    }
     if (recentsAreLoaded) n++;
     if (channelsAreLoaded) n++;
-    // if (ownChannelsAreLoaded) n++;
 
     if (n === dependencies) setLoadingComplete(true);
 
     let found = userDb.find((user) => user.uid === headers.uid);
-    console.log(headers.uid);
     setChat(found);
-  }, [
-    usersAreLoaded,
-    recentsAreLoaded,
-    channelsAreLoaded,
-    // ownChannelsAreLoaded,
-  ]);
+  }, [usersAreLoaded, recentsAreLoaded, channelsAreLoaded]);
 
   const displayErrorMsg = () => {
     return <div>Please log in again to continue</div>;
@@ -105,7 +103,7 @@ function Dashboard() {
           {loadingComplete && (
             <Sidebar
               userDb={userDb}
-              recentDms={recentDms}
+              recentDms={filteredRecents}
               channelDb={channelDb}
               setChat={setChat}
               setChannelDb={setChannelDb}

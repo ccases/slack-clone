@@ -75,7 +75,7 @@ function ChatArea(props) {
           return (
             <ChatMsg
               key={msg.id}
-              sender={msg.sender.uid}
+              sender={msg.sender}
               msg={msg.body}
               time={msg.created_at}
               isSameDay={isSameDay}
@@ -89,7 +89,7 @@ function ChatArea(props) {
         return (
           <ChatMsg
             key={msg.id}
-            sender={msg.sender.uid}
+            sender={msg.sender}
             msg={msg.body}
             time={msg.created_at}
             isSameDay={isSameDay}

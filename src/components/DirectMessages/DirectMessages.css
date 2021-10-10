@@ -1,4 +1,13 @@
+.direct-messages-div {
+  display: flex;
+  flex-flow: row;
+  padding: 3px;
+}
+
+.direct-messages-uid {
+  padding-left: 10px;
+}
 .direct-messages-div:hover {
   cursor: pointer;
-  background-color: blueviolet;
+  background-color: #340e36;
 }

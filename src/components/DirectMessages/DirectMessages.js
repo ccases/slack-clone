@@ -1,4 +1,5 @@
 import React from "react";
+import Avatar from "../Avatar/Avatar";
 import "./DirectMessages.css";
 
 function DirectMessages({ user, setChat }) {
@@ -7,7 +8,11 @@ function DirectMessages({ user, setChat }) {
   };
   return (
     <div className="direct-messages-div" onClick={clickHandler}>
-      {user.uid}
+      <div className="direct-messages-avatar">
+        <Avatar user={user} size={20} />
+      </div>
+      {/* size in px */}
+      <div className="direct-messages-uid">{user.uid}</div>
     </div>
   );
 }
