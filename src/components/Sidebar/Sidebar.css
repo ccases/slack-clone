@@ -7,6 +7,11 @@
   height: calc(100vh - 60px);
   overflow-y: scroll;
 }
+.modal-container {
+  z-index: 99;
+
+  transform: translate(Y -60px);
+}
 
 .sidbar-header {
   display: flex;
@@ -26,13 +31,13 @@
   margin-bottom: 10px;
   border-bottom: 1px solid #49274b;
 }
-h2 {
+.sidebar-h2 {
   font-size: 18px;
   font-weight: 900;
   margin-bottom: 5px;
 }
 
-h3 {
+.sidebar-h3 {
   display: flex;
   font-size: 15px;
   font-weight: 400px;

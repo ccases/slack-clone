@@ -83,7 +83,7 @@ const AddChannel = (props) => {
           <animated.div style={animation}>
             <div className="modal-wrapper">
               <div className="modal-content">
-                <h1>Create a private channel</h1>
+                <h1 className="add-channel-header">Create a private channel</h1>
                 <span className="add-channel-content">
                   Channels are where your team communicates. They’re best when
                   organized around a topic — #marketing, for example.
@@ -91,9 +91,10 @@ const AddChannel = (props) => {
 
                 <span className="name-label">Name</span>
 
-                <div className="form-container">
+                <div className="addch-form-container">
                   <form onSubmit={onSubmit}>
                     <input
+                      className="add-channel-input"
                       type="text"
                       onChange={(e) => {
                         setChannelName(e.target.value);
@@ -101,10 +102,16 @@ const AddChannel = (props) => {
                       value={channelName}
                       onClick={updateChannels}
                     />
-                    <input type="submit" value="Add New Channel" />
+                    <input
+                      className="sidebar-button"
+                      type="submit"
+                      value="Add New Channel"
+                    />
                   </form>
 
-                  <button onClick={updateChannels}>UpdateChannels</button>
+                  <button className="sidebar-button" onClick={updateChannels}>
+                    UpdateChannels
+                  </button>
                   {/* <form onSubmit={onAddMember}>
                     <input
                       type="text"

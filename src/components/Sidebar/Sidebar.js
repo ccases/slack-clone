@@ -84,7 +84,7 @@ function Sidebar(props) {
       <div className="sidebar-container">
         <div className="sidebar-header">
           <div className="sidebar-info">
-            <h2>
+            <h2 className="sidebar-h2">
               Slack Clone{" "}
               <RiPencilFill
                 style={{
@@ -98,7 +98,7 @@ function Sidebar(props) {
               />
             </h2>
             <div className="user-name">
-              <h3>
+              <h3 className="sidebar-h3">
                 <RiCheckboxBlankCircleFill
                   style={{
                     marginTop: "1px",
@@ -114,20 +114,28 @@ function Sidebar(props) {
           </div>
 
           <div className="sidebar-options">
-            <button onClick={openModal}>Add Channel</button>
-            <button onClick={openMemberModal}>Add Members</button>
-            <button onClick={openAllMemberModal}>View Channel Members</button>
+            {/* <button onClick={openModal} className="sidebar-button">
+              Add Channel
+            </button> */}
+            <button onClick={openMemberModal} className="sidebar-button">
+              Add Members
+            </button>
+            <button onClick={openAllMemberModal} className="sidebar-button">
+              View Channel Members
+            </button>
             <SidebarOptions Icon={RiMenu2Line} title="All unreads" />
             <SidebarOptions Icon={RiChat1Line} title="Threads" />
             <SidebarOptions Icon={RiQuestionAnswerLine} title="All DMs" />
             <SidebarOptions Icon={RiAtLine} title="Mentions & reactions" />
             <SidebarOptions Icon={RiBookmarkLine} title="Saved Items" />
             <SidebarOptions Icon={RiMore2Fill} title="More" />
-            <SidebarOptions
-              onClick={openModal}
-              Icon={RiAddFill}
-              title="Add Channel"
-            />
+            <div onClick={openModal}>
+              <SidebarOptions
+                onClick={openModal}
+                Icon={RiAddFill}
+                title="Add Channel"
+              />
+            </div>
           </div>
         </div>
         <div

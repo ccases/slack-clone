@@ -98,11 +98,12 @@ function AddMembers(props) {
           <animated.div style={animation}>
             <div className="modal-wrapper">
               <div className="modal-content">
-                <h2>Add People</h2>
+                <h2 className="name-label">Add People</h2>
 
-                <div className="form-container">
+                <div className="addch-form-container">
                   <form onSubmit={onAddMember}>
                     <input
+                      className="add-channel-input"
                       type="text"
                       onChange={(e) => {
                         setNewMember(e.target.value);
@@ -112,9 +113,16 @@ function AddMembers(props) {
                       }}
                       value={newMember}
                     />
-                    <input type="submit" value="Add Members" />
+                    <input
+                      type="submit"
+                      className="sidebar-button"
+                      value="Add Members"
+                    />
                   </form>
-                  <button onClick={getChannelDetails}>
+                  <button
+                    className="sidebar-button"
+                    onClick={getChannelDetails}
+                  >
                     View Channel Members
                   </button>{" "}
                 </div>
