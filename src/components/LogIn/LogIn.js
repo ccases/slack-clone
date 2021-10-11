@@ -3,9 +3,9 @@ import axios from "axios";
 import SignUp from "../../components/SignUp/SignUp";
 import "./LogIn.css";
 import slackLogo from "../../assets/slack-logo.png";
-import {FcGoogle} from 'react-icons/fc'
-import {FaApple} from 'react-icons/fa'
-import {FiGlobe} from 'react-icons/fi'
+import { FcGoogle } from "react-icons/fc";
+import { FaApple } from "react-icons/fa";
+import { FiGlobe } from "react-icons/fi";
 
 function LogIn() {
   const [username, setUsername] = useState("");
@@ -58,23 +58,26 @@ function LogIn() {
         setShowModal={setShowModal}
       />
 
-
-            <header className = 'header-container'>
-
-      <img src={slackLogo} alt="Slack Logo" />
-      <h1>Sign in to Slack</h1>
-      <p>We suggest using the <strong>email address you use at work.</strong></p>
+      <header className="header-container">
+        <img src={slackLogo} alt="Slack Logo" />
+        <h1>Sign in to Slack</h1>
+        <p>
+          We suggest using the <strong>email address you use at work.</strong>
+        </p>
       </header>
-      <div className = 'dummy-btn-container'>
-        <button><FcGoogle /> Sign in with Google </button>
-        <button><FaApple /> Sign in with Apple </button>
+      <div className="dummy-btn-container">
+        <button>
+          <FcGoogle /> Sign in with Google{" "}
+        </button>
+        <button>
+          <FaApple /> Sign in with Apple{" "}
+        </button>
       </div>
 
-      <h4><span>OR</span></h4>
-      <div className="login-container">      
-      <h4><span>OR</span></h4>
+      <h4>
+        <span>OR</span>
+      </h4>
       <div className="login-container">
-
         <form onSubmit={submitHandler}>
           <input
             type="email"
@@ -90,7 +93,11 @@ function LogIn() {
             onChange={handlePasswordChange}
             required
           />
-          <input type="submit" className= 'submit-btn' value="Sign in with Email" />
+          <input
+            type="submit"
+            className="submit-btn"
+            value="Sign in with Email"
+          />
         </form>
         <button className="signup-btn" onClick={openModal}>
           Create an account
@@ -99,8 +106,11 @@ function LogIn() {
       <footer>
         <span>Privacy & Terms </span>
         <span> Contact Us </span>
-        
-        <span> <FiGlobe /> Change region </span>
+
+        <span>
+          {" "}
+          <FiGlobe /> Change region{" "}
+        </span>
       </footer>
     </div>
   );
