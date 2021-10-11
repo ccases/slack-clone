@@ -5,7 +5,7 @@ import Headers from "../../Helpers/Headers";
 import "./ChatArea.css";
 
 function ChatArea(props) {
-  const { userId, userEmail, convo, setConvo, chatType } = props;
+  const { userId, userEmail, convo, setConvo, chatType, recentDms } = props;
   const [header] = useState(Headers);
   const msgEnd = useRef(null);
 
@@ -14,12 +14,25 @@ function ChatArea(props) {
       return;
     }
     setConvo([]); // reset all messages before going into the next one
-    retrieveMsgs(userId, chatType);
+    retrieveMsgs(userId, chatType, false);
   }, [userId, header]);
 
   useEffect(() => {
     scrollToBottom();
   }, [convo]);
+
+  useEffect(() => {
+    // enables "real time" chat!!!! w/ 2 sec delay
+    if (header["access-token"] === undefined || userId === undefined) {
+      return;
+    }
+
+    const interval = setInterval(() => {
+      retrieveMsgs(userId, chatType, true);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [userId, chatType]);
 
   const scrollToBottom = () => {
     msgEnd.current.scrollIntoView({ behavior: "smooth" });
@@ -30,6 +43,8 @@ function ChatArea(props) {
     let isWithin3Mins = false;
     let isSameDay = false;
 
+    // if (arr[idx - 1].sender !== arr[idx].sender)
+    //   return [isSameDay, isWithin3Mins];
     // if()
     if (idx !== 0) {
       let currentMsgTime = new Date(arr[idx].created_at);
@@ -59,12 +74,10 @@ function ChatArea(props) {
     return [isSameDay, isWithin3Mins];
   };
 
-  const retrieveMsgs = (userId, chatType) => {
-    UserAPI.getMsgs(header, userId, chatType)
-      .then((res) => {
-        setConvo(res.data.data); // res (an object) has property named data (also an object), and data has data hence this
-      })
-      .catch((e) => console.log("Failed to fetch messages"));
+  const retrieveMsgs = (userId, chatType, isChecking = false) => {
+    UserAPI.getMsgs(header, userId, chatType).then((res) => {
+      setConvo(res.data.data);
+    });
   };
   const displayMsgs = !convo
     ? "Loading messages..."

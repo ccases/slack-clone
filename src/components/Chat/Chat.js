@@ -4,7 +4,7 @@ import ChatForm from "./ChatForm";
 import "./Chat.css";
 
 function Chat(props) {
-  const { chat } = props;
+  const { chat, recentDms, userDb } = props;
   const [chatWith, setChatWith] = useState("");
   const [convo, setConvo] = useState([]);
   const [chatType, setChatType] = useState("User"); // can be Channel, CAPITALIZE FIRST LETTER!
@@ -35,6 +35,7 @@ function Chat(props) {
           convo={convo}
           setConvo={setConvo}
           chatType={chatType}
+          recentDms={recentDms}
         />
       </div>
       <div>
