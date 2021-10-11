@@ -38,7 +38,13 @@ function Sidebar(props) {
   const displayChannels = channelDb
     ? channelDb.map((channel) => {
         return (
-          <div className="channel-name" key={channel.id}>
+          <div
+            onClick={(e) =>
+              setChat(channelDb.find((ch) => ch.name === e.target.textContent))
+            }
+            className="channel-name"
+            key={channel.id}
+          >
             {channel.name}
           </div>
         );
@@ -94,7 +100,7 @@ function Sidebar(props) {
           </div>
 
           <div className="sidebar-options">
-        
+
             <SidebarOptions Icon={RiMenu2Line} title="All unreads" />
             <SidebarOptions Icon={RiChat1Line} title="Threads" />
             <SidebarOptions Icon={RiQuestionAnswerLine} title="All DMs" />
