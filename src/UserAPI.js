@@ -18,7 +18,7 @@ export const logIn = (body) => {
 };
 
 export const sendMsg = (header, body) => {
-  // ACCEPTS "body" (object w receiver_id, receiver_class(usually "user") and body)
+  // ACCEPTS "body" (object w receiver_id, receiver_class(can be User or Channel) and body)
   const url = BASEURL + "messages";
   return axios.post(url, body, { headers: header });
 };
