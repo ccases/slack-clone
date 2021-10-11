@@ -63,12 +63,12 @@
   display: flex;
   flex-direction: row;
 }
-input {
+.sign-up-input {
   width: 100%;
   height: 4vh;
   padding-left: 10px;
 }
-label {
+.sign-up-label {
   width: 100%;
 }
 
