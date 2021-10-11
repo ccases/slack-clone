@@ -31,7 +31,7 @@ function ChatForm(props) {
 
   var raw = {
     receiver_id: userId,
-    receiver_class: "User",
+    receiver_class: chatType,
     body: `${chatInput}`,
   };
 
@@ -51,6 +51,7 @@ function ChatForm(props) {
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     let input = chatInput;
     if (chatInput == null || input.trim().length === 0) return;
     if (header["access-token"] === undefined) return;
