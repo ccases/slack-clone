@@ -19,7 +19,7 @@
   display: grid;
   position: relative;
   border-radius: 10px;
-  transform: translate(Y -100px);
+  transform: translate(Y -60px);
   z-index: 99;
 }
 
