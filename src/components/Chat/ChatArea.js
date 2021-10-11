@@ -3,6 +3,7 @@ import ChatMsg from "./ChatMsg";
 import * as UserAPI from "../../UserAPI";
 import Headers from "../../Helpers/Headers";
 import "./ChatArea.css";
+import ChatHeader from "./ChatHeader";
 
 function ChatArea(props) {
   const { userId, userEmail, convo, setConvo, chatType } = props;

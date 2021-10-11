@@ -111,7 +111,7 @@ function Dashboard() {
           )}
         </div>
         <div className="chat-dashboard">
-          {loadingComplete && <Chat chat={chat} />}
+          {loadingComplete && <Chat chat={chat} recentDms={recentDms} />}
         </div>
       </div>
     </div>
