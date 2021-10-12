@@ -47,6 +47,7 @@ img {
   color:rgb(92, 92, 92);
   margin-top:10px;
   font-size:1.2rem;
+}
 
 h1 {
   font-weight: 900;
@@ -68,7 +69,7 @@ h1 {
   font-size:1rem;
 }
 
-button:nth-child(1){
+.dummy-btn-container button:nth-child(1){
   border: 2px solid var(--darkblue);
   border-radius:5px;
   font-weight:900;
@@ -76,7 +77,7 @@ button:nth-child(1){
   color: var(--darkblue);
 }
 
-button:nth-child(2){
+.dummy-btn-container button:nth-child(2){
   border: 2px solid black;
   border-radius:5px;
   font-weight:900;
@@ -98,7 +99,7 @@ h4 span {
    padding:0 10px; 
 }
 
-form {
+.login-form {
   display: flex;
   flex-direction: column;
   align-items: center;

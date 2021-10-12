@@ -57,10 +57,7 @@ function LogIn() {
         showModal={showModal}
         setShowModal={setShowModal}
       />
-
-
-            <header className = 'header-container'>
-
+      <header className = 'header-container'>
       <img src={slackLogo} alt="Slack Logo" />
       <h1>Sign in to Slack</h1>
       <p>We suggest using the <strong>email address you use at work.</strong></p>
@@ -71,11 +68,8 @@ function LogIn() {
       </div>
 
       <h4><span>OR</span></h4>
-      <div className="login-container">      
-      <h4><span>OR</span></h4>
       <div className="login-container">
-
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} className = 'login-form'>
           <input
             type="email"
             className="email-input"
@@ -99,7 +93,6 @@ function LogIn() {
       <footer>
         <span>Privacy & Terms </span>
         <span> Contact Us </span>
-        
         <span> <FiGlobe /> Change region </span>
       </footer>
     </div>

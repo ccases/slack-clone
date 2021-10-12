@@ -3,6 +3,8 @@ import SearchResult from "./SearchResult";
 import Headers from "../../Helpers/Headers";
 import { useEffect } from "react/cjs/react.development";
 import * as UserAPI from "../../UserAPI";
+import { BiSearch } from "react-icons/bi";
+import "./SearchBar.css";
 
 function SearchBar(props) {
   const { placeholder, setChatWith } = props;
@@ -56,23 +58,30 @@ function SearchBar(props) {
       })
     : null;
   return (
-    <div className="searchBar">
-      <form onSubmit={submitHandler}>
-        <input
-          type="text"
-          placeholder={placeholder}
-          onChange={(e) => {
-            setSearchEntry(e.target.value);
-          }}
-          onFocus={() => {
-            getAllUsers();
-            setIsActive(true);
-          }}
-          value={searchEntry}
-        />
-        <input type="submit" value="Search" />
-      </form>
-      {isActive ? <div className="Suggestions">{suggestions}</div> : null}
+    <div className="container-search">
+      <div className="searchBar">
+        <form onSubmit={submitHandler} className="form-searchbar">
+          <input
+            type="text"
+            placeholder={placeholder}
+            onChange={(e) => {
+              setSearchEntry(e.target.value);
+              setIsActive(true);
+            }}
+            onFocus={() => {
+              getAllUsers();
+            }}
+            className="input-search"
+            value={searchEntry}
+          />
+          <button type="submit" className="header-btn">
+            <BiSearch />
+          </button>
+        </form>
+      </div>
+      <div>
+        {isActive ? <div className="Suggestions">{suggestions}</div> : null}
+      </div>
     </div>
   );
 }
