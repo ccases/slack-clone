@@ -1,11 +1,17 @@
 import React from "react";
 import "./Header.css";
-import SearchBar from '../SearchBar/SearchBar'
+import SearchBar from "../SearchBar/SearchBar";
+import SearchResult from "../SearchBar/SearchResult";
+import { FiClock } from "react-icons/fi";
 
-function Header() {
-  return <div className="header">
-    <SearchBar />
-  </div>;
+function Header({ userDb, channelDb, setChat }) {
+  return (
+    <div className="header">
+      <FiClock />
+      <SearchBar userDb={userDb} channelDb={channelDb} setChatWith={setChat} />
+      <SearchResult />
+    </div>
+  );
 }
 
 export default Header;
