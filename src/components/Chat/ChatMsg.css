@@ -73,6 +73,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -97,7 +98,9 @@
   font-weight: 600;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 20px;
-  padding: 4px 10px 5px 15px;
+  height: 30px;
+  padding: 0 12px;
+  align-items: center;
   cursor: pointer;
 }
 .down-icon-divider {

@@ -26,7 +26,7 @@
   font-size: 0.9em;
 }
 
-textarea:focus {
+.chat-input:focus {
   border-bottom: 1px solid #888888;
   outline: none;
 }
@@ -42,7 +42,7 @@ textarea:focus {
 .send {
   display: none;
 }
-textarea:focus + .chat-form-icons-container {
+.chat-input:focus + .chat-form-icons-container {
   background-color: #eeeeee;
 }
 

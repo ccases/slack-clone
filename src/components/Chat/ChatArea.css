@@ -3,6 +3,7 @@
 }
 .ChatArea {
   margin-bottom: 10px;
+  align-self: flex-end;
 }
 .name {
   color: #5890bcff;
@@ -14,4 +15,17 @@
 }
 .name:hover {
   cursor: pointer;
+}
+
+.messages-header {
+  margin: 20px;
+}
+.messages-header-top-part {
+  margin-bottom: 10px;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+.messages-header-top-part p {
+  margin-left: 10px;
 }
