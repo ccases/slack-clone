@@ -16,6 +16,7 @@ import {
   RiArrowRightSFill,
   RiAddFill,
 } from "react-icons/ri";
+import { MdLock } from "react-icons/md";
 import SidebarOptions from "./SidebarOptions";
 import DirectMessages from "../DirectMessages/DirectMessages";
 
@@ -33,7 +34,9 @@ function Sidebar(props) {
     setShowModal((prev) => !prev);
   };
 
- 
+ const notAvailable = () => {
+   alert ("Feature is not yet available")
+ }
 
   const displayChannels = channelDb
     ? channelDb.map((channel) => {
@@ -45,7 +48,7 @@ function Sidebar(props) {
             className="channel-name"
             key={channel.id}
           >
-            {channel.name}
+           {channel.name}
           </div>
         );
       })
@@ -100,13 +103,14 @@ function Sidebar(props) {
           </div>
 
           <div className="sidebar-options">
-
-            <SidebarOptions Icon={RiMenu2Line} title="All unreads" />
+            <div className="not-available" onClick={notAvailable}>
+            <SidebarOptions Icon={RiMenu2Line} title="All unreads"/>
             <SidebarOptions Icon={RiChat1Line} title="Threads" />
             <SidebarOptions Icon={RiQuestionAnswerLine} title="All DMs" />
             <SidebarOptions Icon={RiAtLine} title="Mentions & reactions" />
             <SidebarOptions Icon={RiBookmarkLine} title="Saved Items" />
             <SidebarOptions Icon={RiMore2Fill} title="More" />
+            </div>
             <div onClick={openModal}>
               <SidebarOptions
                 onClick={openModal}
@@ -128,7 +132,7 @@ function Sidebar(props) {
             channelsExpanded ? "direct-messages expanded" : "direct-messages"
           }
         >
-          {displayChannels}
+       {displayChannels}
         </div>
 
         <div

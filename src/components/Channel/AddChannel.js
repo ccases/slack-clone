@@ -30,7 +30,7 @@ const AddChannel = (props) => {
         console.log(res.data.errors)
         alert(res.data.errors)
       } else {
-        alert(res.data.data.name)
+        alert(`new channel ${res.data.data.name} has been created`)
       }
         // alert(res.data.data.name);
         // console.log(res.data);
@@ -84,7 +84,7 @@ const AddChannel = (props) => {
     : null;
 
   return (
-    <>
+    <div className = "main-modal">
       {showModal ? (
         <div className="background" onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
@@ -119,22 +119,7 @@ const AddChannel = (props) => {
                   <button className="sidebar-button" onClick={updateChannels}>
                     UpdateChannels
                   </button>
-                  {/* <form onSubmit={onAddMember}>
-                    <input
-                      type="text"
-                      onChange={(e) => {
-                        setNewMember(e.target.value);
-                      }}
-                      onClick={(e) => {
-                        getAllUsers();
-                      }}
-                      value={newMember}
-                    />
-                    <input type="submit" value="Add Members" />
-                  </form>
-                  <button onClick={getChannelDetails}>
-                    View Channel Members
-                  </button>{" "} */}
+                
                 </div>
                 <MdClose
                   className="close-modal-button"
@@ -146,7 +131,7 @@ const AddChannel = (props) => {
           </animated.div>{" "}
         </div>
       ) : null}
-    </>
+    </div>
   );
 };
 

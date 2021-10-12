@@ -9,7 +9,6 @@
 }
 .modal-container {
   z-index: 99;
-
   transform: translate(Y -60px);
 }
 
@@ -77,4 +76,8 @@
 
 .expanded {
   height: max-content;
+}
+
+.sidebar-channel{
+  padding-left: 10px;
 }

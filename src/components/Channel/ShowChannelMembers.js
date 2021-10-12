@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import * as UserAPI from "../../UserAPI";
 import Headers from "../../Helpers/Headers";
 import { useSpring, animated } from "react-spring";
-import { MdClose } from "react-icons/md";
-import "./AddChannel.css";
+import { MdClose, MdLock } from "react-icons/md";
+import "./ShowChannelMembers.css";
 import Avatar from '../Avatar/Avatar'
 
 function ShowChannelMembers(props) {
@@ -15,13 +15,6 @@ function ShowChannelMembers(props) {
   const [channelId, setChannelId] = useState("1224");
   
 
-// const displayChannelDetails = () => {
-//   return (
-//     <div className="channel-details" > 
-//     {channelDetails.created_at} {channelDetails.owner_id}
-//     </div>
-//   )
-// }
 
 const displayChannelMembers = channelMembers.map((member)=> {
   let user = userDb.find(user => user.id === member.user_id)
@@ -88,7 +81,6 @@ if (uid)
   }
 
 
-
   return (
     <>
       {showMembers ? (
@@ -97,12 +89,19 @@ if (uid)
             <div className="modal-wrapper">
               <div className="modal-content">
 
-                <h2 className="name-label">Channel Members</h2>
-
-                 <div className="channel-details" > 
-    {dateFormat(channelDetails.created_at)} {getUid(channelDetails.owner_id)}
+                 <div className="channel-member-details" > 
+                  <h2 className="channel-details">Channel Details</h2>
+                 
+                 <div className="channel-title"> <MdLock/> <span className="ch-name">{channelDetails.name}</span> </div>
+  
+    <div className ="created-by"> Created by</div>
+    <div className ="channel-owner"> <span className="owner-details">{getUid(channelDetails.owner_id)}</span> on  <span className="owner-details">{dateFormat(channelDetails.created_at)}
+    
+    
+    </span></div>
     </div>
-                <div> {displayChannelMembers}</div>
+    <h2 className="channel-details">Channel Members</h2>
+                <div className="display-channel-members"> {displayChannelMembers}</div>
 
                 <MdClose
                   className="close-modal-button"
