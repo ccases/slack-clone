@@ -4,27 +4,46 @@ import Headers from "../../Helpers/Headers";
 import { useSpring, animated } from "react-spring";
 import { MdClose } from "react-icons/md";
 import "./AddChannel.css";
+import Avatar from '../Avatar/Avatar'
 
 function ShowChannelMembers(props) {
-  const { ID } = props;
+  const { chat, userDb, channelMembers, channelDetails } = props;
   const [userArray, setUserArray] = useState([]);
   const [header, setHeader] = useState(Headers);
   const [allUsers, setAllUsers] = useState([]);
   const [newMember, setNewMember] = useState("");
   const [channelId, setChannelId] = useState("1224");
+  
 
-  const getChannelDetails = () => {
-    UserAPI.getChannelDetails(header, ID)
-      .then((res) => {
-        console.log(res);
-        console.log(res.data.data.channel_members);
-      })
-      .catch((e) => {
-        console.log("no channel details");
-      });
-  };
+// const displayChannelDetails = () => {
+//   return (
+//     <div className="channel-details" > 
+//     {channelDetails.created_at} {channelDetails.owner_id}
+//     </div>
+//   )
+// }
 
-  //modal
+const displayChannelMembers = channelMembers.map((member)=> {
+  let user = userDb.find(user => user.id === member.user_id)
+  return (
+    <div className = "channel-members" key={member.user_id}>
+    <Avatar user={user} size={30} /> {user.uid} 
+    </div>
+  )
+})
+
+const getUid = (id) => {
+  if (userDb[0].uid) {
+  let uid = userDb.find(user => user.id === id)
+  console.log(uid)
+
+if (uid) 
+    return (uid.uid)
+  }
+
+}
+
+   //modal
   const { showMembers, setShowMembers } = props;
   const animation = useSpring({
     config: {
@@ -56,6 +75,20 @@ function ShowChannelMembers(props) {
     return () => document.removeEventListener("keydown", keyPress);
   }, [keyPress]);
 
+
+  const dateFormat = (date) => {
+
+    const createdDate = new Date(date)
+     const month = createdDate.toLocaleString('default', { month: 'long' });
+     const day = createdDate.getDate();
+     const year = createdDate.getFullYear();
+    
+    return (`${month} ${day}, ${year} `
+    )
+  }
+
+
+
   return (
     <>
       {showMembers ? (
@@ -63,16 +96,14 @@ function ShowChannelMembers(props) {
           <animated.div style={animation}>
             <div className="modal-wrapper">
               <div className="modal-content">
+
                 <h2 className="name-label">Channel Members</h2>
 
-                <div className="addch-form-container">
-                  <button
-                    className="sidebar-button"
-                    onClick={getChannelDetails}
-                  >
-                    View Channel Members
-                  </button>{" "}
-                </div>
+                 <div className="channel-details" > 
+    {dateFormat(channelDetails.created_at)} {getUid(channelDetails.owner_id)}
+    </div>
+                <div> {displayChannelMembers}</div>
+
                 <MdClose
                   className="close-modal-button"
                   aria-label="Close modal"

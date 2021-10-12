@@ -3,10 +3,11 @@ import ChatMsg from "./ChatMsg";
 import * as UserAPI from "../../UserAPI";
 import Headers from "../../Helpers/Headers";
 import "./ChatArea.css";
-import ChatHeader from "./ChatHeader";
+import ChatHeader from "./ChatHeader"
+
 
 function ChatArea(props) {
-  const { userId, userEmail, convo, setConvo, chatType } = props;
+  const { userId, userEmail, convo, setConvo, chatType, userDb, } = props;
   const [header] = useState(Headers);
   const msgEnd = useRef(null);
 
@@ -88,6 +89,7 @@ function ChatArea(props) {
     : convo.map((msg, idx, arr) => {
         let [isSameDay, isWithin3Mins] = timeChecker(arr, idx);
         return (
+        
           <ChatMsg
             key={msg.id}
             sender={msg.sender}
@@ -111,7 +113,10 @@ function ChatArea(props) {
       );
 
     return (
+     
       <div>
+
+    
         This is the very beginning of your direct message history with{" "}
         <button className="name">{userEmail}</button> Only the two of you are in
         this conversation, and no one else can join it.{" "}

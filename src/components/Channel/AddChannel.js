@@ -25,11 +25,18 @@ const AddChannel = (props) => {
     })
 
       .then((res) => {
-        console.log(res.data.data);
-        alert("Channel Created");
+      
+      if (res.data.errors !== undefined) {
+        console.log(res.data.errors)
+        alert(res.data.errors)
+      } else {
+        alert(res.data.data.name)
+      }
+        // alert(res.data.data.name);
+        // console.log(res.data);
       })
       .catch((e) => {
-        console.log("Create Channel Error " + e);
+         
       });
   };
 

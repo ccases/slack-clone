@@ -6,12 +6,12 @@ import { MdClose } from "react-icons/md";
 import "./AddChannel.css";
 
 function AddMembers(props) {
-  const { ID } = props;
+  const { ID, chat, userDb } = props;
   const [userArray, setUserArray] = useState([]);
   const [header, setHeader] = useState(Headers);
   const [allUsers, setAllUsers] = useState([]);
   const [newMember, setNewMember] = useState("");
-  const [channelId, setChannelId] = useState("1224");
+  const [channelId, setChannelId] = useState("");
 
   // used in Add members onclick
   const getAllUsers = () => {
@@ -25,33 +25,36 @@ function AddMembers(props) {
       });
   };
 
+
   const onAddMember = (e) => {
     e.preventDefault();
+    // console.log(chat.id)
+    setChannelId(chat.id)
+    // console.log(channelId)
 
-    let found = allUsers.find((user) => user.uid === newMember);
-    if (!channelId) {
+    let found = userDb.find((user) => user.uid === newMember);
       if (!found) {
         alert("user not found");
       } else {
         setUserArray(userArray.concat(found.id));
         console.log(found.id);
-        console.log(userArray);
-      }
-    } else {
-      if (found) {
-        UserAPI.addChannelMember(header, channelId, found.id);
+
+        UserAPI.addChannelMember(header, channelId, found.id).then((res) =>{
+          console.log(res)
+          
+        })
+        .catch((e) => {
+          // console.log(e)
+        });
         alert(`${found.id} is successfully added to the channel `);
-      } else {
-        alert("User does not exist");
-        console.log(newMember);
       }
-    }
+    
   };
 
   const getChannelDetails = () => {
     UserAPI.getChannelDetails(header, ID)
       .then((res) => {
-        console.log(res);
+        
         console.log(res.data.data.channel_members);
       })
       .catch((e) => {
@@ -108,23 +111,18 @@ function AddMembers(props) {
                       onChange={(e) => {
                         setNewMember(e.target.value);
                       }}
-                      onClick={(e) => {
-                        getAllUsers();
-                      }}
+                     
                       value={newMember}
                     />
                     <input
                       type="submit"
                       className="sidebar-button"
                       value="Add Members"
+                      
                     />
+                     
                   </form>
-                  <button
-                    className="sidebar-button"
-                    onClick={getChannelDetails}
-                  >
-                    View Channel Members
-                  </button>{" "}
+                 
                 </div>
                 <MdClose
                   className="close-modal-button"
