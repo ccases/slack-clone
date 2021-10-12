@@ -14,6 +14,7 @@ function Chat(props) {
     if (chat["owner_id"] !== undefined) {
       // if object passed has owner id, set chat type to channel!
       setChatType("Channel");
+      setChatWith(chat);
     } else if (chat["email"] !== undefined) {
       // if chat has property: email, single user lang siya
       setChatType("User");

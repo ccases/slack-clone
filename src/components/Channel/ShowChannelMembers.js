@@ -63,10 +63,13 @@ function ShowChannelMembers(props) {
           <animated.div style={animation}>
             <div className="modal-wrapper">
               <div className="modal-content">
-                <h2>Channel Members</h2>
+                <h2 className="name-label">Channel Members</h2>
 
-                <div className="form-container">
-                  <button onClick={getChannelDetails}>
+                <div className="addch-form-container">
+                  <button
+                    className="sidebar-button"
+                    onClick={getChannelDetails}
+                  >
                     View Channel Members
                   </button>{" "}
                 </div>

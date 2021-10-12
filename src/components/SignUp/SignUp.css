@@ -37,16 +37,16 @@
   line-height: 1.8;
   color: #141414;
 }
-p {
+.sign-up-p {
   margin-bottom: 1rem;
 }
 
-button {
+/* button {
   padding: 10px 24px;
   background: #141414;
   color: #fff;
   border: none;
-}
+} */
 
 .close-modal-button {
   cursor: pointer;
@@ -63,12 +63,12 @@ button {
   display: flex;
   flex-direction: row;
 }
-input {
+.sign-up-input {
   width: 100%;
   height: 4vh;
   padding-left: 10px;
 }
-label {
+.sign-up-label {
   width: 100%;
 }
 

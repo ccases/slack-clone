@@ -30,7 +30,7 @@
   align-items: center;
 }
 
-img {
+.container img {
   transform: scale(0.3);
 }
 
@@ -48,7 +48,7 @@ img {
   font-size: 1.2rem;
 }
 
-h1 {
+.container h1 {
   font-weight: 900;
   font-size: 3rem;
 }
@@ -68,7 +68,8 @@ h1 {
   font-size: 1rem;
 }
 
-.dummy-btn-container button:nth-child(1) {
+
+.container button:nth-child(1) {
   border: 2px solid var(--darkblue);
   border-radius: 5px;
   font-weight: 900;
@@ -76,7 +77,8 @@ h1 {
   color: var(--darkblue);
 }
 
-.dummy-btn-container button:nth-child(2) {
+
+.container button:nth-child(2) {
   border: 2px solid black;
   border-radius: 5px;
   font-weight: 900;
@@ -84,7 +86,8 @@ h1 {
   color: black;
 }
 
-h4 {
+
+.container h4 {
   width: 50%;
   text-align: center;
   border-bottom: 1px solid gray;
@@ -92,13 +95,15 @@ h4 {
   margin: 10px 0 20px;
 }
 
-h4 span {
+.container h4 span {
   color: rgb(78, 78, 78);
   background: #fff;
   padding: 0 10px;
 }
 
-.login-form {
+
+.container form {
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -145,7 +150,9 @@ h4 span {
   cursor: pointer;
 }
 
-footer {
+
+.container footer {
+
   display: flex;
   align-items: flex-end;
   justify-content: space-evenly;

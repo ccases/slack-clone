@@ -57,6 +57,7 @@ function LogIn() {
         showModal={showModal}
         setShowModal={setShowModal}
       />
+
       <header className="header-container">
         <img src={slackLogo} alt="Slack Logo" />
         <h1>Sign in to Slack</h1>
@@ -77,7 +78,7 @@ function LogIn() {
         <span>OR</span>
       </h4>
       <div className="login-container">
-        <form onSubmit={submitHandler} className="login-form">
+        <form onSubmit={submitHandler}>
           <input
             type="email"
             className="email-input"
@@ -105,6 +106,7 @@ function LogIn() {
       <footer>
         <span>Privacy & Terms </span>
         <span> Contact Us </span>
+
         <span>
           {" "}
           <FiGlobe /> Change region{" "}
