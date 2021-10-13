@@ -36,17 +36,17 @@ function ChatForm(props) {
   };
 
   const handleKeyUp = (e) => {
-    e.preventDefault();
-    const isKeyEnter = (e) => {
-      if (e.code === "Enter" || (e.location === 3 && e.key === "Enter"))
-        //to also catch the numpad enter
-        return true;
-
-      return false;
-    };
-    if (isKeyEnter(e) && e.shiftKey) {
-    } else if (isKeyEnter(e)) {
+    if (e.which === 13 && !e.shiftKey) {
+      e.preventDefault();
+      //submit
       handleSubmit(e);
+      return false;
+    }
+    if (
+      (e.code === "Enter" || (e.location === 3 && e.key === "Enter")) &&
+      e.shiftKey
+    ) {
+      setChatInput(chatInput + "\n");
     }
   };
 
@@ -62,7 +62,7 @@ function ChatForm(props) {
           .then((res) => {
             setConvo(res.data.data);
           })
-          .catch((e) => console.log("Failed to get messages"));
+          .catch(() => console.log("Failed to get messages"));
       })
       .catch((e) => console.log(e));
     setChatInput("");
@@ -70,78 +70,78 @@ function ChatForm(props) {
   return (
     <div className="ChatForm">
       <div className="chat-form-container">
-        <form onSubmit={handleSubmit}>
-          <textarea
-            className="chat-input"
-            type="text"
-            onChange={(e) => {
-              setChatInput(e.target.value);
-            }}
-            value={chatInput}
-            onKeyUp={(e) => handleKeyUp(e)}
-            onFocus={(e) => setIsActive(true)}
-            onBlur={(e) => setIsActive(false)}
-          />
+        {/* <form onSubmit={handleSubmit}> */}
+        <input
+          className="chat-input"
+          type="text"
+          onChange={(e) => {
+            setChatInput(e.target.value);
+          }}
+          value={chatInput}
+          onKeyUp={(e) => handleKeyUp(e)}
+          onFocus={() => setIsActive(true)}
+          onBlur={() => setIsActive(false)}
+        />
 
-          <div className="chat-form-icons-container">
-            <div className="icons-container">
-              <div className="chat-form-icons disabled-icons">
-                <BsFillLightningFill />
-              </div>
-              <div className="chat-form-icons disabled-icons">
-                <BsTypeBold />
-              </div>
-              <div className="chat-form-icons disabled-icons">
-                <BsTypeItalic />
-              </div>
-              <div className="chat-form-icons disabled-icons">
-                <BsTypeStrikethrough />
-              </div>
-              <div className="chat-form-icons disabled-icons">
-                <BsCodeSlash />
-              </div>
-              <div className="chat-form-icons disabled-icons">
-                <BsLink45Deg />
-              </div>
-              <div className="chat-form-icons disabled-icons">
-                <BsListOl />
-              </div>
-              <div className="chat-form-icons disabled-icons">
-                <BsListUl />
-              </div>
-              <div className="chat-form-icons disabled-icons">
-                <BsBlockquoteLeft />
-              </div>
-              <div className="chat-form-icons disabled-icons">
-                <BsCodeSquare />
-              </div>
+        <div className="chat-form-icons-container">
+          <div className="icons-container">
+            <div className="chat-form-icons disabled-icons">
+              <BsFillLightningFill />
             </div>
-            <div className="icons-container">
-              <div className="chat-form-icons disabled-icons">
-                <IoAtOutline />
-              </div>
-              <div className="chat-form-icons">
-                <BsEmojiSmile />
-              </div>
-              <div className="chat-form-icons">
-                <IoAttach />
-              </div>
-              <div className="chat-form-icons">
-                <IoVideocamOutline />
-              </div>
-              <div className="chat-form-icons">
-                <IoMicOutline />
-              </div>
-              <div
-                className="chat-form-icons send-icon"
-                onClick={(e) => handleSubmit(e)}
-              >
-                <IoSend />
-              </div>
+            <div className="chat-form-icons disabled-icons">
+              <BsTypeBold />
             </div>
-            <input type="submit" value="send" className="send"></input>
+            <div className="chat-form-icons disabled-icons">
+              <BsTypeItalic />
+            </div>
+            <div className="chat-form-icons disabled-icons">
+              <BsTypeStrikethrough />
+            </div>
+            <div className="chat-form-icons disabled-icons">
+              <BsCodeSlash />
+            </div>
+            <div className="chat-form-icons disabled-icons">
+              <BsLink45Deg />
+            </div>
+            <div className="chat-form-icons disabled-icons">
+              <BsListOl />
+            </div>
+            <div className="chat-form-icons disabled-icons">
+              <BsListUl />
+            </div>
+            <div className="chat-form-icons disabled-icons">
+              <BsBlockquoteLeft />
+            </div>
+            <div className="chat-form-icons disabled-icons">
+              <BsCodeSquare />
+            </div>
           </div>
-        </form>
+          <div className="icons-container">
+            <div className="chat-form-icons disabled-icons">
+              <IoAtOutline />
+            </div>
+            <div className="chat-form-icons">
+              <BsEmojiSmile />
+            </div>
+            <div className="chat-form-icons">
+              <IoAttach />
+            </div>
+            <div className="chat-form-icons">
+              <IoVideocamOutline />
+            </div>
+            <div className="chat-form-icons">
+              <IoMicOutline />
+            </div>
+            <div
+              className="chat-form-icons send-icon"
+              onClick={(e) => handleSubmit(e)}
+            >
+              <IoSend />
+            </div>
+          </div>
+          <input type="submit" value="send" className="send"></input>
+        </div>
+        {/* </form> */}
       </div>
     </div>
   );

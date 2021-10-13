@@ -24,7 +24,11 @@ function Chat(props) {
   }, [chat]);
 
   useEffect(() => {
-    console.log(`Chatwith: ${chatWith.uid} ${chatWith.id}`);
+    console.log(
+      `Chatwith: ${chatType === "User" ? chatWith.uid : chatWith.name} ${
+        chatWith.id
+      }`
+    );
   }, [chatWith]);
 
   return (
@@ -42,8 +46,8 @@ function Chat(props) {
           setConvo={setConvo}
           chatType={chatType}
           recentDms={recentDms}
-          userDb = {userDb}
-
+          chat={chat}
+          userDb={userDb}
         />
       </div>
       <div>

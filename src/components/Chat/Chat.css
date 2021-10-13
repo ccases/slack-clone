@@ -12,6 +12,7 @@
   width: calc(100vw - var(--sidebar-width));
 }
 .chat-area-wrapper {
+  display: flex;
   flex: 1 1 auto;
   overflow-y: scroll;
 }
