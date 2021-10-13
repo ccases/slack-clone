@@ -40,9 +40,13 @@ function Sidebar(props) {
     ? channelDb.map((channel) => {
         return (
           <div
-            onClick={(e) =>
-              setChat(channelDb.find((ch) => ch.name === e.target.textContent))
-            }
+            onClick={(e) => {
+              let channelName = e.target.textContent.trim();
+              let selectedChannel = channelDb.find(
+                (ch) => ch.name === channelName
+              );
+              setChat(selectedChannel);
+            }}
             className="channel-name"
             key={channel.id}
           >
