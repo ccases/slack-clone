@@ -30,11 +30,12 @@ function SearchBar(props) {
     if (userDb[0] === undefined) return;
     if (e.target.textContent == null) return;
     let found = userDb.find((user) => user.uid === searchEntry);
-    console.log("FOUND " + found.uid);
-    if (found) {
+    if (found === undefined) {
+      alert("No users with that id!");
+    } else {
       setChatWith(found);
       setIsActive(false);
-    } else alert("no users with that id!");
+    }
   };
 
   const getAllUsers = () => {

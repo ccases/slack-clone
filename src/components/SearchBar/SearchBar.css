@@ -22,5 +22,5 @@
   max-height: 500px;
   width: 500px;
   max-width: 500px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
