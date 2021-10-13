@@ -3,8 +3,7 @@
 }
 
 .dashboard {
-  display: flex;
-  flex-flow: column;
+  display: grid;
 }
 
 .main-container {

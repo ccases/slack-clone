@@ -6,16 +6,7 @@ import "./ChatArea.css";
 import Avatar from "../Avatar/Avatar";
 
 function ChatArea(props) {
-  const {
-    userId,
-    userEmail,
-    convo,
-    setConvo,
-    chatType,
-    recentDms,
-    chat,
-    userDb,
-  } = props;
+  const { userId, userEmail, convo, setConvo, chatType, userDb, chat, } = props;
   const [header] = useState(Headers);
   const msgEnd = useRef(null);
 
@@ -121,6 +112,7 @@ function ChatArea(props) {
     : convo.map((msg, idx, arr) => {
         let [isSameDay, isWithin3Mins] = timeChecker(arr, idx);
         return (
+        
           <ChatMsg
             key={msg.id}
             sender={msg.sender}
