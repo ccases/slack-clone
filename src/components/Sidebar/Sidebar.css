@@ -86,3 +86,7 @@
 .sidebar-channel {
   padding-left: 10px;
 }
+
+.isActiveChat {
+  background-color: #1164a3ff;
+}

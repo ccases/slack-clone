@@ -56,12 +56,6 @@ function Sidebar(props) {
       })
     : null;
 
-  {
-    /* {displayChannels.map((channels) => {
-          return <div className="direct-message-user">{displayChannels}</div>;
-        })} */
-  }
-
   return (
     <div className="modal-container">
       <AddChannel
