@@ -126,6 +126,7 @@ function Dashboard() {
               userDb={userDb}
               recentDms={filteredRecents}
               channelDb={channelDb}
+              chat={chat}
               setChat={setChat}
               setChannelDb={setChannelDb}
             />

@@ -20,7 +20,7 @@ import SidebarOptions from "./SidebarOptions";
 import DirectMessages from "../DirectMessages/DirectMessages";
 
 function Sidebar(props) {
-  const { userDb, recentDms, channelDb, setChat } = props;
+  const { userDb, recentDms, channelDb, setChat, chat } = props;
   const [userChannels, setUserChannels] = useState([]);
   const [userName, setUserName] = useState([]);
   const [dmsExpanded, setDmsExpanded] = useState(true);
@@ -38,6 +38,9 @@ function Sidebar(props) {
 
   const displayChannels = channelDb
     ? channelDb.map((channel) => {
+        let isActive = false;
+        if (chat.name === channel.name) isActive = true;
+        console.log(`${channel.name} ${isActive}`);
         return (
           <div
             onClick={(e) => {
@@ -47,7 +50,7 @@ function Sidebar(props) {
               );
               setChat(selectedChannel);
             }}
-            className="channel-name"
+            className={"channel-name " + (isActive ? "isActiveChat" : "")}
             key={channel.id}
           >
             <RiLockLine /> &nbsp; {channel.name}
@@ -146,7 +149,12 @@ function Sidebar(props) {
           {recentDms.map((user) => {
             return (
               <div className="direct-message-user">
-                <DirectMessages key={user.id} user={user} setChat={setChat} />
+                <DirectMessages
+                  key={user.id}
+                  user={user}
+                  setChat={setChat}
+                  chat={chat}
+                />
               </div>
             );
           })}
