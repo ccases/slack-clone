@@ -85,11 +85,22 @@ function SearchBar(props) {
               getAllUsers();
               setIsActive(true);
             }}
-            className="input-search"
+            className={
+              searchBarFor === "AddMembers"
+                ? "input-search-add-members"
+                : "input-search"
+            }
             value={searchEntry}
           />
-          <button type="submit" className="header-btn">
-            <BiSearch />
+          <button
+            type="submit"
+            className={
+              searchBarFor === "AddMembers"
+                ? "search-add-member-btn"
+                : "header-btn"
+            }
+          >
+            {searchBarFor === "AddMembers" ? "Add member" : <BiSearch />}
           </button>
         </form>
       </div>
