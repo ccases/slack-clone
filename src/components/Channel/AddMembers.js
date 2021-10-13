@@ -4,6 +4,7 @@ import Headers from "../../Helpers/Headers";
 import { useSpring, animated } from "react-spring";
 import { MdClose } from "react-icons/md";
 import "./AddChannel.css";
+import SearchBar from "../SearchBar/SearchBar";
 
 function AddMembers(props) {
   const { ID, chat, userDb } = props;
@@ -25,36 +26,33 @@ function AddMembers(props) {
       });
   };
 
-
   const onAddMember = (e) => {
     e.preventDefault();
     // console.log(chat.id)
-    setChannelId(chat.id)
+    setChannelId(chat.id);
     // console.log(channelId)
-
+    console.log(newMember);
     let found = userDb.find((user) => user.uid === newMember);
-      if (!found) {
-        alert("user not found");
-      } else {
-        setUserArray(userArray.concat(found.id));
-        console.log(found.id);
+    if (!found) {
+      alert("user not found");
+    } else {
+      setUserArray(userArray.concat(found.id));
+      console.log(found.id);
 
-        UserAPI.addChannelMember(header, channelId, found.id).then((res) =>{
-          console.log(res)
-          
+      UserAPI.addChannelMember(header, channelId, found.id)
+        .then((res) => {
+          console.log(res);
         })
         .catch((e) => {
           // console.log(e)
         });
-        alert(`${found.id} is successfully added to the channel `);
-      }
-    
+      alert(`${found.id} is successfully added to the channel `);
+    }
   };
 
   const getChannelDetails = () => {
     UserAPI.getChannelDetails(header, ID)
       .then((res) => {
-        
         console.log(res.data.data.channel_members);
       })
       .catch((e) => {
@@ -104,7 +102,7 @@ function AddMembers(props) {
                 <h2 className="name-label">Add People</h2>
 
                 <div className="addch-form-container">
-                  <form onSubmit={onAddMember}>
+                  {/* <form onSubmit={onAddMember}>
                     <input
                       className="add-channel-input"
                       type="text"
@@ -120,7 +118,14 @@ function AddMembers(props) {
                       value="Add Members"                      
                     />
                      
-                  </form>
+                  </form> */}
+                  <SearchBar
+                    placeholder="Search for members..."
+                    userDb={userDb}
+                    searchBarFor="AddMembers"
+                    onAddMember={onAddMember}
+                    setNewMember={setNewMember}
+                  />
                 </div>
                 <MdClose
                   className="close-modal-button"

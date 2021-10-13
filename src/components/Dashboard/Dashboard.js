@@ -132,6 +132,7 @@ function Dashboard() {
               chat={chat}
               recentDms={recentDms}
               setRecentDms={setRecentDms}
+              setUserDb={setUserDb}
             />
           )}
         </div>

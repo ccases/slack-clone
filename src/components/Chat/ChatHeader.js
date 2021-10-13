@@ -6,7 +6,7 @@ import Headers from "../../Helpers/Headers";
 import "./ChatHeader.css";
 import { MdLock } from "react-icons/md";
 
-function ChatHeader({ chat, chatType, userDb }) {
+function ChatHeader({ chat, chatType, userDb, setUserDb }) {
   //modal add members
   const [showAddMembers, setShowAddMembers] = useState(false);
   const openMemberModal = () => {
@@ -48,6 +48,7 @@ function ChatHeader({ chat, chatType, userDb }) {
             chat={chat}
             channelMembers={channelMembers}
             userDb={userDb}
+            setUserDb={setUserDb}
           />
         </div>
 
