@@ -1,7 +1,9 @@
 import React from "react";
+import Avatar from "../Avatar/Avatar";
 import "./SearchResult.css";
 
-function SearchResult({ userEmail, setSearchEntry, submitHandler }) {
+function SearchResult({ user, setSearchEntry, submitHandler }) {
+  const isAvailable = user !== undefined ? true : false;
   return (
     <div
       className="result"
@@ -10,7 +12,8 @@ function SearchResult({ userEmail, setSearchEntry, submitHandler }) {
         setSearchEntry(e.target.textContent);
       }}
     >
-      {userEmail}
+      {isAvailable && <Avatar user={user} size={30} />}
+      {isAvailable && user.uid}
     </div>
   );
 }

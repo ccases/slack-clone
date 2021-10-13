@@ -7,9 +7,9 @@ import { BiSearch } from "react-icons/bi";
 import "./SearchBar.css";
 
 function SearchBar(props) {
-  const { placeholder, setChatWith } = props;
+  const { placeholder, setChatWith, userDb, setUserDb } = props;
   const [searchEntry, setSearchEntry] = useState("");
-  const [userDb, setUserDb] = useState([]);
+  // const [userDb, setUserDb] = useState([]);
   const [header] = useState(Headers);
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [isActive, setIsActive] = useState(false);
@@ -28,6 +28,7 @@ function SearchBar(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     if (userDb[0] === undefined) return;
+    if (e.target.textContent == null) return;
     let found = userDb.find((user) => user.uid === searchEntry);
     console.log("FOUND " + found.uid);
     if (found) {
@@ -50,7 +51,7 @@ function SearchBar(props) {
         return (
           <SearchResult
             key={user.id}
-            userEmail={user.uid}
+            user={user}
             setSearchEntry={setSearchEntry}
             submitHandler={submitHandler}
           />
@@ -66,10 +67,10 @@ function SearchBar(props) {
             placeholder={placeholder}
             onChange={(e) => {
               setSearchEntry(e.target.value);
-              setIsActive(true);
             }}
             onFocus={() => {
               getAllUsers();
+              setIsActive(true);
             }}
             className="input-search"
             value={searchEntry}
@@ -80,7 +81,16 @@ function SearchBar(props) {
         </form>
       </div>
       <div>
-        {isActive ? <div className="Suggestions">{suggestions}</div> : null}
+        {isActive ? (
+          <div
+            onClick={(e) => {
+              setIsActive(false);
+            }}
+            className="Suggestions"
+          >
+            {suggestions}
+          </div>
+        ) : null}
       </div>
     </div>
   );
