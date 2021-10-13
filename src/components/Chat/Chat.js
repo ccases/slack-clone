@@ -5,7 +5,7 @@ import "./Chat.css";
 import ChatHeader from "./ChatHeader";
 
 function Chat(props) {
-  const { chat, recentDms, userDb } = props;
+  const { chat, recentDms, userDb, setRecentDms } = props;
   const [chatWith, setChatWith] = useState("");
   const [convo, setConvo] = useState([]);
   const [chatType, setChatType] = useState("User"); // can be Channel, CAPITALIZE FIRST LETTER!

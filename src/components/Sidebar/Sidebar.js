@@ -18,6 +18,8 @@ import {
 } from "react-icons/ri";
 import SidebarOptions from "./SidebarOptions";
 import DirectMessages from "../DirectMessages/DirectMessages";
+import { useEffect } from "react/cjs/react.development";
+import { IoFastFood } from "react-icons/io5";
 
 function Sidebar(props) {
   const { userDb, recentDms, channelDb, setChat, chat } = props;
@@ -26,6 +28,17 @@ function Sidebar(props) {
   const [dmsExpanded, setDmsExpanded] = useState(true);
   const [channelsExpanded, setChannelsExpanded] = useState(true);
 
+  const [isInRecents, setIsInRecents] = useState(false);
+  useEffect(() => {
+    if (chat.name) return;
+    // if channel do nothing
+    else if (chat.uid) {
+      let found = recentDms.find((recents) => recents.uid === chat.uid);
+      if (found) {
+        setIsInRecents(true);
+      } else setIsInRecents(false);
+    }
+  }, [chat]);
   //modal add channel
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
@@ -158,6 +171,9 @@ function Sidebar(props) {
               </div>
             );
           })}
+          {!isInRecents && (
+            <DirectMessages user={chat} setChat={setChat} chat={chat} />
+          )}
         </div>
       </div>
     </div>

@@ -23,7 +23,7 @@ function Dashboard() {
 
   const [isErrorLoading, setIsErrorLoading] = useState(false);
 
-  const [availableChats, setAvailableChats] = useState("");
+  const [isInRecents, setIsInRecents] = useState(false);
 
   useEffect(() => {
     // get all users
@@ -94,14 +94,7 @@ function Dashboard() {
     setChat(found);
   }, [usersAreLoaded, recentsAreLoaded, channelsAreLoaded]);
 
-  useEffect(() => {
-    setAvailableChats(availableChats.concat(filteredRecents));
-    setAvailableChats(availableChats.concat(channelDb));
-
-    // availableChats.forEach(person => {
-
-    // })
-  }, [filteredRecents, channelDb]);
+  useEffect(() => {}, [filteredRecents, channelDb]);
 
   const displayErrorMsg = () => {
     return <div>Please log in again to continue</div>;
@@ -134,7 +127,12 @@ function Dashboard() {
         </div>
         <div className="chat-dashboard">
           {loadingComplete && (
-            <Chat userDb={userDb} chat={chat} recentDms={recentDms} />
+            <Chat
+              userDb={userDb}
+              chat={chat}
+              recentDms={recentDms}
+              setRecentDms={setRecentDms}
+            />
           )}
         </div>
       </div>
