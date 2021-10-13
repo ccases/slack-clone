@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ChatArea from "./ChatArea";
 import ChatForm from "./ChatForm";
 import "./Chat.css";
-import ChatHeader from "./ChatHeader"
+import ChatHeader from "./ChatHeader";
 
 function Chat(props) {
   const { chat, recentDms, userDb } = props;
@@ -33,32 +33,26 @@ function Chat(props) {
 
   return (
     <div className="chat">
-    <div className="chat-header"> 
-
- <ChatHeader chat={chat} chatType={chatType} userDb={userDb}/> 
-    
-    </div>
-      <div className="chat-area-wrapper">
-        <ChatArea
-          userId={chatWith.id}
-          userEmail={chatWith.uid}
-          convo={convo}
-          setConvo={setConvo}
-          chatType={chatType}
-          recentDms={recentDms}
-          chat={chat}
-          userDb={userDb}
-        />
+      <div className="chat-header">
+        <ChatHeader chat={chat} chatType={chatType} userDb={userDb} />
       </div>
-      <div>
-        <ChatForm
-          userId={chatWith.id}
-          setConvo={setConvo}
-          convo={convo}
-          userEmail={chatWith.uid}
-          chatType={chatType}
-        />
-      </div>
+      <ChatArea
+        userId={chatWith.id}
+        userEmail={chatWith.uid}
+        convo={convo}
+        setConvo={setConvo}
+        chatType={chatType}
+        recentDms={recentDms}
+        chat={chat}
+        userDb={userDb}
+      />
+      <ChatForm
+        userId={chatWith.id}
+        setConvo={setConvo}
+        convo={convo}
+        userEmail={chatWith.uid}
+        chatType={chatType}
+      />
     </div>
   );
 }

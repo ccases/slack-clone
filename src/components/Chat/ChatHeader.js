@@ -38,7 +38,7 @@ function ChatHeader({ chat, chatType, userDb }) {
   };
 
   return (
-    <div>
+    <div className="chat-header-parent">
       <div className="modals">
         <div className="add-members">
           <AddMembers
@@ -51,7 +51,7 @@ function ChatHeader({ chat, chatType, userDb }) {
           />
         </div>
 
-        <div className="chat-headers" onClick={getChannelDetails}>
+        <div className="chat-headers">
           <ShowChannelMembers
             onclick={openAllMemberModal}
             showMembers={showMembers}
@@ -68,7 +68,7 @@ function ChatHeader({ chat, chatType, userDb }) {
             <h1> {chat.uid}</h1>
           </div>
         ) : (
-          <div className="channel-header-title">
+          <div className="channel-header-title" onClick={getChannelDetails}>
             <div className="header-child">
               <h1 onClick={openAllMemberModal}>
                 {" "}

@@ -22,6 +22,8 @@ function Dashboard() {
   const [loadingComplete, setLoadingComplete] = useState(false);
 
   const [isErrorLoading, setIsErrorLoading] = useState(false);
+
+  const [activeChat, setActiveChat] = useState("");
   useEffect(() => {
     // get all users
 
@@ -97,8 +99,10 @@ function Dashboard() {
   return (
     <div className="dashboard">
       {isErrorLoading ? displayErrorMsg() : null}
-      <div className='header-container'>
-      {loadingComplete && <Header userDb={userDb} channelDb={channelDb} setChat={setChat} />}
+      <div className="header-container">
+        {loadingComplete && (
+          <Header userDb={userDb} channelDb={channelDb} setChat={setChat} />
+        )}
       </div>
       <div className="main-container">
         <div className="sidebar-dashboard">
