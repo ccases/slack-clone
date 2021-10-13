@@ -16,10 +16,8 @@ import {
   RiArrowRightSFill,
   RiAddFill,
 } from "react-icons/ri";
-import { MdLock } from "react-icons/md";
 import SidebarOptions from "./SidebarOptions";
 import DirectMessages from "../DirectMessages/DirectMessages";
-
 
 function Sidebar(props) {
   const { userDb, recentDms, channelDb, setChat } = props;
@@ -34,9 +32,9 @@ function Sidebar(props) {
     setShowModal((prev) => !prev);
   };
 
- const notAvailable = () => {
-   alert ("Feature is not yet available")
- }
+  const notAvailable = () => {
+    alert("Feature is not yet available");
+  };
 
   const displayChannels = channelDb
     ? channelDb.map((channel) => {
@@ -48,7 +46,7 @@ function Sidebar(props) {
             className="channel-name"
             key={channel.id}
           >
-           {channel.name}
+            <RiLockLine /> &nbsp; {channel.name}
           </div>
         );
       })
@@ -69,11 +67,11 @@ function Sidebar(props) {
         showModal={showModal}
         setShowModal={setShowModal}
       />
-     
+
       <div className="sidebar-container">
         <div className="sidebar-header">
           <div className="sidebar-info">
-            <h2 className="sidebar-h2">
+            <div className="sidebar-h2">
               Slack Clone{" "}
               <RiPencilFill
                 style={{
@@ -82,10 +80,9 @@ function Sidebar(props) {
                   fontSize: "1.5rem",
                   color: "#49274b",
                   borderRadius: "999px",
-                  marginLeft: "100px",
                 }}
               />
-            </h2>
+            </div>
             <div className="user-name">
               <h3 className="sidebar-h3">
                 <RiCheckboxBlankCircleFill
@@ -104,12 +101,12 @@ function Sidebar(props) {
 
           <div className="sidebar-options">
             <div className="not-available" onClick={notAvailable}>
-            <SidebarOptions Icon={RiMenu2Line} title="All unreads"/>
-            <SidebarOptions Icon={RiChat1Line} title="Threads" />
-            <SidebarOptions Icon={RiQuestionAnswerLine} title="All DMs" />
-            <SidebarOptions Icon={RiAtLine} title="Mentions & reactions" />
-            <SidebarOptions Icon={RiBookmarkLine} title="Saved Items" />
-            <SidebarOptions Icon={RiMore2Fill} title="More" />
+              <SidebarOptions Icon={RiMenu2Line} title="All unreads" />
+              <SidebarOptions Icon={RiChat1Line} title="Threads" />
+              <SidebarOptions Icon={RiQuestionAnswerLine} title="All DMs" />
+              <SidebarOptions Icon={RiAtLine} title="Mentions & reactions" />
+              <SidebarOptions Icon={RiBookmarkLine} title="Saved Items" />
+              <SidebarOptions Icon={RiMore2Fill} title="More" />
             </div>
 
             <div onClick={openModal}>
@@ -122,26 +119,26 @@ function Sidebar(props) {
           </div>
         </div>
         <div
-          className="dms-expander-div"
+          className="expander-div sidebar-option-container"
           onClick={() => setChannelsExpanded(!channelsExpanded)}
         >
           {channelsExpanded ? <RiArrowDownSFill /> : <RiArrowRightSFill />}{" "}
-          Channels
+          &nbsp;Channels
         </div>
         <div
           className={
             channelsExpanded ? "direct-messages expanded" : "direct-messages"
           }
         >
-       {displayChannels}
+          {displayChannels}
         </div>
 
         <div
-          className="dms-expander-div"
+          className="expander-div sidebar-option-container"
           onClick={() => setDmsExpanded(!dmsExpanded)}
         >
-          {dmsExpanded ? <RiArrowDownSFill /> : <RiArrowRightSFill />} Direct
-          Messages
+          {dmsExpanded ? <RiArrowDownSFill /> : <RiArrowRightSFill />}{" "}
+          &nbsp;Direct Messages
         </div>
         <div
           className={

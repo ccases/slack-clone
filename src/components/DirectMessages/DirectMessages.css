@@ -1,7 +1,9 @@
 .direct-messages-div {
   display: flex;
   flex-flow: row;
-  padding: 3px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 20px;
 }
 
 .direct-messages-uid {

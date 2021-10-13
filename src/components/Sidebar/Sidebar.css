@@ -31,6 +31,9 @@
   border-bottom: 1px solid #49274b;
 }
 .sidebar-h2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-size: 18px;
   font-weight: 900;
   margin-bottom: 5px;
@@ -47,7 +50,9 @@
   font-size: 16px;
   align-items: center;
   cursor: pointer;
-  padding: 9px 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 20px;
   display: flex;
 }
 .channel-name:hover {
@@ -59,7 +64,7 @@
   padding-top: 3px;
 }
 
-.dms-expander-div {
+.expander-div {
   display: flex;
   align-items: center;
 }
@@ -67,6 +72,7 @@
 .direct-messages {
   height: 0;
   transition: height 0.3s;
+  overflow: hidden;
 }
 .direct-message-user {
   margin: 0;
@@ -77,6 +83,6 @@
   height: max-content;
 }
 
-.sidebar-channel{
+.sidebar-channel {
   padding-left: 10px;
 }
