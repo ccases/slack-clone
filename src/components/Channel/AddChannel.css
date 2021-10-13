@@ -1,3 +1,4 @@
+
 .background {
   width: 100vw;
   height: 100vh;
@@ -11,15 +12,14 @@
 }
 
 .modal-wrapper {
-  width: 560px;
+  width: 500px;
   height: 350px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: #000;
-  display: grid;
   position: relative;
   border-radius: 10px;
-  transform: translate(Y -60px);
+  transform: translateY(-60px);
   z-index: 99;
 }
 
@@ -92,4 +92,21 @@
   height: 30px;
   border-radius: 5px;
   margin-top: 10px;
+}
+
+
+.channel-member-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.channel-details {
+  margin-top: 7px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.date-created{
+  
 }

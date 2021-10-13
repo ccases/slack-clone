@@ -16,10 +16,10 @@ import {
   RiArrowRightSFill,
   RiAddFill,
 } from "react-icons/ri";
+import { MdLock } from "react-icons/md";
 import SidebarOptions from "./SidebarOptions";
 import DirectMessages from "../DirectMessages/DirectMessages";
-import AddMembers from "../Channel/AddMembers";
-import ShowChannelMembers from "../Channel/ShowChannelMembers";
+
 
 function Sidebar(props) {
   const { userDb, recentDms, channelDb, setChat } = props;
@@ -34,17 +34,9 @@ function Sidebar(props) {
     setShowModal((prev) => !prev);
   };
 
-  //modal add members
-  const [showAddMembers, setShowAddMembers] = useState(false);
-  const openMemberModal = () => {
-    setShowAddMembers((prev) => !prev);
-  };
-
-  //modal show channel members
-  const [showMembers, setShowMembers] = useState(false);
-  const openAllMemberModal = () => {
-    setShowMembers((prev) => !prev);
-  };
+ const notAvailable = () => {
+   alert ("Feature is not yet available")
+ }
 
   const displayChannels = channelDb
     ? channelDb.map((channel) => {
@@ -56,7 +48,7 @@ function Sidebar(props) {
             className="channel-name"
             key={channel.id}
           >
-            {channel.name}
+           {channel.name}
           </div>
         );
       })
@@ -77,16 +69,7 @@ function Sidebar(props) {
         showModal={showModal}
         setShowModal={setShowModal}
       />
-      <AddMembers
-        onclick={openMemberModal}
-        showAddMembers={showAddMembers}
-        setShowAddMembers={setShowAddMembers}
-      />
-      <ShowChannelMembers
-        onclick={openAllMemberModal}
-        showMembers={showMembers}
-        setShowMembers={setShowMembers}
-      />
+     
       <div className="sidebar-container">
         <div className="sidebar-header">
           <div className="sidebar-info">
@@ -120,21 +103,15 @@ function Sidebar(props) {
           </div>
 
           <div className="sidebar-options">
-            {/* <button onClick={openModal} className="sidebar-button">
-              Add Channel
-            </button> */}
-            <button onClick={openMemberModal} className="sidebar-button">
-              Add Members
-            </button>
-            <button onClick={openAllMemberModal} className="sidebar-button">
-              View Channel Members
-            </button>
-            <SidebarOptions Icon={RiMenu2Line} title="All unreads" />
+            <div className="not-available" onClick={notAvailable}>
+            <SidebarOptions Icon={RiMenu2Line} title="All unreads"/>
             <SidebarOptions Icon={RiChat1Line} title="Threads" />
             <SidebarOptions Icon={RiQuestionAnswerLine} title="All DMs" />
             <SidebarOptions Icon={RiAtLine} title="Mentions & reactions" />
             <SidebarOptions Icon={RiBookmarkLine} title="Saved Items" />
             <SidebarOptions Icon={RiMore2Fill} title="More" />
+            </div>
+
             <div onClick={openModal}>
               <SidebarOptions
                 onClick={openModal}
@@ -156,7 +133,7 @@ function Sidebar(props) {
             channelsExpanded ? "direct-messages expanded" : "direct-messages"
           }
         >
-          {displayChannels}
+       {displayChannels}
         </div>
 
         <div

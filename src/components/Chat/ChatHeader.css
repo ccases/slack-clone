@@ -1,0 +1,24 @@
+.channel-header-title{
+    padding: 10px 0 10px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.header-child {
+    padding-right: 30px;
+}
+
+.ch-details-tooltip {
+    visibility: hidden;
+    width: 140px;
+    background-color: grey;
+    border-radius: 5;
+    position: absolute;
+    z-index: 1;
+}
+
+.ch-details-tooltip::hover{
+    visibility: visible;
+}
