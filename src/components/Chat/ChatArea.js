@@ -27,7 +27,7 @@ function ChatArea(props) {
 
   useEffect(() => {
     scrollToBottom();
-  }, [convo]);
+  }, [chat]);
 
   useEffect(() => {
     // enables "real time" chat!!!! w/ 2 sec delay
@@ -37,13 +37,13 @@ function ChatArea(props) {
 
     const interval = setInterval(() => {
       retrieveMsgs(userId, chatType, true);
-    }, 2000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [userId, chatType]);
 
   const scrollToBottom = () => {
-    // msgEnd.current.scrollIntoView({ behavior: "smooth" });
+    msgEnd.current.scrollIntoView({ behavior: "smooth" });
   };
   // checker if same day, or wihtin a certain timeframe
   // helper for map functions
@@ -175,11 +175,14 @@ function ChatArea(props) {
   };
   return (
     <div className="ChatArea ">
-      {/* <div className="chat-wrapper"> */}
-      {messagesHeader(userEmail)}
-      <div>{displayMsgs} </div>
-      <div style={{ visibility: "none" }} ref={msgEnd}></div>
-      {/* </div> */}
+      <div className="chat-wrapper">
+        {messagesHeader(userEmail)}
+        <div>{displayMsgs} </div>
+        <div
+          style={{ visibility: "none", height: "0px", width: "0px" }}
+          ref={msgEnd}
+        ></div>
+      </div>
     </div>
   );
 }

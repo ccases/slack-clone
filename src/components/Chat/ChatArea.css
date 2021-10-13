@@ -2,8 +2,10 @@
   box-sizing: border-box;
 }
 .ChatArea {
+  /* display: flex; */
   margin-bottom: 10px;
-  align-self: flex-end;
+  height: 100%;
+  overflow-y: scroll;
 }
 .name {
   color: #5890bcff;
@@ -28,4 +30,15 @@
 }
 .messages-header-top-part p {
   margin-left: 10px;
+}
+.chat-area-wrapper {
+  /* display: flex; */
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+/* apologies for the confusing names, short on time kind of */
+.chat-wrapper {
+  align-self: flex-end;
 }
