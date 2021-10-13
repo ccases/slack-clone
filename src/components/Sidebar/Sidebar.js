@@ -111,6 +111,7 @@ function Sidebar(props) {
             <SidebarOptions Icon={RiBookmarkLine} title="Saved Items" />
             <SidebarOptions Icon={RiMore2Fill} title="More" />
             </div>
+
             <div onClick={openModal}>
               <SidebarOptions
                 onClick={openModal}

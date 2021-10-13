@@ -9,7 +9,6 @@
   align-items: center;
   z-index: 99;
   transform: translate(Y -60px);
-
 }
 
 .modal-wrapper {
@@ -20,7 +19,8 @@
   color: #000;
   position: relative;
   border-radius: 10px;
-  
+  transform: translateY(-60px);
+  z-index: 99;
 }
 
 .modal-content {
@@ -84,8 +84,6 @@
   font-weight: bold;
 }
 
-
-
 .sidebar-button {
   width: 280px;
   background-color: #347a5a;
@@ -100,8 +98,6 @@
 .channel-member-details {
   display: flex;
   flex-direction: column;
- 
-
 }
 
 .channel-details {

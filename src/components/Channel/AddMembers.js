@@ -117,12 +117,10 @@ function AddMembers(props) {
                     <input
                       type="submit"
                       className="sidebar-button"
-                      value="Add Members"
-                      
+                      value="Add Members"                      
                     />
                      
                   </form>
-                 
                 </div>
                 <MdClose
                   className="close-modal-button"

@@ -88,7 +88,6 @@ if (uid)
           <animated.div style={animation}>
             <div className="modal-wrapper">
               <div className="modal-content">
-
                  <div className="channel-member-details" > 
                   <h2 className="channel-details">Channel Details</h2>
                  
@@ -96,13 +95,10 @@ if (uid)
   
     <div className ="created-by"> Created by</div>
     <div className ="channel-owner"> <span className="owner-details">{getUid(channelDetails.owner_id)}</span> on  <span className="owner-details">{dateFormat(channelDetails.created_at)}
-    
-    
     </span></div>
     </div>
     <h2 className="channel-details">Channel Members</h2>
                 <div className="display-channel-members"> {displayChannelMembers}</div>
-
                 <MdClose
                   className="close-modal-button"
                   aria-label="Close modal"
