@@ -7,9 +7,16 @@ import { BiSearch } from "react-icons/bi";
 import "./SearchBar.css";
 
 function SearchBar(props) {
-  const { placeholder, setChatWith, userDb, setUserDb } = props;
+  const {
+    placeholder,
+    setChatWith,
+    userDb,
+    setUserDb,
+    searchBarFor,
+    onAddMember,
+    setNewMember,
+  } = props;
   const [searchEntry, setSearchEntry] = useState("");
-  // const [userDb, setUserDb] = useState([]);
   const [header] = useState(Headers);
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [isActive, setIsActive] = useState(false);
@@ -55,6 +62,7 @@ function SearchBar(props) {
             user={user}
             setSearchEntry={setSearchEntry}
             submitHandler={submitHandler}
+            setNewMember={setNewMember}
           />
         );
       })
@@ -62,22 +70,37 @@ function SearchBar(props) {
   return (
     <div className="container-search">
       <div className="searchBar">
-        <form onSubmit={submitHandler} className="form-searchbar">
+        <form
+          onSubmit={searchBarFor === "AddMembers" ? onAddMember : submitHandler}
+          className="form-searchbar"
+        >
           <input
             type="text"
             placeholder={placeholder}
             onChange={(e) => {
               setSearchEntry(e.target.value);
+              if (searchBarFor === "AddMembers") setNewMember(e.target.value);
             }}
             onFocus={() => {
               getAllUsers();
               setIsActive(true);
             }}
-            className="input-search"
+            className={
+              searchBarFor === "AddMembers"
+                ? "input-search-add-members"
+                : "input-search"
+            }
             value={searchEntry}
           />
-          <button type="submit" className="header-btn">
-            <BiSearch />
+          <button
+            type="submit"
+            className={
+              searchBarFor === "AddMembers"
+                ? "search-add-member-btn"
+                : "header-btn"
+            }
+          >
+            {searchBarFor === "AddMembers" ? "Add member" : <BiSearch />}
           </button>
         </form>
       </div>
