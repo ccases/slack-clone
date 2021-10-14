@@ -1,5 +1,4 @@
-
-.background {
+.add-ch-background {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.8);
@@ -11,9 +10,9 @@
   transform: translate(Y -60px);
 }
 
-.modal-wrapper {
-  width: 500px;
-  height: 350px;
+.add-ch-modal-wrapper {
+  width: 700px;
+  height: 400px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: #000;
@@ -23,14 +22,14 @@
   z-index: 99;
 }
 
-.modal-content {
+.add-ch-modal-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   line-height: 25px;
   color: #141414;
-  width: 500px;
+  width: 600px;
   margin: 40px;
 }
 .sign-up-p {
@@ -77,6 +76,7 @@
 
 .add-channel-header {
   padding-bottom: 15px;
+  padding-top: 40px;
 }
 .name-label {
   padding-bottom: 15px;
@@ -107,6 +107,7 @@
   font-weight: bold;
 }
 
-.date-created{
-  
+.add-people{
+  padding-top: 40px;
+  padding-bottom: 20px;
 }

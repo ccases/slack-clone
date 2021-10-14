@@ -84,10 +84,10 @@ if (uid)
   return (
     <>
       {showMembers ? (
-        <div className="background" onClick={closeModal} ref={modalRef}>
+        <div className="cd-background" onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
-            <div className="modal-wrapper">
-              <div className="modal-content">
+            <div className="cd-modal-wrapper">
+              <div className="cd-modal-content">
                  <div className="channel-member-details" > 
                   <h2 className="channel-details">Channel Details</h2>
                  

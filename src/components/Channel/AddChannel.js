@@ -86,10 +86,10 @@ const AddChannel = (props) => {
   return (
     <div className = "main-modal">
       {showModal ? (
-        <div className="background" onClick={closeModal} ref={modalRef}>
+        <div className="add-ch-background" onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
-            <div className="modal-wrapper">
-              <div className="modal-content">
+            <div className="add-ch-modal-wrapper">
+              <div className="add-ch-modal-content">
                 <h1 className="add-channel-header">Create a private channel</h1>
                 <span className="add-channel-content">
                   Channels are where your team communicates. They’re best when

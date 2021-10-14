@@ -80,17 +80,19 @@ function SignUp(props) {
   return (
     <>
       {showModal ? (
-        <div className="background" onClick={closeModal} ref={modalRef}>
+        <div className="su-background" onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
-            <div className="modal-wrapper">
-              <img className="modal-img" src={signupImage} alt="Sign Up" />{" "}
-              <div className="modal-content">
-                <h1>First, enter your email</h1>
+            <div className="su-modal-wrapper">
+              
+              <img src={signupImage} width={"100%"}className ="su-modal-img" />
+          
+              <div className="su-modal-content">
+                <p className ="su-h1">First, enter your email</p>
                 <p className="sign-up-p">
                   We suggest using the{" "}
                   <strong>email address you use at work.</strong>
                 </p>
-                <div className="form-container">
+                <div className="su-form-container">
                   <form onSubmit={submitHandler} autoComplete="off">
                     <label className="sign-up-label">
                       Email

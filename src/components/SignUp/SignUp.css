@@ -1,6 +1,6 @@
-.background {
-  width: 100%;
-  height: 100%;
+.su-background {
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.8);
   position: fixed;
   display: flex;
@@ -8,7 +8,7 @@
   align-items: center;
 }
 
-.modal-wrapper {
+.su-modal-wrapper{
   width: 800px;
   height: 500px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
@@ -21,32 +21,34 @@
   border-radius: 10px;
 }
 
-.modal-img {
+.su-modal-img {
+  
   width: 100%;
   height: 100%;
   object-fit: cover;
+  position: relative;
   border-radius: 10px 0 0 10px;
-  background: #000;
+ 
 }
 
-.modal-content {
+.su-modal-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   line-height: 1.8;
   color: #141414;
+  padding-right: 40px;
+}
+
+.su-h1 {
+  font-size: 32px;
+  font-weight: bold;
+
 }
 .sign-up-p {
   margin-bottom: 1rem;
 }
-
-/* button {
-  padding: 10px 24px;
-  background: #141414;
-  color: #fff;
-  border: none;
-} */
 
 .close-modal-button {
   cursor: pointer;
@@ -59,7 +61,7 @@
   z-index: 10;
 }
 
-.form-container {
+.su-form-container {
   display: flex;
   flex-direction: row;
 }

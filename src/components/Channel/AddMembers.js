@@ -3,7 +3,7 @@ import * as UserAPI from "../../UserAPI";
 import Headers from "../../Helpers/Headers";
 import { useSpring, animated } from "react-spring";
 import { MdClose } from "react-icons/md";
-import "./AddChannel.css";
+import "./AddMembers.css";
 
 function AddMembers(props) {
   const { ID, chat, userDb } = props;
@@ -97,11 +97,11 @@ function AddMembers(props) {
   return (
     <>
       {showAddMembers ? (
-        <div className="background" onClick={closeModal} ref={modalRef}>
+        <div className="add-mem-background" onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
-            <div className="modal-wrapper">
-              <div className="modal-content">
-                <h2 className="name-label">Add People</h2>
+            <div className="add-mem-modal-wrapper">
+              <div className="add-mem-modal-content">
+                <h2 className="add-people">Add People</h2>
 
                 <div className="addch-form-container">
                   <form onSubmit={onAddMember}>
