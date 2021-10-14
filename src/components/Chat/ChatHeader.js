@@ -27,10 +27,7 @@ function ChatHeader({ chat, chatType, userDb, setUserDb }) {
 
       .then((res) => {
         setChannelMembers(res.data.data.channel_members);
-        console.log(res.data.data.channel_members);
         setChannelDetails(res.data.data);
-
-        console.log(res.data);
       })
       .catch((e) => {
         console.log("no channel details");
