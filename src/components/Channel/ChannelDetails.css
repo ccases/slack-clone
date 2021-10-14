@@ -1,0 +1,15 @@
+.ch-about-details{
+    background-color: white;
+    border-bottom: 1px solid #d4d4d4; 
+    padding-left: 20px;
+    line-height: 20px;
+    padding: 10px 9px;
+    color: gray;
+}
+  .ch-main-label{
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .ch-sub-label{
+    font-size: 12px;
+  }

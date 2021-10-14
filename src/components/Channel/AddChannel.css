@@ -1,5 +1,5 @@
 
-.background {
+.add-ch-background {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.8);
@@ -11,8 +11,8 @@
   transform: translate(Y -60px);
 }
 
-.modal-wrapper {
-  width: 500px;
+.add-ch-modal-wrapper {
+  width: 600px;
   height: 350px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
@@ -23,7 +23,7 @@
   z-index: 99;
 }
 
-.modal-content {
+.add-ch-modal-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,17 +31,8 @@
   line-height: 25px;
   color: #141414;
   width: 500px;
-  margin: 40px;
-}
-.sign-up-p {
-  margin-bottom: 1rem;
-}
-
-.login-button {
-  padding: 10px 24px;
-  background: #141414;
-  color: #fff;
-  border: none;
+  margin: auto;
+  padding-top: 40px;
 }
 
 .close-modal-button {
@@ -57,9 +48,9 @@
 
 .addch-form-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
-.add-channel-input {
+.add-ch-input {
   width: 470px;
   height: 4vh;
   padding-left: 10px;
@@ -69,14 +60,14 @@
   margin-top: 20px;
 }
 
-.add-channel-content {
+.add-ch-content {
   padding-bottom: 15px;
   font-size: 18px;
   color: #141414;
 }
 
-.add-channel-header {
-  padding-bottom: 15px;
+.add-ch-header {
+  padding-bottom: 20px;
 }
 .name-label {
   padding-bottom: 15px;
@@ -84,29 +75,12 @@
   font-weight: bold;
 }
 
-.sidebar-button {
-  width: 280px;
+.add-ch-button {
+  width: 200px;
   background-color: #347a5a;
   color: #fff;
   border: 0;
   height: 30px;
   border-radius: 5px;
-  margin-top: 10px;
-}
-
-
-.channel-member-details {
-  display: flex;
-  flex-direction: column;
-}
-
-.channel-details {
-  margin-top: 7px;
-  margin-bottom: 10px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.date-created{
-  
+  margin-top: 25px;
 }

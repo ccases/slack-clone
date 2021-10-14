@@ -3,18 +3,19 @@ import * as UserAPI from "../../UserAPI";
 import Headers from "../../Helpers/Headers";
 import { useSpring, animated } from "react-spring";
 import { MdClose, MdLock } from "react-icons/md";
+import { BiPhone, BiBell, BiChevronDown, BiStar } from "react-icons/bi"
 import "./ShowChannelMembers.css";
 import Avatar from '../Avatar/Avatar'
+import ChannelDetails from "./ChannelDetails"
 
 function ShowChannelMembers(props) {
-  const { chat, userDb, channelMembers, channelDetails } = props;
+  const { chat, userDb, channelMembers, channelDetails} = props;
   const [userArray, setUserArray] = useState([]);
   const [header, setHeader] = useState(Headers);
   const [allUsers, setAllUsers] = useState([]);
   const [newMember, setNewMember] = useState("");
   const [channelId, setChannelId] = useState("1224");
   
-
 
 const displayChannelMembers = channelMembers.map((member)=> {
   let user = userDb.find(user => user.id === member.user_id)
@@ -36,7 +37,7 @@ if (uid)
 
 }
 
-   //modal
+//modal
   const { showMembers, setShowMembers } = props;
   const animation = useSpring({
     config: {
@@ -80,31 +81,72 @@ if (uid)
     )
   }
 
+  const notAvail = () => {
+    alert("Feature is not yet available")
+  }
+
 
   return (
     <>
       {showMembers ? (
-        <div className="background" onClick={closeModal} ref={modalRef}>
+        <div className="ch-details-background" onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
-            <div className="modal-wrapper">
-              <div className="modal-content">
+            <div className="ch-details-modal-wrapper">
+              <div className="ch-details-modal-content">
                  <div className="channel-member-details" > 
-                  <h2 className="channel-details">Channel Details</h2>
+                 <div className="channel-member-header">
+                    <div className="channel-title"> 
+                      <MdLock/> 
+                      <span className="ch-name">
+                        {channelDetails.name}
+                      </span> 
+                    </div>
+                    <div className="ch-details-placeholder"> 
+                      <button type="submit" 
+                              className="ch-ph-button"
+                              onClick={notAvail}>
+                        <BiStar/><BiChevronDown/>
+                      </button>
+                      <button type="submit" 
+                              className="ch-ph-button"
+                              onClick={notAvail}>
+                        <BiBell/> Get Notification for @ Mentions <BiChevronDown/> 
+                      </button>
+                      <button type="submit" 
+                              className="ch-ph-button"
+                              onClick={notAvail}>
+                        <BiPhone/> Start a Call
+                      </button>
+                    </div>
+                  
+                  </div>
+               <div className="ch-details-container">   
+               <div className="ch-about">About</div>
+                <div className="all-ch-details">
+                  
+                    <ChannelDetails topic="Topic" subtopic ="Add a topic"/>
+                    <ChannelDetails topic="Description" subtopic ="Add a description"/>
+                    <div className="ch-about-details-1">
+                       <div className="created-by-label">
+                         Created by
+                       </div>
+                       <div className="created-by-sub-label">
+                        {getUid(channelDetails.owner_id)} on {dateFormat(channelDetails.created_at)}
+                       </div>
+                  </div>
                  
-                 <div className="channel-title"> <MdLock/> <span className="ch-name">{channelDetails.name}</span> </div>
-  
-    <div className ="created-by"> Created by</div>
-    <div className ="channel-owner"> <span className="owner-details">{getUid(channelDetails.owner_id)}</span> on  <span className="owner-details">{dateFormat(channelDetails.created_at)}
-    </span></div>
-    </div>
-    <h2 className="channel-details">Channel Members</h2>
-                <div className="display-channel-members"> {displayChannelMembers}</div>
-                <MdClose
-                  className="close-modal-button"
-                  aria-label="Close modal"
-                  onClick={() => setShowMembers((prev) => !prev)}
-                />
-              </div>
+                  </div>
+                  <h2 className="ch-about">Channel Members</h2>
+                    <div className="display-channel-members"> {displayChannelMembers}</div>
+                   
+                  </div>
+                   <MdClose
+                      className="close-modal-button"
+                      aria-label="Close modal"
+                      onClick={() => setShowMembers((prev) => !prev)}
+                    />
+                </div>
+              </div> 
             </div>
           </animated.div>{" "}
         </div>
