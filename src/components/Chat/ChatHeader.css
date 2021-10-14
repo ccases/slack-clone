@@ -12,15 +12,13 @@
 .chat-header-parent {
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
-.ch-details-tooltip {
-  visibility: hidden;
-  width: 140px;
-  background-color: grey;
-  border-radius: 5;
-  position: absolute;
-  z-index: 1;
-}
 
-.ch-details-tooltip::hover {
-  visibility: visible;
+.add-people-button {
+  width: 200px;
+  background-color: #347a5a;
+  color: #fff;
+  border: 0;
+  height: 30px;
+  border-radius: 5px;
+  margin-top: 5px;
 }

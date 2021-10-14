@@ -78,8 +78,8 @@ function ChatHeader({ chat, chatType, userDb, setUserDb }) {
               </h1>
             </div>
             <div className="header-child">
-              <button onClick={openMemberModal} className="sidebar-button">
-                Add Members
+              <button onClick={openMemberModal} className="add-people-button">
+                Add People
               </button>
             </div>
           </div>
