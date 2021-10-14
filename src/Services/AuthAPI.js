@@ -6,10 +6,10 @@ const AuthAPI = () => {
   };
 
   const logout = () => {
-    localStorage.remove("access-token");
-    localStorage.remove("client");
-    localStorage.remove("uid");
-    localStorage.remove("expiry");
+    localStorage.removeItem("access-token");
+    localStorage.removeItem("client");
+    localStorage.removeItem("uid");
+    localStorage.removeItem("expiry");
   };
 
   return {
