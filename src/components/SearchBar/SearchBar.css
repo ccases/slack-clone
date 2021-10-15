@@ -24,3 +24,19 @@
   max-width: 500px;
   overflow-y: auto;
 }
+
+.input-search-add-members {
+  width: 480px;
+  height: 35px;
+  padding-left: 10px;
+}
+
+.search-add-member-btn {
+  width: 200px;
+  background-color: #347a5a;
+  color: #fff;
+  border: 0;
+  height: 30px;
+  border-radius: 5px;
+  margin-top: 25px;
+}

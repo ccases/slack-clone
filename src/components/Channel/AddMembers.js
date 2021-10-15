@@ -3,7 +3,8 @@ import * as UserAPI from "../../UserAPI";
 import Headers from "../../Helpers/Headers";
 import { useSpring, animated } from "react-spring";
 import { MdClose } from "react-icons/md";
-import "./AddChannel.css";
+import { RiUserAddLine } from "react-icons/ri"
+import "./AddMembers.css";
 import SearchBar from "../SearchBar/SearchBar";
 
 function AddMembers(props) {
@@ -95,36 +96,26 @@ function AddMembers(props) {
   return (
     <>
       {showAddMembers ? (
-        <div className="background" onClick={closeModal} ref={modalRef}>
+        <div className="add-mem-background" onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
-            <div className="modal-wrapper">
-              <div className="modal-content">
-                <h2 className="name-label">Add People</h2>
-
-                <div className="addch-form-container">
-                  {/* <form onSubmit={onAddMember}>
-                    <input
-                      className="add-channel-input"
-                      type="text"
-                      onChange={(e) => {
-                        setNewMember(e.target.value);
-                      }}
-                     
-                      value={newMember}
-                    />
-                    <input
-                      type="submit"
-                      className="sidebar-button"
-                      value="Add Members"                      
-                    />
-                     
-                  </form> */}
+            <div className="add-mem-modal-wrapper">
+              <div className="add-mem-modal-content">
+                <div className="add-mem-header">
+                  <div className="add-mem-name-icon"> 
+                    <RiUserAddLine color={"#1164a3ff"}/>
+                  </div>
+                  <div className="add-mem-name-label">
+                    Add People
+                  </div>
+                </div>
+                <div className="add-mem-form-container">
                   <SearchBar
-                    placeholder="Search for members..."
+                    placeholder="Find members..."
                     userDb={userDb}
                     searchBarFor="AddMembers"
                     onAddMember={onAddMember}
                     setNewMember={setNewMember}
+                    className="add-mem-input"
                   />
                 </div>
                 <MdClose

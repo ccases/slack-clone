@@ -1,0 +1,71 @@
+.add-mem-background {
+    width: calc(100% - 260px);
+    height: calc(100% - 60px);
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+    transform: translate(Y -60px);
+  }
+  
+  .add-mem-modal-wrapper {
+    width: 550px;
+    height:280px;
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    color: #000;
+    position: relative;
+    border-radius: 10px;
+    transform: translateY(-60px);
+    z-index: 99;
+  }
+  
+  .add-mem-modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    line-height: 25px;
+    color: #141414;
+    width: 500px;
+    margin: auto;
+    padding-top: 40px;
+  }
+  
+  .close-modal-button {
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    z-index: 10;
+  }
+
+  .add-mem-header {
+      display: flex;
+      flex-direction: row;
+  }
+  
+  .add-mem-name-label {
+    font-size: 25px;
+    font-weight: bold;
+  }
+  .add-mem-name-icon {
+    margin-right: 15px;
+    padding: 7px 8px 0px 8px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #E7F4FA;
+  }
+  
+  .add-mem-form-container {
+    display: flex;
+    flex-direction: row;
+    width: 480px;
+    margin-top: 20px;
+  }
+  

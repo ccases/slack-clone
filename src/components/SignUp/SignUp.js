@@ -3,7 +3,6 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useSpring, animated } from "react-spring";
 import axios from "axios";
 import "./SignUp.css";
-import signupImage from "../../assets/signup.jpg";
 import { MdClose } from "react-icons/md";
 
 function SignUp(props) {
@@ -80,17 +79,17 @@ function SignUp(props) {
   return (
     <>
       {showModal ? (
-        <div className="background" onClick={closeModal} ref={modalRef}>
+        <div className="su-background" onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
-            <div className="modal-wrapper">
-              <img className="modal-img" src={signupImage} alt="Sign Up" />{" "}
-              <div className="modal-content">
-                <h1>First, enter your email</h1>
+            <div className="su-modal-wrapper">
+            
+              <div className="su-modal-content">
+                <div className="su-title">First, enter your email</div>
                 <p className="sign-up-p">
                   We suggest using the{" "}
                   <strong>email address you use at work.</strong>
                 </p>
-                <div className="form-container">
+                <div className="su-form-container">
                   <form onSubmit={submitHandler} autoComplete="off">
                     <label className="sign-up-label">
                       Email
@@ -124,9 +123,10 @@ function SignUp(props) {
                       />
                     </label>
                     <input
+                    className="sign-up-button"
                       type="submit"
-                      className="sign-up-button"
                       value="Sign up"
+                      placeholder="name@work-email.com"
                     />
                   </form>
                 </div>

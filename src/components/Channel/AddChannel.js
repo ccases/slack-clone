@@ -84,14 +84,14 @@ const AddChannel = (props) => {
     : null;
 
   return (
-    <div className = "main-modal">
+    <div className = "add-ch-main-modal">
       {showModal ? (
-        <div className="background" onClick={closeModal} ref={modalRef}>
+        <div className="add-ch-background" onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
-            <div className="modal-wrapper">
-              <div className="modal-content">
-                <h1 className="add-channel-header">Create a private channel</h1>
-                <span className="add-channel-content">
+            <div className="add-ch-modal-wrapper">
+              <div className="add-ch-modal-content">
+                <h1 className="add-ch-header">Create a private channel</h1>
+                <span className="add-ch-content">
                   Channels are where your team communicates. They’re best when
                   organized around a topic — #marketing, for example.
                 </span>
@@ -101,7 +101,7 @@ const AddChannel = (props) => {
                 <div className="addch-form-container">
                   <form onSubmit={onSubmit}>
                     <input
-                      className="add-channel-input"
+                      className="add-ch-input"
                       type="text"
                       onChange={(e) => {
                         setChannelName(e.target.value);
@@ -110,15 +110,16 @@ const AddChannel = (props) => {
                       onClick={updateChannels}
                     />
                     <input
-                      className="sidebar-button"
+                      className="add-ch-button"
                       type="submit"
-                      value="Add New Channel"
+                      value="Create"
+                      placeholder ="e.g. plan-budget"
                     />
                   </form>
 
-                  <button className="sidebar-button" onClick={updateChannels}>
+                  {/* <button className="add-ch-button" onClick={updateChannels}>
                     UpdateChannels
-                  </button>
+                  </button> */}
                 
                 </div>
                 <MdClose
