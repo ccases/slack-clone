@@ -61,7 +61,20 @@ function Dashboard() {
         setIsErrorLoading(true);
       });
   }, [headers]);
-
+  useEffect(() => {
+    const interval = setInterval(() => {
+      UserAPI.getAllUsersChannels(headers)
+        .then((res) => {
+          setChannelDb(res.data.data);
+          setChannelsAreLoaded(true);
+        })
+        .catch((e) => {
+          console.log("error: " + e);
+          setIsErrorLoading(true);
+        });
+      return () => clearInterval(interval);
+    }, 5000);
+  }, []);
   useEffect(() => {
     // get rid of duplicates
     let filteredUids = new Set();

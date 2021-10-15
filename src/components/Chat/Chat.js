@@ -48,6 +48,7 @@ function Chat(props) {
         setConvo={setConvo}
         chatType={chatType}
         recentDms={recentDms}
+        setRecentDms={setRecentDms}
         chat={chat}
         userDb={userDb}
       />

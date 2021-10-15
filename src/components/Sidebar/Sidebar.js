@@ -38,7 +38,7 @@ function Sidebar(props) {
         setIsInRecents(true);
       } else setIsInRecents(false);
     }
-  }, [chat]);
+  }, [chat, recentDms]);
   //modal add channel
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
@@ -53,7 +53,6 @@ function Sidebar(props) {
     ? channelDb.map((channel) => {
         let isActive = false;
         if (chat.name === channel.name) isActive = true;
-        console.log(`${channel.name} ${isActive}`);
         return (
           <div
             onClick={(e) => {

@@ -6,7 +6,16 @@ import "./ChatArea.css";
 import Avatar from "../Avatar/Avatar";
 
 function ChatArea(props) {
-  const { userId, userEmail, convo, setConvo, chatType, userDb, chat } = props;
+  const {
+    userId,
+    userEmail,
+    convo,
+    setConvo,
+    chatType,
+    userDb,
+    chat,
+    setRecentDms,
+  } = props;
   const [header] = useState(Headers);
   const msgEnd = useRef(null);
 
@@ -37,6 +46,13 @@ function ChatArea(props) {
 
     const interval = setInterval(() => {
       retrieveMsgs(userId, chatType, true);
+      UserAPI.getRecent(header)
+        .then((res) => {
+          setRecentDms(res.data.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     }, 3000);
 
     return () => clearInterval(interval);
