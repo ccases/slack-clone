@@ -28,8 +28,8 @@
 /* apologies for the confusing names, short on time kind of */
 .ChatArea {
   display: flex;
-  height: 100%;
   flex-flow: column;
+  height: 100%;
   margin-bottom: 10px;
   overflow-y: auto;
 }
