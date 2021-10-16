@@ -100,8 +100,5 @@
 
 .isActiveChat {
   background-color: #1164a3ff;
-}
-
-.isActiveChat:hover {
-  background-color: #1164a3ff;
+  pointer-events: none;
 }
