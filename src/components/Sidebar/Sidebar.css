@@ -5,13 +5,13 @@
   min-width: 260px;
   max-width: 260px;
   padding: 18px;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 40px);
   overflow-y: scroll;
   overflow-x: hidden;
 }
 .modal-container {
   z-index: 99;
-  transform: translate(Y -60px);
+  transform: translate(Y -40px);
 }
 
 .sidbar-header {
