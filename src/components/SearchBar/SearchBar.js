@@ -68,54 +68,57 @@ function SearchBar(props) {
       })
     : null;
   return (
-    <div className="container-search">
-      <div className="searchBar">
-        <form
-          onSubmit={searchBarFor === "AddMembers" ? onAddMember : submitHandler}
-          className="form-searchbar"
-        >
-          <input
-            type="text"
-            placeholder={placeholder}
-            onChange={(e) => {
-              setSearchEntry(e.target.value);
-              if (searchBarFor === "AddMembers") setNewMember(e.target.value);
-            }}
-            onFocus={() => {
-              getAllUsers();
-              setIsActive(true);
-            }}
-            className={
-              searchBarFor === "AddMembers"
-                ? "input-search-add-members"
-                : "input-search"
+    <div className="input-and-button-wrapper">
+      <div className="container-search">
+        <div className="searchBar">
+          <form
+            onSubmit={
+              searchBarFor === "AddMembers" ? onAddMember : submitHandler
             }
-            value={searchEntry}
-          />
-          <button
-            type="submit"
-            className={
-              searchBarFor === "AddMembers"
-                ? "search-add-member-btn"
-                : "header-btn"
-            }
+            className="form-searchbar"
           >
-            {searchBarFor === "AddMembers" ? "Add member" : <BiSearch />}
-          </button>
-        </form>
+            <input
+              type="text"
+              placeholder={placeholder}
+              onChange={(e) => {
+                setSearchEntry(e.target.value);
+                if (searchBarFor === "AddMembers") setNewMember(e.target.value);
+              }}
+              onFocus={() => {
+                getAllUsers();
+                setIsActive(true);
+              }}
+              className={
+                searchBarFor === "AddMembers"
+                  ? "input-search-add-members"
+                  : "input-search"
+              }
+              value={searchEntry}
+            />
+          </form>
+        </div>
+        <div>
+          {isActive ? (
+            <div
+              onClick={(e) => {
+                setIsActive(false);
+              }}
+              className="Suggestions"
+            >
+              {suggestions}
+            </div>
+          ) : null}
+        </div>
       </div>
-      <div>
-        {isActive ? (
-          <div
-            onClick={(e) => {
-              setIsActive(false);
-            }}
-            className="Suggestions"
-          >
-            {suggestions}
-          </div>
-        ) : null}
-      </div>
+
+      <button
+        type="submit"
+        className={
+          searchBarFor === "AddMembers" ? "search-add-member-btn" : "header-btn"
+        }
+      >
+        {searchBarFor === "AddMembers" ? "Add member" : <BiSearch />}
+      </button>
     </div>
   );
 }

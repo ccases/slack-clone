@@ -1,12 +1,12 @@
-.logout{
-    position: fixed;
-    right: 0;
-    padding-right: 30px;
-    cursor: pointer;
-    color: white;
+.logout {
+  position: absolute;
+  right: 0;
+  padding-right: 30px;
+  cursor: pointer;
+  color: white;
 }
 
-.logout:hover{
-    color: #BEBEBE;
-    text-decoration: underline;
+.logout:hover {
+  color: #bebebe;
+  text-decoration: underline;
 }
