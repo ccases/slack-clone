@@ -24,3 +24,7 @@
 .ch-details-tooltip::hover {
   visibility: visible;
 }
+
+.chat-title {
+  padding: 10px;
+}
