@@ -52,56 +52,58 @@ function LogIn() {
 
   return (
     <div className="container">
-      <SignUp
-        onclick={openModal}
-        showModal={showModal}
-        setShowModal={setShowModal}
-      />
+      <div className="login-header">
+        <SignUp
+          onclick={openModal}
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
 
-      <header className="header-container">
-        <img src={slackLogo} alt="Slack Logo" />
-        <h1>Sign in to Slack</h1>
-        <p>
-          We suggest using the <strong>email address you use at work.</strong>
-        </p>
-      </header>
-      <div className="dummy-btn-container">
-        <button>
-          <FcGoogle /> Sign in with Google{" "}
-        </button>
-        <button>
-          <FaApple /> Sign in with Apple{" "}
-        </button>
-      </div>
+        <header className="header-container">
+          <img src={slackLogo} alt="Slack Logo" />
+          <h1>Sign in to Slack</h1>
+          <p>
+            We suggest using the <strong>email address you use at work.</strong>
+          </p>
+        </header>
+        <div className="dummy-btn-container">
+          <button className="google-btn">
+            <FcGoogle /> Sign in with Google{" "}
+          </button>
+          <button className="apple-btn">
+            <FaApple /> Sign in with Apple{" "}
+          </button>
+        </div>
 
-      <h4>
-        <span>OR</span>
-      </h4>
-      <div className="login-container">
-        <form onSubmit={submitHandler}>
-          <input
-            type="email"
-            className="email-input"
-            placeholder="name@work-email.com"
-            onChange={handleEmailChange}
-            required
-          />
-          <input
-            type="password"
-            className="password-input"
-            placeholder="Password"
-            onChange={handlePasswordChange}
-            required
-          />
-          <input
-            type="submit"
-            className="submit-btn"
-            value="Sign in with Email"
-          />
-        </form>
-        <button className="signup-btn" onClick={openModal}>
-          Create an account
-        </button>
+        <h4>
+          <span>OR</span>
+        </h4>
+        <div className="login-container">
+          <form onSubmit={submitHandler}>
+            <input
+              type="email"
+              className="email-input"
+              placeholder="name@work-email.com"
+              onChange={handleEmailChange}
+              required
+            />
+            <input
+              type="password"
+              className="password-input"
+              placeholder="Password"
+              onChange={handlePasswordChange}
+              required
+            />
+            <input
+              type="submit"
+              className="submit-btn"
+              value="Sign in with Email"
+            />
+          </form>
+          <button className="signup-btn" onClick={openModal}>
+            Create an account
+          </button>
+        </div>
       </div>
       <footer>
         <span>Privacy & Terms </span>

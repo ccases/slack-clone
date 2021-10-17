@@ -28,10 +28,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 }
 
 .container img {
   transform: scale(0.3);
+}
+
+.login-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .header-container {
@@ -61,15 +69,13 @@
 
 .dummy-btn-container button {
   background-color: transparent;
-  color: black;
   cursor: pointer;
   padding: 10px 100px;
   margin: 10px 0 10px 0px;
   font-size: 1rem;
 }
 
-
-.container button:nth-child(1) {
+.google-btn {
   border: 2px solid var(--darkblue);
   border-radius: 5px;
   font-weight: 900;
@@ -77,8 +83,17 @@
   color: var(--darkblue);
 }
 
+.signup-btn {
+  border: 0;
+  outline: 0;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: darkgray;
+}
 
-.container button:nth-child(2) {
+.apple-btn {
   border: 2px solid black;
   border-radius: 5px;
   font-weight: 900;
@@ -86,9 +101,8 @@
   color: black;
 }
 
-
 .container h4 {
-  width: 50%;
+  width: 450px;
   text-align: center;
   border-bottom: 1px solid gray;
   line-height: 0.1em;
@@ -101,13 +115,18 @@
   padding: 0 10px;
 }
 
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .container form {
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  align-items: stretch;
   width: 400px;
   height: 200px;
 }
@@ -117,7 +136,8 @@
   height: 40px;
   font-size: 1.2rem;
   border-radius: 5px;
-  outline: 1px solid black;
+  padding-left: 5px;
+  border: 1px solid black;
   background: transparent;
 }
 
@@ -126,7 +146,8 @@
   height: 40px;
   font-size: 1.2rem;
   border-radius: 5px;
-  outline: 1px solid black;
+  padding-left: 5px;
+  border: 1px solid black;
   background: transparent;
 }
 
@@ -142,18 +163,8 @@
   cursor: pointer;
 }
 
-.signup-btn {
-  border: 0;
-  outline: 0;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-
 .container footer {
-
   display: flex;
-  align-items: flex-end;
   justify-content: space-evenly;
+  width: 500px;
 }
