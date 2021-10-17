@@ -18,7 +18,3 @@
 .result:hover {
   background-color: lightblue;
 }
-
-.result:last-of-type {
-  visibility: hidden;
-}
