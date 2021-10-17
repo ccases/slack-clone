@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import SearchResult from "./SearchResult";
 import Headers from "../../Helpers/Headers";
 import { useEffect } from "react/cjs/react.development";
@@ -20,6 +20,21 @@ function SearchBar(props) {
   const [header] = useState(Headers);
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [isActive, setIsActive] = useState(false);
+  const handleClick = useCallback(
+    (e) => {
+      let cl = e.target.classList;
+      if (cl.contains("input-search") || cl.contains("result")) {
+      } else {
+        setIsActive(false);
+      }
+    },
+    [setIsActive, isActive]
+  );
+
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, [handleClick]);
 
   useEffect(() => {
     if (header["access-token"] === undefined) return;
