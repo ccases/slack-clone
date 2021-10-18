@@ -105,6 +105,7 @@ function LogIn() {
           </button>
         </div>
       </div>
+      <div className="footer-container">
       <footer>
         <span>Privacy & Terms </span>
         <span> Contact Us </span>
@@ -114,6 +115,11 @@ function LogIn() {
           <FiGlobe /> Change region{" "}
         </span>
       </footer>
+      <div className="copyright">
+        Disclaimer: This app is created for educational purposes only.<br/>
+        Cases | Cacas | Almeda &#169; 2021</div>
+      </div>
+       
     </div>
   );
 }
