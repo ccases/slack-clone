@@ -16,6 +16,8 @@ function LogIn() {
     setShowModal((prev) => !prev);
   };
 
+  const [error, setError] = useState("");
+
   const handleEmailChange = (e) => {
     setUsername(e.target.value);
   };
@@ -46,7 +48,8 @@ function LogIn() {
       })
       .then((res) => handleHeader(res))
       .catch((e) => {
-        console.log("error: " + e);
+        console.log(e.response.data.errors[0]);
+        setError(e.response.data.errors[0]);
       });
   };
 
@@ -94,6 +97,8 @@ function LogIn() {
               onChange={handlePasswordChange}
               required
             />
+            <div className="login-error">{error}</div>
+
             <input
               type="submit"
               className="submit-btn"
