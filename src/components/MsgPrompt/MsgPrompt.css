@@ -6,6 +6,7 @@
   padding: 10px 20px;
   width: max-content;
   z-index: 200;
+  border-radius: 10px;
 }
 
 .notification-txt {
