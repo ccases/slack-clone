@@ -11,10 +11,13 @@
   display: flex;
   justify-content: flex-start;
   padding: 5px 20px;
-  border: 1px solid black;
   align-items: center;
+  cursor: pointer;
+  width: 500px;
+  transition: 50ms all ease-in;
 }
 
 .result:hover {
   background-color: lightblue;
+  color: black;
 }
