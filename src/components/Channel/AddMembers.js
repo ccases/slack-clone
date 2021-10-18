@@ -14,30 +14,29 @@ function AddMembers(props) {
   const [header, setHeader] = useState(Headers);
   const [allUsers, setAllUsers] = useState([]);
   const [newMember, setNewMember] = useState("");
-  const [channelId, setChannelId] = useState("");
   const [errors, setErrors] = useState(false);
   const [responseMsg, setResponseMsg] = useState("");
 
   const onAddMember = (e) => {
     e.preventDefault();
     // console.log(chat.id)
-    setChannelId(chat.id);
-    // console.log(channelId)
     console.log(newMember);
     let found = userDb.find((user) => user.uid === newMember);
     if (!found) {
-      alert("user not found");
+      setErrors(true);
+      setResponseMsg("");
+      setResponseMsg("No users with that ID!");
     } else {
       setUserArray(userArray.concat(found.id));
-      console.log(found.id);
-
-      UserAPI.addChannelMember(header, channelId, found.id)
+      UserAPI.addChannelMember(header, chat.id, found.id)
         .then((res) => {
           if (res.data.errors) {
             setErrors(true);
-            setResponseMsg(res.data.errors[0]);
+            setResponseMsg("");
+            setResponseMsg(res.data.errors);
           } else {
             setErrors(false);
+            setResponseMsg("");
             setResponseMsg(`Added ${found.uid} to ${chat.name}!`);
           }
         })

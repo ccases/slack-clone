@@ -16,13 +16,13 @@ const AddChannel = (props) => {
   const [responseMsg, setResponseMsg] = useState("");
 
   useEffect(() => {
-    const showMsgTimer = setInterval(() => {
+    const showMsgTimer = setTimeout(() => {
       setResponseMsg("");
     }, 5000);
     return () => {
       clearInterval(showMsgTimer);
     };
-  }, [responseMsg]);
+  }, [responseMsg, errors]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -35,9 +35,11 @@ const AddChannel = (props) => {
       .then((res) => {
         if (res.data.errors !== undefined) {
           setErrors(true);
+          setResponseMsg("");
           setResponseMsg(res.data.errors[0]);
         } else {
           setErrors(false);
+          setResponseMsg("");
           setResponseMsg(`New channel ${res.data.data.name} has been created!`);
         }
         // alert(res.data.data.name);
