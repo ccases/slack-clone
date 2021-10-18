@@ -89,6 +89,7 @@ function Sidebar(props) {
                 <RiPencilFill
                   style={{
                     padding: "3px",
+                    marginRight: "20px",
                     backgroundColor: "white",
                     fontSize: "1.5rem",
                     color: "#49274b",
