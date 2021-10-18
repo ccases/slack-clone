@@ -7,7 +7,23 @@
 }
 
 .main-container {
-  display: flex;
-  flex-flow: row;
-  position: relative;
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: var(--header-height) 1fr;
+  grid-template-areas:
+    "header header"
+    "sidebar chat";
+}
+
+.header-container {
+  grid-area: header;
+  z-index: 1;
+}
+
+.sidebar-dashboard {
+  grid-area: sidebar;
+}
+
+.chat-dashboard {
+  grid-area: chat;
 }
