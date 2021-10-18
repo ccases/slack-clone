@@ -8,7 +8,7 @@
   background-color: #4a154b;
   color: white;
   border-top: 1px solid #49274b;
-  max-width: calc(var(--sidebar-width + 20px)); */
+  max-width: calc(var(--sidebar-width + 20px));
   width: 280px;
   padding: 0;
   height: calc(100vh - 40px);
