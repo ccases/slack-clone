@@ -120,10 +120,11 @@ function AddMembers(props) {
                 />
               </div>
             </div>
-            {responseMsg && <MsgPrompt error={errors} message={responseMsg} />}
           </animated.div>{" "}
         </div>
       ) : null}
+
+      {responseMsg && <MsgPrompt error={errors} message={responseMsg} />}
     </>
   );
 }

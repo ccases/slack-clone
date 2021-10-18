@@ -3,18 +3,26 @@ import * as UserAPI from "../../UserAPI";
 import Headers from "../../Helpers/Headers";
 import { useSpring, animated } from "react-spring";
 import { MdClose } from "react-icons/md";
+import MsgPrompt from "../MsgPrompt/MsgPrompt";
 import "./AddChannel.css";
 
 const AddChannel = (props) => {
   const { userId, setUserChannels, ID, channelDb } = props;
-  const [channels, setChannels] = useState([]);
   const [channelName, setChannelName] = useState("");
-  const { userName, setUserName } = props;
   const [userArray, setUserArray] = useState([]);
   const [header, setHeader] = useState(Headers);
-  const [allUsers, setAllUsers] = useState([]);
-  const [newMember, setNewMember] = useState("");
-  const [channelId, setChannelId] = useState("1224");
+  // ERROR CHECKING
+  const [errors, setErrors] = useState(false);
+  const [responseMsg, setResponseMsg] = useState("");
+
+  useEffect(() => {
+    const showMsgTimer = setInterval(() => {
+      setResponseMsg("");
+    }, 5000);
+    return () => {
+      clearInterval(showMsgTimer);
+    };
+  }, [responseMsg]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -25,19 +33,17 @@ const AddChannel = (props) => {
     })
 
       .then((res) => {
-      
-      if (res.data.errors !== undefined) {
-        console.log(res.data.errors)
-        alert(res.data.errors)
-      } else {
-        alert(`new channel ${res.data.data.name} has been created`)
-      }
+        if (res.data.errors !== undefined) {
+          setErrors(true);
+          setResponseMsg(res.data.errors[0]);
+        } else {
+          setErrors(false);
+          setResponseMsg(`New channel ${res.data.data.name} has been created!`);
+        }
         // alert(res.data.data.name);
         // console.log(res.data);
       })
-      .catch((e) => {
-         
-      });
+      .catch((e) => {});
   };
 
   const { showModal, setShowModal } = props;
@@ -84,7 +90,8 @@ const AddChannel = (props) => {
     : null;
 
   return (
-    <div className = "add-ch-main-modal">
+    <div className="add-ch-main-modal">
+      {responseMsg && <MsgPrompt error={errors} message={responseMsg} />}
       {showModal ? (
         <div className="add-ch-background" onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
@@ -113,14 +120,13 @@ const AddChannel = (props) => {
                       className="add-ch-button"
                       type="submit"
                       value="Create"
-                      placeholder ="e.g. plan-budget"
+                      placeholder="e.g. plan-budget"
                     />
                   </form>
 
                   {/* <button className="add-ch-button" onClick={updateChannels}>
                     UpdateChannels
                   </button> */}
-                
                 </div>
                 <MdClose
                   className="close-modal-button"

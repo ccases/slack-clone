@@ -25,11 +25,11 @@
   }
 }
 .error-class {
-  background-color: rgb(153, 123, 5);
+  background-color: #ff8800;
   color: white;
 }
 
 .success-class {
-  background-color: rgb(180, 240, 62);
-  color: black;
+  background-color: #376e37;
+  color: white;
 }
