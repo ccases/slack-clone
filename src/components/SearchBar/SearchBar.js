@@ -83,7 +83,13 @@ function SearchBar(props) {
       })
     : null;
   return (
-    <div className="input-and-button-wrapper">
+    <div
+      className={
+        searchBarFor === "AddMembers"
+          ? "add-member-form-container"
+          : "input-and-button-wrapper"
+      }
+    >
       <div className="container-search">
         <div className="searchBar">
           <form
@@ -119,7 +125,11 @@ function SearchBar(props) {
               onClick={(e) => {
                 setIsActive(false);
               }}
-              className="Suggestions"
+              className={
+                searchBarFor === "AddMembers"
+                  ? "add-mem-suggestion"
+                  : "Suggestions"
+              }
             >
               {suggestions}
             </div>
