@@ -115,17 +115,18 @@ function Dashboard() {
   return (
     <div className="dashboard">
       {isErrorLoading ? displayErrorMsg() : null}
-      <div className="header-container">
-        {loadingComplete && (
-          <Header
-            userDb={userDb}
-            setUserDb={setUserDb}
-            channelDb={channelDb}
-            setChat={setChat}
-          />
-        )}
-      </div>
+
       <div className="main-container">
+        <div className="header-container">
+          {loadingComplete && (
+            <Header
+              userDb={userDb}
+              setUserDb={setUserDb}
+              channelDb={channelDb}
+              setChat={setChat}
+            />
+          )}
+        </div>
         <div className="sidebar-dashboard">
           {loadingComplete && (
             <Sidebar

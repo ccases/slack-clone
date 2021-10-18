@@ -1,14 +1,12 @@
-
 .add-ch-background {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.8);
   position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-items: center;
   z-index: 99;
-  transform: translate(Y -60px);
+  transform: translateY(calc(-1 * var(--header-height)));
 }
 
 .add-ch-modal-wrapper {
@@ -19,8 +17,8 @@
   color: #000;
   position: relative;
   border-radius: 10px;
-  transform: translateY(-60px);
   z-index: 99;
+  transform: translateY(calc(-1 * var(--header-height)));
 }
 
 .add-ch-modal-content {
