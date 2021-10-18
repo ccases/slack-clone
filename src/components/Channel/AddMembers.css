@@ -71,3 +71,14 @@
   width: 480px;
   margin-top: 20px;
 }
+
+.add-mem-form-container:first-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-mem-suggestion {
+  max-height: 80px;
+  border-radius: 5px;
+  overflow: auto;
+}
