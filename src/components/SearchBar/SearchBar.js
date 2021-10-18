@@ -96,12 +96,13 @@ function SearchBar(props) {
               type="text"
               placeholder={placeholder}
               onChange={(e) => {
+                e.target.value !== "" ? setIsActive(true) : setIsActive(false);
                 setSearchEntry(e.target.value);
                 if (searchBarFor === "AddMembers") setNewMember(e.target.value);
               }}
-              onFocus={() => {
+              onFocus={(e) => {
                 getAllUsers();
-                setIsActive(true);
+                e.target.value !== "" ? setIsActive(true) : setIsActive(false);
               }}
               className={
                 searchBarFor === "AddMembers"
@@ -131,6 +132,7 @@ function SearchBar(props) {
         className={
           searchBarFor === "AddMembers" ? "search-add-member-btn" : "header-btn"
         }
+        onClick={submitHandler}
       >
         {searchBarFor === "AddMembers" ? "Add member" : <BiSearch />}
       </button>
