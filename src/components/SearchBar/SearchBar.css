@@ -4,15 +4,38 @@
   box-sizing: border-box;
 }
 
+.input-and-button-wrapper {
+  display: flex;
+}
+
 .container-search {
   display: flex;
   flex-direction: column;
 }
 
 .input-search {
-  opacity: 0.5;
   outline: none;
   border: none;
+  border-radius: 5px;
+  width: 300px;
+  margin: 0 10px 0 20px;
+  padding: 3px;
+  background-color: rgba(0, 0, 0, 0.253);
+}
+
+.header-btn {
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  padding: 4px;
+  display: flex;
+  background-color: white;
+}
+
+.form-searchbar {
+  display: flex;
+  align-items: center;
+  align-content: center;
 }
 
 .Suggestions {
@@ -20,9 +43,25 @@
   font-size: 1rem;
   height: max-content;
   max-height: 500px;
-  width: 500px;
-  max-width: 500px;
   overflow-y: auto;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.input-search-add-members {
+  width: 480px;
+  height: 35px;
+  padding-left: 10px;
+}
+
+.search-add-member-btn {
+  width: 200px;
+  background-color: #347a5a;
+  color: #fff;
+  border: 0;
+  height: 30px;
+  border-radius: 5px;
+  margin-top: 25px;
 }
 
 .input-search-add-members {
