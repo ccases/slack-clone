@@ -3,24 +3,31 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  cursor: pointer;
 }
 
 .header-child {
   padding-right: 30px;
 }
+
+.header-child h1 {
+  cursor: pointer;
+}
+
 .chat-header-parent {
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .add-people-button {
-  width: 200px;
   background-color: #347a5a;
   color: #fff;
   border: 0;
-  height: 30px;
   border-radius: 5px;
-  margin-top: 5px;
+  cursor: pointer;
+  padding: 10px 80px;
+}
+
+.add-people-button:hover {
+  background-color: #459772;
 }
 
 .chat-title {
