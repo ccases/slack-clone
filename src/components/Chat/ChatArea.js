@@ -18,6 +18,7 @@ function ChatArea(props) {
   } = props;
   const [header] = useState(Headers);
   const msgEnd = useRef(null);
+  const [prevLen, setPrevLen] = useState("");
 
   useEffect(() => {
     if (header["access-token"] === undefined || userId === undefined) {
@@ -32,11 +33,22 @@ function ChatArea(props) {
     }
     setConvo([]); // reset all messages before going into the next one
     retrieveMsgs(userId, chatType, false);
+
+    let clen = convo.length;
+    if (clen > 1) {
+      setPrevLen(clen);
+    }
   }, []);
 
   useEffect(() => {
-    scrollToBottom();
-  }, [chat]);
+    let clen = convo.length;
+    if (clen > 1) {
+      if (prevLen !== clen) {
+        scrollToBottom();
+        setPrevLen(clen);
+      }
+    }
+  }, [chat, convo]);
 
   useEffect(() => {
     // enables "real time" chat!!!! w/ 2 sec delay
@@ -59,6 +71,7 @@ function ChatArea(props) {
   }, [userId, chatType]);
 
   const scrollToBottom = () => {
+    console.log("SCROLL");
     msgEnd.current.scrollIntoView({ behavior: "smooth" });
   };
   // checker if same day, or wihtin a certain timeframe

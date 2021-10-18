@@ -1,10 +1,16 @@
+.sidebar-scrollhider {
+  overflow: hidden;
+  min-width: var(--sidebar-width);
+  max-width: var(--sidebar-width);
+}
+
 .sidebar-container {
   background-color: #4a154b;
   color: white;
   border-top: 1px solid #49274b;
-  min-width: 260px;
-  max-width: 260px;
-  padding: 18px;
+  max-width: calc(var(--sidebar-width + 20px)); */
+  width: 280px;
+  padding: 0;
   height: calc(100vh - 40px);
   overflow-y: scroll;
   overflow-x: hidden;
@@ -22,6 +28,9 @@
 
 .sidebar-info {
   flex: 1;
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-top: 18px;
   padding-bottom: 10px;
   margin-bottom: 10px;
   border-bottom: 1px solid #49274b;
@@ -46,7 +55,6 @@
   font-size: 15px;
   font-weight: 400px;
   align-items: center;
-  padding-left: 10px;
 }
 .channel-name {
   font-size: 16px;
@@ -91,4 +99,5 @@
 
 .isActiveChat {
   background-color: #1164a3ff;
+  pointer-events: none;
 }

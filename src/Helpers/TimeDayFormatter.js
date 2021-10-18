@@ -52,9 +52,9 @@ export const formatDay = (time) => {
     return "Today";
   } else if (tDate - 1 === dRx && tMonth === yMonth && tYear === yearRx)
     return "Yesterday";
-  if (dRx % 10 === 1) dispString += "st";
-  else if (dRx % 10 === 2) dispString += "nd";
-  else if (dRx % 10 === 3) dispString += "rd";
+  if (dRx % 10 === 1 && Math.floor(dRx / 10) !== 1) dispString += "st";
+  else if (dRx % 10 === 2 && Math.floor(dRx / 10) !== 1) dispString += "nd";
+  else if (dRx % 10 === 3 && Math.floor(dRx / 10) !== 1) dispString += "rd";
   else dispString += "th";
   return dispString;
 };

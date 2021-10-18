@@ -80,99 +80,100 @@ function Sidebar(props) {
         showModal={showModal}
         setShowModal={setShowModal}
       />
-
-      <div className="sidebar-container">
-        <div className="sidebar-header">
-          <div className="sidebar-info">
-            <div className="sidebar-h2">
-              Slack Clone{" "}
-              <RiPencilFill
-                style={{
-                  padding: "3px",
-                  backgroundColor: "white",
-                  fontSize: "1.5rem",
-                  color: "#49274b",
-                  borderRadius: "999px",
-                }}
-              />
-            </div>
-            <div className="user-name">
-              <h3 className="sidebar-h3">
-                <RiCheckboxBlankCircleFill
+      <div className="sidebar-scrollhider">
+        <div className="sidebar-container">
+          <div className="sidebar-header">
+            <div className="sidebar-info">
+              <div className="sidebar-h2">
+                Slack Clone{" "}
+                <RiPencilFill
                   style={{
-                    marginTop: "1px",
-                    marginRight: "9px",
-                    fontSize: "12px",
-                    color: "green",
+                    padding: "3px",
+                    backgroundColor: "white",
+                    fontSize: "1.5rem",
+                    color: "#49274b",
+                    borderRadius: "999px",
                   }}
-                />{" "}
-                {Headers.uid}
-                {/* {displayName} */}
-              </h3>
-            </div>
-          </div>
-
-          <div className="sidebar-options">
-            <div className="not-available" onClick={notAvailable}>
-              <SidebarOptions Icon={RiMenu2Line} title="All unreads" />
-              <SidebarOptions Icon={RiChat1Line} title="Threads" />
-              <SidebarOptions Icon={RiQuestionAnswerLine} title="All DMs" />
-              <SidebarOptions Icon={RiAtLine} title="Mentions & reactions" />
-              <SidebarOptions Icon={RiBookmarkLine} title="Saved Items" />
-              <SidebarOptions Icon={RiMore2Fill} title="More" />
-            </div>
-
-            <div onClick={openModal}>
-              <SidebarOptions
-                onClick={openModal}
-                Icon={RiAddFill}
-                title="Add Channel"
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          className="expander-div sidebar-option-container"
-          onClick={() => setChannelsExpanded(!channelsExpanded)}
-        >
-          {channelsExpanded ? <RiArrowDownSFill /> : <RiArrowRightSFill />}{" "}
-          &nbsp;Channels
-        </div>
-        <div
-          className={
-            channelsExpanded ? "direct-messages expanded" : "direct-messages"
-          }
-        >
-          {displayChannels}
-        </div>
-
-        <div
-          className="expander-div sidebar-option-container"
-          onClick={() => setDmsExpanded(!dmsExpanded)}
-        >
-          {dmsExpanded ? <RiArrowDownSFill /> : <RiArrowRightSFill />}{" "}
-          &nbsp;Direct Messages
-        </div>
-        <div
-          className={
-            dmsExpanded ? "direct-messages expanded" : "direct-messages"
-          }
-        >
-          {recentDms.map((user) => {
-            return (
-              <div className="direct-message-user">
-                <DirectMessages
-                  key={user.id}
-                  user={user}
-                  setChat={setChat}
-                  chat={chat}
                 />
               </div>
-            );
-          })}
-          {!isInRecents && (
-            <DirectMessages user={chat} setChat={setChat} chat={chat} />
-          )}
+              <div className="user-name">
+                <h3 className="sidebar-h3">
+                  <RiCheckboxBlankCircleFill
+                    style={{
+                      marginTop: "1px",
+                      marginRight: "9px",
+                      fontSize: "12px",
+                      color: "green",
+                    }}
+                  />{" "}
+                  {Headers.uid}
+                  {/* {displayName} */}
+                </h3>
+              </div>
+            </div>
+
+            <div className="sidebar-options">
+              <div className="not-available" onClick={notAvailable}>
+                <SidebarOptions Icon={RiMenu2Line} title="All unreads" />
+                <SidebarOptions Icon={RiChat1Line} title="Threads" />
+                <SidebarOptions Icon={RiQuestionAnswerLine} title="All DMs" />
+                <SidebarOptions Icon={RiAtLine} title="Mentions & reactions" />
+                <SidebarOptions Icon={RiBookmarkLine} title="Saved Items" />
+                <SidebarOptions Icon={RiMore2Fill} title="More" />
+              </div>
+
+              <div onClick={openModal}>
+                <SidebarOptions
+                  onClick={openModal}
+                  Icon={RiAddFill}
+                  title="Add Channel"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="expander-div sidebar-option-container"
+            onClick={() => setChannelsExpanded(!channelsExpanded)}
+          >
+            {channelsExpanded ? <RiArrowDownSFill /> : <RiArrowRightSFill />}{" "}
+            &nbsp;Channels
+          </div>
+          <div
+            className={
+              channelsExpanded ? "direct-messages expanded" : "direct-messages"
+            }
+          >
+            {displayChannels}
+          </div>
+
+          <div
+            className="expander-div sidebar-option-container"
+            onClick={() => setDmsExpanded(!dmsExpanded)}
+          >
+            {dmsExpanded ? <RiArrowDownSFill /> : <RiArrowRightSFill />}{" "}
+            &nbsp;Direct Messages
+          </div>
+          <div
+            className={
+              dmsExpanded ? "direct-messages expanded" : "direct-messages"
+            }
+          >
+            {recentDms.map((user) => {
+              return (
+                <div className="direct-message-user">
+                  <DirectMessages
+                    key={user.id}
+                    user={user}
+                    setChat={setChat}
+                    chat={chat}
+                  />
+                </div>
+              );
+            })}
+            {!isInRecents && (
+              <DirectMessages user={chat} setChat={setChat} chat={chat} />
+            )}
+          </div>
         </div>
       </div>
     </div>
