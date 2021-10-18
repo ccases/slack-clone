@@ -60,6 +60,7 @@ function Chat(props) {
         chatType={chatType}
       />
     </div>
+    
   );
 }
 

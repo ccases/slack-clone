@@ -174,11 +174,10 @@ function Sidebar(props) {
             {!isInRecents && (
               <DirectMessages user={chat} setChat={setChat} chat={chat} />
             )}
-
-            <div className="disclaimer">
+          </div>
+          <div className="disclaimer">
              Disclaimer: This app is created for educational purposes only.<br/>
              Cases | Cacas | Almeda &#169; 2021
-          </div>
           </div>
         </div>
       </div>
