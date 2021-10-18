@@ -101,3 +101,11 @@
   background-color: #1164a3ff;
   pointer-events: none;
 }
+
+.disclaimer{
+  margin-right: 20px;
+  font-size: 12px;
+  text-align: center;
+  padding: 15px 0;
+  color: #696969;
+}
