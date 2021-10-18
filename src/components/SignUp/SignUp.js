@@ -6,40 +6,44 @@ import "./SignUp.css";
 import { MdClose } from "react-icons/md";
 
 function SignUp(props) {
-  const { onclick, showModal, setShowModal } = props;
+  const { showModal, setShowModal } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  const isMatching = (pw, confirmPassword) => {
-    if (pw === confirmPassword) {
-      return true;
-    }
-    return false;
-  };
+  const [error, setError] = useState("");
 
   const submitHandler = (e) => {
     // put fetch here
     const url = "http://206.189.91.54//api/v1/auth/";
     e.preventDefault();
+    axios
+      .post(url, {
+        email: email,
+        password: password,
+        password_confirmation: confirmPassword,
+      })
+      .then((res) => {
+        localStorage.setItem("access-token", res.headers["access-token"]);
+        localStorage.setItem("client", res.headers["client"]);
+        localStorage.setItem("uid", res.headers["uid"]);
+        localStorage.setItem("expiry", res.headers["expiry"]);
+        window.location = "/Dashboard";
+      })
+      .catch((e) => {
+        console.log(e.response.data.errors.full_messages[0]);
+        setError(e.response.data.errors.full_messages[0]);
+      });
+  };
 
-    if (isMatching) {
-      axios
-        .post(url, {
-          email: email,
-          password: password,
-          password_confirmation: confirmPassword,
-        })
-        .then((res) => {
-          localStorage.setItem("access-token", res.headers["access-token"]);
-          localStorage.setItem("client", res.headers["client"]);
-          localStorage.setItem("uid", res.headers["uid"]);
-          localStorage.setItem("expiry", res.headers["expiry"]);
-          window.location = "/Dashboard";
-        })
-        .catch((e) => {
-          console.log("error: " + e);
-        });
+  const setBorder = (pw, confirmPw) => {
+    if (pw === confirmPw) {
+      return {
+        border: "1.5px solid green",
+      };
+    } else {
+      return {
+        border: "1.5px solid red",
+      };
     }
   };
 
@@ -82,7 +86,6 @@ function SignUp(props) {
         <div className="su-background" onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
             <div className="su-modal-wrapper">
-            
               <div className="su-modal-content">
                 <div className="su-title">First, enter your email</div>
                 <p className="sign-up-p">
@@ -90,7 +93,11 @@ function SignUp(props) {
                   <strong>email address you use at work.</strong>
                 </p>
                 <div className="su-form-container">
-                  <form onSubmit={submitHandler} autoComplete="off">
+                  <form
+                    onSubmit={submitHandler}
+                    autoComplete="off"
+                    className="signup-form"
+                  >
                     <label className="sign-up-label">
                       Email
                       <input
@@ -105,7 +112,12 @@ function SignUp(props) {
                     <label className="sign-up-label">
                       Password
                       <input
-                        className="sign-up-input"
+                        className="sign-up-pw"
+                        style={
+                          password && confirmPassword !== ""
+                            ? setBorder(password, confirmPassword)
+                            : null
+                        }
                         type="password"
                         onChange={(e) => {
                           setPassword(e.target.value);
@@ -116,14 +128,22 @@ function SignUp(props) {
                     <label className="sign-up-label">
                       Confirm Password
                       <input
-                        className="sign-up-input"
+                        className="sign-up-pw"
+                        style={
+                          password && confirmPassword !== ""
+                            ? setBorder(password, confirmPassword)
+                            : null
+                        }
                         type="password"
-                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        onChange={(e) => {
+                          setConfirmPassword(e.target.value);
+                        }}
                         required
                       />
                     </label>
+                    <div className="error-container">{error}</div>
                     <input
-                    className="sign-up-button"
+                      className="sign-up-button"
                       type="submit"
                       value="Sign up"
                       placeholder="name@work-email.com"
