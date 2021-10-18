@@ -132,7 +132,7 @@ function SearchBar(props) {
         className={
           searchBarFor === "AddMembers" ? "search-add-member-btn" : "header-btn"
         }
-        onClick={submitHandler}
+        onClick={searchBarFor === "AddMembers" ? onAddMember : submitHandler}
       >
         {searchBarFor === "AddMembers" ? "Add member" : <BiSearch />}
       </button>
