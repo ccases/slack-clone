@@ -48,8 +48,9 @@ function LogIn() {
       })
       .then((res) => handleHeader(res))
       .catch((e) => {
-        console.log(e.response.data.errors[0]);
-        setError(e.response.data.errors[0]);
+        // console.log(e.response.data.errors[0]);
+        // setError(e.response.data.errors[0]);
+        console.log(e);
       });
   };
 
@@ -111,20 +112,21 @@ function LogIn() {
         </div>
       </div>
       <div className="footer-container">
-      <footer>
-        <span>Privacy & Terms </span>
-        <span> Contact Us </span>
+        <footer>
+          <span>Privacy & Terms </span>
+          <span> Contact Us </span>
 
-        <span>
-          {" "}
-          <FiGlobe /> Change region{" "}
-        </span>
-      </footer>
-      <div className="copyright">
-        Disclaimer: This app is created for educational purposes only.<br/>
-        Cases | Cacas | Almeda &#169; 2021</div>
+          <span>
+            {" "}
+            <FiGlobe /> Change region{" "}
+          </span>
+        </footer>
+        <div className="copyright">
+          Disclaimer: This app is created for educational purposes only.
+          <br />
+          Cases | Cacas | Almeda &#169; 2021
+        </div>
       </div>
-       
     </div>
   );
 }
