@@ -1,5 +1,3 @@
-import React from "react";
-
 const AuthAPI = () => {
   const isAuthenticated = () => {
     return localStorage.getItem("access-token") ? true : false;

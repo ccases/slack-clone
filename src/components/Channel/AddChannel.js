@@ -7,10 +7,10 @@ import MsgPrompt from "../MsgPrompt/MsgPrompt";
 import "./AddChannel.css";
 
 const AddChannel = (props) => {
-  const { userId, setUserChannels, ID, channelDb } = props;
+  const { channelDb } = props;
   const [channelName, setChannelName] = useState("");
-  const [userArray, setUserArray] = useState([]);
-  const [header, setHeader] = useState(Headers);
+  const [userArray] = useState([]);
+  const [header] = useState(Headers);
   // ERROR CHECKING
   const [errors, setErrors] = useState(false);
   const [responseMsg, setResponseMsg] = useState("");

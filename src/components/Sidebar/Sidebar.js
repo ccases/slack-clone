@@ -19,12 +19,11 @@ import {
 import SidebarOptions from "./SidebarOptions";
 import DirectMessages from "../DirectMessages/DirectMessages";
 import { useEffect } from "react/cjs/react.development";
-import { IoFastFood } from "react-icons/io5";
 
 function Sidebar(props) {
-  const { userDb, recentDms, channelDb, setChat, chat } = props;
-  const [userChannels, setUserChannels] = useState([]);
-  const [userName, setUserName] = useState([]);
+  const { recentDms, channelDb, setChat, chat } = props;
+  const [setUserChannels] = useState([]);
+  const [setUserName] = useState([]);
   const [dmsExpanded, setDmsExpanded] = useState(true);
   const [channelsExpanded, setChannelsExpanded] = useState(true);
 

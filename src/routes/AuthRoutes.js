@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import AuthAPI from "../Services/AuthAPI";
-import Dashboard from '../components/Dashboard/Dashboard'
 
 const AuthRoutes = ({ component: Component, ...rest }) => {
   return (
@@ -13,7 +12,8 @@ const AuthRoutes = ({ component: Component, ...rest }) => {
           if (AuthAPI.isAuthenticated()) {
             return <Component {...props} />;
           } else {
-            return <Redirect
+            return (
+              <Redirect
                 to={{
                   pathname: "/",
                   state: {
@@ -21,6 +21,7 @@ const AuthRoutes = ({ component: Component, ...rest }) => {
                   },
                 }}
               />
+            );
           }
         }}
       />

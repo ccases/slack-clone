@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import * as UserAPI from "../../UserAPI";
-import Headers from "../../Helpers/Headers";
+import React, { useEffect, useCallback, useRef } from "react";
 import { useSpring, animated } from "react-spring";
 import { MdClose, MdLock } from "react-icons/md";
 import { BiPhone, BiBell, BiChevronDown, BiStar } from "react-icons/bi";
@@ -9,12 +7,7 @@ import Avatar from "../Avatar/Avatar";
 import ChannelDetails from "./ChannelDetails";
 
 function ShowChannelMembers(props) {
-  const { chat, userDb, channelMembers, channelDetails } = props;
-  const [userArray, setUserArray] = useState([]);
-  const [header, setHeader] = useState(Headers);
-  const [allUsers, setAllUsers] = useState([]);
-  const [newMember, setNewMember] = useState("");
-  const [channelId, setChannelId] = useState("1224");
+  const { userDb, channelMembers, channelDetails } = props;
 
   const displayChannelMembers = channelMembers.map((member) => {
     let user = userDb.find((user) => user.id === member.user_id);
@@ -28,8 +21,6 @@ function ShowChannelMembers(props) {
   const getUid = (id) => {
     if (userDb[0].uid) {
       let uid = userDb.find((user) => user.id === id);
-      console.log(uid);
-
       if (uid) return uid.uid;
     }
   };

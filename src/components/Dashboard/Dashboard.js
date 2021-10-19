@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import Chat from "../Chat/Chat";
 import Headers from "../../Helpers/Headers";
-import AuthAPI from "../../Services/AuthAPI";
 import Header from "../Header/Header";
 import * as UserAPI from "../../UserAPI";
 import "./Dashboard.css";
@@ -22,8 +21,6 @@ function Dashboard() {
   const [loadingComplete, setLoadingComplete] = useState(false);
 
   const [isErrorLoading, setIsErrorLoading] = useState(false);
-
-  const [isInRecents, setIsInRecents] = useState(false);
 
   useEffect(() => {
     // get all users
@@ -74,7 +71,7 @@ function Dashboard() {
         });
       return () => clearInterval(interval);
     }, 5000);
-  }, []);
+  }, [headers]);
   useEffect(() => {
     // get rid of duplicates
     let filteredUids = new Set();

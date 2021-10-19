@@ -9,10 +9,9 @@ import SearchBar from "../SearchBar/SearchBar";
 import MsgPrompt from "../MsgPrompt/MsgPrompt";
 
 function AddMembers(props) {
-  const { ID, chat, userDb } = props;
+  const { chat, userDb } = props;
   const [userArray, setUserArray] = useState([]);
-  const [header, setHeader] = useState(Headers);
-  const [allUsers, setAllUsers] = useState([]);
+  const [header] = useState(Headers);
   const [newMember, setNewMember] = useState("");
   const [errors, setErrors] = useState(false);
   const [responseMsg, setResponseMsg] = useState("");
@@ -20,7 +19,6 @@ function AddMembers(props) {
   const onAddMember = (e) => {
     e.preventDefault();
     // console.log(chat.id)
-    console.log(newMember);
     let found = userDb.find((user) => user.uid === newMember);
     if (!found) {
       setErrors(true);

@@ -31,7 +31,7 @@ function SearchBar(props) {
         setIsActive(false);
       }
     },
-    [setIsActive, isActive]
+    [setIsActive]
   );
 
   useEffect(() => {
