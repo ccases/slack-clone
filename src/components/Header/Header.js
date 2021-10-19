@@ -8,7 +8,11 @@ import { FiClock } from "react-icons/fi";
 function Header({ userDb, channelDb, setChat, setUserDb }) {
   return (
     <div className="header">
-      <FiClock />
+      <FiClock 
+       style={{
+        fontSize: "18px",
+        color: "white",
+        }}/>
       <SearchBar
         userDb={userDb}
         setUserDb={setUserDb}

@@ -89,6 +89,7 @@ function Sidebar(props) {
                 <RiPencilFill
                   style={{
                     padding: "3px",
+                    marginRight: "20px",
                     backgroundColor: "white",
                     fontSize: "1.5rem",
                     color: "#49274b",
@@ -173,6 +174,10 @@ function Sidebar(props) {
             {!isInRecents && (
               <DirectMessages user={chat} setChat={setChat} chat={chat} />
             )}
+          </div>
+          <div className="disclaimer">
+             Disclaimer: This app is created for educational purposes only.<br/>
+             Cases | Cacas | Almeda &#169; 2021
           </div>
         </div>
       </div>
