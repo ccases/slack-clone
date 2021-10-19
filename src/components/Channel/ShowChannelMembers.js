@@ -3,41 +3,38 @@ import * as UserAPI from "../../UserAPI";
 import Headers from "../../Helpers/Headers";
 import { useSpring, animated } from "react-spring";
 import { MdClose, MdLock } from "react-icons/md";
-import { BiPhone, BiBell, BiChevronDown, BiStar } from "react-icons/bi"
+import { BiPhone, BiBell, BiChevronDown, BiStar } from "react-icons/bi";
 import "./ShowChannelMembers.css";
-import Avatar from '../Avatar/Avatar'
-import ChannelDetails from "./ChannelDetails"
+import Avatar from "../Avatar/Avatar";
+import ChannelDetails from "./ChannelDetails";
 
 function ShowChannelMembers(props) {
-  const { chat, userDb, channelMembers, channelDetails} = props;
+  const { chat, userDb, channelMembers, channelDetails } = props;
   const [userArray, setUserArray] = useState([]);
   const [header, setHeader] = useState(Headers);
   const [allUsers, setAllUsers] = useState([]);
   const [newMember, setNewMember] = useState("");
   const [channelId, setChannelId] = useState("1224");
-  
 
-const displayChannelMembers = channelMembers.map((member)=> {
-  let user = userDb.find(user => user.id === member.user_id)
-  return (
-    <div className = "channel-members" key={member.user_id}>
-    <Avatar user={user} size={30} /> {user.uid} 
-    </div>
-  )
-})
+  const displayChannelMembers = channelMembers.map((member) => {
+    let user = userDb.find((user) => user.id === member.user_id);
+    return (
+      <div className="channel-members" key={member.user_id}>
+        <Avatar user={user} size={30} /> {user.uid}
+      </div>
+    );
+  });
 
-const getUid = (id) => {
-  if (userDb[0].uid) {
-  let uid = userDb.find(user => user.id === id)
-  console.log(uid)
+  const getUid = (id) => {
+    if (userDb[0].uid) {
+      let uid = userDb.find((user) => user.id === id);
+      console.log(uid);
 
-if (uid) 
-    return (uid.uid)
-  }
+      if (uid) return uid.uid;
+    }
+  };
 
-}
-
-//modal
+  //modal
   const { showMembers, setShowMembers } = props;
   const animation = useSpring({
     config: {
@@ -69,84 +66,91 @@ if (uid)
     return () => document.removeEventListener("keydown", keyPress);
   }, [keyPress]);
 
-
   const dateFormat = (date) => {
+    const createdDate = new Date(date);
+    const month = createdDate.toLocaleString("default", { month: "long" });
+    const day = createdDate.getDate();
+    const year = createdDate.getFullYear();
 
-    const createdDate = new Date(date)
-     const month = createdDate.toLocaleString('default', { month: 'long' });
-     const day = createdDate.getDate();
-     const year = createdDate.getFullYear();
-    
-    return (`${month} ${day}, ${year} `
-    )
-  }
+    return `${month} ${day}, ${year} `;
+  };
 
   const notAvail = () => {
-    alert("Feature is not yet available")
-  }
-
+    alert("Feature is not yet available");
+  };
 
   return (
     <>
       {showMembers ? (
-        <div className="ch-details-background" onClick={closeModal} ref={modalRef}>
+        <div
+          className="ch-details-background"
+          onClick={closeModal}
+          ref={modalRef}
+        >
           <animated.div style={animation}>
             <div className="ch-details-modal-wrapper">
               <div className="ch-details-modal-content">
-                 <div className="channel-member-details" > 
-                 <div className="channel-member-header">
-                    <div className="channel-title"> 
-                      <MdLock/> 
-                      <span className="ch-name">
-                        {channelDetails.name}
-                      </span> 
+                <div className="channel-member-details">
+                  <div className="channel-member-header">
+                    <div className="channel-title">
+                      <MdLock style={{ fontSize: "1rem" }} />
+                      <span className="ch-name">{channelDetails.name}</span>
                     </div>
-                    <div className="ch-details-placeholder"> 
-                      <button type="submit" 
-                              className="ch-ph-button"
-                              onClick={notAvail}>
-                        <BiStar/><BiChevronDown/>
+                    <div className="ch-details-placeholder">
+                      <button
+                        type="submit"
+                        className="ch-ph-button"
+                        onClick={notAvail}
+                      >
+                        <BiStar />
+                        <BiChevronDown />
                       </button>
-                      <button type="submit" 
-                              className="ch-ph-button"
-                              onClick={notAvail}>
-                        <BiBell/> Get Notification for @ Mentions <BiChevronDown/> 
+                      <button
+                        type="submit"
+                        className="ch-ph-button"
+                        onClick={notAvail}
+                      >
+                        <BiBell /> Get Notification for @ Mentions{" "}
+                        <BiChevronDown />
                       </button>
-                      <button type="submit" 
-                              className="ch-ph-button"
-                              onClick={notAvail}>
-                        <BiPhone/> Start a Call
+                      <button
+                        type="submit"
+                        className="ch-ph-button"
+                        onClick={notAvail}
+                      >
+                        <BiPhone /> Start a Call
                       </button>
                     </div>
-                  
                   </div>
-               <div className="ch-details-container">   
-               <div className="ch-about">About</div>
-                <div className="all-ch-details">
-                  
-                    <ChannelDetails topic="Topic" subtopic ="Add a topic"/>
-                    <ChannelDetails topic="Description" subtopic ="Add a description"/>
-                    <div className="ch-about-details-1">
-                       <div className="created-by-label">
-                         Created by
-                       </div>
-                       <div className="created-by-sub-label">
-                        {getUid(channelDetails.owner_id)} on {dateFormat(channelDetails.created_at)}
-                       </div>
+                  <div className="ch-details-container">
+                    <div className="ch-about">About</div>
+                    <div className="all-ch-details">
+                      <ChannelDetails topic="Topic" subtopic="Add a topic" />
+                      <ChannelDetails
+                        topic="Description"
+                        subtopic="Add a description"
+                      />
+                      <div className="ch-about-details-1">
+                        <div className="created-by-label">Created by</div>
+                        <div className="created-by-sub-label">
+                          {getUid(channelDetails.owner_id)} on{" "}
+                          {dateFormat(channelDetails.created_at)}
+                        </div>
+                      </div>
+                    </div>
+                    <h2 className="ch-about">Channel Members</h2>
+                    <div className="display-channel-members">
+                      {" "}
+                      {displayChannelMembers}
+                    </div>
                   </div>
-                 
-                  </div>
-                  <h2 className="ch-about">Channel Members</h2>
-                    <div className="display-channel-members"> {displayChannelMembers}</div>
-                   
-                  </div>
-                   <MdClose
-                      className="close-modal-button"
-                      aria-label="Close modal"
-                      onClick={() => setShowMembers((prev) => !prev)}
-                    />
+                  <MdClose
+                    className="close-modal-button"
+                    aria-label="Close modal"
+                    onClick={() => setShowMembers((prev) => !prev)}
+                  />
                 </div>
-              </div> 
+              </div>
             </div>
           </animated.div>{" "}
         </div>

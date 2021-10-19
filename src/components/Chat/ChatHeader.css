@@ -7,9 +7,12 @@
 
 .header-child {
   padding-right: 30px;
+  display: flex;
+  align-items: center;
 }
 
 .header-child h1 {
+  text-align: center;
   cursor: pointer;
 }
 
