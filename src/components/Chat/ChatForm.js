@@ -27,7 +27,6 @@ function ChatForm(props) {
   const { userId, setConvo, chatType } = props;
   const [header] = useState(Headers);
   const [chatInput, setChatInput] = useState("");
-  const [isActive, setIsActive] = useState(false);
 
   var raw = {
     receiver_id: userId,
@@ -57,7 +56,6 @@ function ChatForm(props) {
     if (header["access-token"] === undefined) return;
     UserAPI.sendMsg(header, raw)
       .then((res) => {
-        console.log("Message sent!");
         UserAPI.getMsgs(header, userId, chatType)
           .then((res) => {
             setConvo(res.data.data);
@@ -79,8 +77,6 @@ function ChatForm(props) {
           }}
           value={chatInput}
           onKeyUp={(e) => handleKeyUp(e)}
-          onFocus={() => setIsActive(true)}
-          onBlur={() => setIsActive(false)}
         />
 
         <div className="chat-form-icons-container">

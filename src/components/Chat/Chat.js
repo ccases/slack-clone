@@ -23,14 +23,6 @@ function Chat(props) {
     }
   }, [chat]);
 
-  useEffect(() => {
-    console.log(
-      `Chatwith: ${chatType === "User" ? chatWith.uid : chatWith.name} ${
-        chatWith.id
-      }`
-    );
-  }, [chatWith]);
-
   return (
     <div className="chat">
       <div className="chat-header">
@@ -60,7 +52,6 @@ function Chat(props) {
         chatType={chatType}
       />
     </div>
-    
   );
 }
 

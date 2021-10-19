@@ -26,7 +26,7 @@ function ChatArea(props) {
     }
     setConvo([]); // reset all messages before going into the next one
     retrieveMsgs(userId, chatType, false);
-  }, [userId, header]);
+  }, [userId, header, setConvo, chatType]);
   useEffect(() => {
     if (header["access-token"] === undefined || userId === undefined) {
       return;
@@ -71,7 +71,6 @@ function ChatArea(props) {
   }, [userId, chatType]);
 
   const scrollToBottom = () => {
-    console.log("SCROLL");
     msgEnd.current.scrollIntoView({ behavior: "smooth" });
   };
   // checker if same day, or wihtin a certain timeframe
