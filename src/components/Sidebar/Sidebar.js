@@ -30,7 +30,10 @@ function Sidebar(props) {
 
   const [isInRecents, setIsInRecents] = useState(false);
   useEffect(() => {
-    if (chat.name) return;
+    if (chat.name) {
+      setIsInRecents(true);
+      return;
+    }
     // if channel do nothing
     else if (chat.uid) {
       let found = recentDms.find((recents) => recents.uid === chat.uid);

@@ -3,9 +3,10 @@ import * as UserAPI from "../../UserAPI";
 import Headers from "../../Helpers/Headers";
 import { useSpring, animated } from "react-spring";
 import { MdClose } from "react-icons/md";
-import { RiUserAddLine } from "react-icons/ri"
+import { RiUserAddLine } from "react-icons/ri";
 import "./AddMembers.css";
 import SearchBar from "../SearchBar/SearchBar";
+import MsgPrompt from "../MsgPrompt/MsgPrompt";
 
 function AddMembers(props) {
   const { ID, chat, userDb } = props;
@@ -13,52 +14,38 @@ function AddMembers(props) {
   const [header, setHeader] = useState(Headers);
   const [allUsers, setAllUsers] = useState([]);
   const [newMember, setNewMember] = useState("");
-  const [channelId, setChannelId] = useState("");
-
-  // used in Add members onclick
-  const getAllUsers = () => {
-    UserAPI.listOfUsers(header)
-      .then((res) => {
-        console.log("success");
-        setAllUsers(res.data.data);
-      })
-      .catch((e) => {
-        console.log("failed to get users");
-      });
-  };
+  const [errors, setErrors] = useState(false);
+  const [responseMsg, setResponseMsg] = useState("");
 
   const onAddMember = (e) => {
     e.preventDefault();
     // console.log(chat.id)
-    setChannelId(chat.id);
-    // console.log(channelId)
     console.log(newMember);
     let found = userDb.find((user) => user.uid === newMember);
     if (!found) {
-      alert("user not found");
+      setErrors(true);
+      setResponseMsg("");
+      setResponseMsg("No users with that ID!");
     } else {
       setUserArray(userArray.concat(found.id));
-      console.log(found.id);
-
-      UserAPI.addChannelMember(header, channelId, found.id)
+      UserAPI.addChannelMember(header, chat.id, found.id)
         .then((res) => {
-          console.log(res);
+          if (res.data.errors) {
+            setErrors(true);
+            setResponseMsg("");
+            setResponseMsg(res.data.errors);
+          } else {
+            setErrors(false);
+            setResponseMsg("");
+            setResponseMsg(`Added ${found.uid} to ${chat.name}!`);
+          }
         })
         .catch((e) => {
-          // console.log(e)
+          if (e.response) {
+            alert(e.response.data.errors.full_messages[0]);
+          }
         });
-      alert(`${found.id} is successfully added to the channel `);
     }
-  };
-
-  const getChannelDetails = () => {
-    UserAPI.getChannelDetails(header, ID)
-      .then((res) => {
-        console.log(res.data.data.channel_members);
-      })
-      .catch((e) => {
-        console.log("no channel details");
-      });
   };
 
   //modal
@@ -93,6 +80,15 @@ function AddMembers(props) {
     return () => document.removeEventListener("keydown", keyPress);
   }, [keyPress]);
 
+  useEffect(() => {
+    const showMsgTimer = setInterval(() => {
+      setResponseMsg("");
+    }, 5000);
+    return () => {
+      clearInterval(showMsgTimer);
+    };
+  }, [responseMsg]);
+
   return (
     <>
       {showAddMembers ? (
@@ -101,12 +97,10 @@ function AddMembers(props) {
             <div className="add-mem-modal-wrapper">
               <div className="add-mem-modal-content">
                 <div className="add-mem-header">
-                  <div className="add-mem-name-icon"> 
-                    <RiUserAddLine color={"#1164a3ff"}/>
+                  <div className="add-mem-name-icon">
+                    <RiUserAddLine color={"#1164a3ff"} />
                   </div>
-                  <div className="add-mem-name-label">
-                    Add People
-                  </div>
+                  <div className="add-mem-name-label">Add People</div>
                 </div>
                 <div className="add-mem-form-container">
                   <SearchBar
@@ -128,6 +122,8 @@ function AddMembers(props) {
           </animated.div>{" "}
         </div>
       ) : null}
+
+      {responseMsg && <MsgPrompt error={errors} message={responseMsg} />}
     </>
   );
 }

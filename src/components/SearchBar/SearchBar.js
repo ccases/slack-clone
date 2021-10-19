@@ -4,6 +4,7 @@ import Headers from "../../Helpers/Headers";
 import { useEffect } from "react/cjs/react.development";
 import * as UserAPI from "../../UserAPI";
 import { BiSearch } from "react-icons/bi";
+import MsgPrompt from "../MsgPrompt/MsgPrompt";
 import "./SearchBar.css";
 
 function SearchBar(props) {
@@ -20,6 +21,8 @@ function SearchBar(props) {
   const [header] = useState(Headers);
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [isActive, setIsActive] = useState(false);
+  const [errors, setErrors] = useState(false);
+  const [responseMsg, setResponseMsg] = useState("");
   const handleClick = useCallback(
     (e) => {
       let cl = e.target.classList;
@@ -30,6 +33,15 @@ function SearchBar(props) {
     },
     [setIsActive, isActive]
   );
+
+  useEffect(() => {
+    const showMsgTimer = setInterval(() => {
+      setResponseMsg("");
+    }, 5000);
+    return () => {
+      clearInterval(showMsgTimer);
+    };
+  }, [responseMsg]);
 
   useEffect(() => {
     document.addEventListener("click", handleClick);
@@ -53,8 +65,12 @@ function SearchBar(props) {
     if (e.target.textContent == null) return;
     let found = userDb.find((user) => user.uid === searchEntry);
     if (found === undefined) {
-      alert("No users with that id!");
+      setErrors(true);
+      setResponseMsg("");
+      setResponseMsg("No users with that ID!");
     } else {
+      setResponseMsg("");
+      setErrors(false);
       setChatWith(found);
       setIsActive(false);
     }
@@ -136,6 +152,8 @@ function SearchBar(props) {
       >
         {searchBarFor === "AddMembers" ? "Add member" : <BiSearch />}
       </button>
+
+      {responseMsg && <MsgPrompt error={errors} message={responseMsg} />}
     </div>
   );
 }
