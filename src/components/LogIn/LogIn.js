@@ -49,7 +49,7 @@ function LogIn() {
       .then((res) => handleHeader(res))
       .catch((e) => {
         // console.log(e.response.data.errors[0]);
-        // setError(e.response.data.errors[0]);
+        setError(e.response.data.errors[0]);
         console.log(e);
       });
   };

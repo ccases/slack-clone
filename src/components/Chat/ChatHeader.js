@@ -70,7 +70,7 @@ function ChatHeader({ chat, chatType, userDb, setUserDb }) {
             <div className="header-child">
               <h1 onClick={openAllMemberModal}>
                 {" "}
-                <MdLock />
+                <MdLock style={{ fontSize: "1.5rem" }} />
                 {chat.name}
               </h1>
             </div>

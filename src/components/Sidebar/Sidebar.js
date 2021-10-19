@@ -162,6 +162,9 @@ function Sidebar(props) {
               dmsExpanded ? "direct-messages expanded" : "direct-messages"
             }
           >
+            {!isInRecents && (
+              <DirectMessages user={chat} setChat={setChat} chat={chat} />
+            )}
             {recentDms.map((user) => {
               return (
                 <div className="direct-message-user">
@@ -174,13 +177,11 @@ function Sidebar(props) {
                 </div>
               );
             })}
-            {!isInRecents && (
-              <DirectMessages user={chat} setChat={setChat} chat={chat} />
-            )}
           </div>
           <div className="disclaimer">
-             Disclaimer: This app is created for educational purposes only.<br/>
-             Cases | Cacas | Almeda &#169; 2021
+            Disclaimer: This app is created for educational purposes only.
+            <br />
+            Cases | Cacas | Almeda &#169; 2021
           </div>
         </div>
       </div>
