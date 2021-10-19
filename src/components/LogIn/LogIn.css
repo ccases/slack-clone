@@ -151,6 +151,12 @@
   background: transparent;
 }
 
+.login-error {
+  text-align: center;
+  color: red;
+  font-style: italic;
+}
+
 .submit-btn {
   border: 0;
   outline: 0;
