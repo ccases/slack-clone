@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AddMembers from "../Channel/AddMembers";
 import ShowChannelMembers from "../Channel/ShowChannelMembers";
 import * as UserAPI from "../../UserAPI";
 import Headers from "../../Helpers/Headers";
 import "./ChatHeader.css";
+import { UserDbContext } from "../../Services/UserContexts";
 import { MdLock } from "react-icons/md";
 
-function ChatHeader({ chat, chatType, userDb, setUserDb }) {
+function ChatHeader({ chat, chatType }) {
   //modal add members
+  const [userDb, setUserDb] = useContext(UserDbContext);
   const [showAddMembers, setShowAddMembers] = useState(false);
   const openMemberModal = () => {
     setShowAddMembers((prev) => !prev);
@@ -61,7 +63,11 @@ function ChatHeader({ chat, chatType, userDb, setUserDb }) {
           />
         </div>
 
-        {chatType === "User" ? (
+        {!chat ? (
+          <div className="chat-title">
+            <h1>New Message</h1>
+          </div>
+        ) : chatType === "User" ? (
           <div className="chat-title">
             <h1> {chat.uid}</h1>
           </div>

@@ -1,22 +1,25 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import SearchResult from "./SearchResult";
 import Headers from "../../Helpers/Headers";
 import { useEffect } from "react/cjs/react.development";
 import * as UserAPI from "../../UserAPI";
 import { BiSearch } from "react-icons/bi";
 import MsgPrompt from "../MsgPrompt/MsgPrompt";
+
+import {
+  ChannelDbContext,
+  UserDbContext,
+  ChatContext,
+} from "../../Services/UserContexts";
 import "./SearchBar.css";
+import { IoFastFood } from "react-icons/io5";
 
 function SearchBar(props) {
-  const {
-    placeholder,
-    setChatWith,
-    userDb,
-    setUserDb,
-    searchBarFor,
-    onAddMember,
-    setNewMember,
-  } = props;
+  const { placeholder, searchBarFor, onAddMember, setNewMember } = props;
+
+  const [userDb, setUserDb] = useContext(UserDbContext);
+  const [chat, setChat] = useContext(ChatContext);
+  const [channelDb, setChannelDb] = useContext(ChannelDbContext);
   const [searchEntry, setSearchEntry] = useState("");
   const [header] = useState(Headers);
   const [searchSuggestions, setSearchSuggestions] = useState([]);
@@ -48,16 +51,19 @@ function SearchBar(props) {
     return () => document.removeEventListener("click", handleClick);
   }, [handleClick]);
 
+  const filterCallback = (chatObj) => {
+    if (chatObj.uid) return chatObj.uid.includes(searchEntry);
+    else if (chatObj.name) return chatObj.name.includes(searchEntry);
+  };
   useEffect(() => {
     if (header["access-token"] === undefined) return;
     if (userDb[0] === undefined) {
       alert("still loading db");
       return;
     }
-    setSearchSuggestions(
-      userDb.filter((user) => user.uid.includes(searchEntry))
-    );
-  }, [searchEntry, userDb, header]);
+    let arr = userDb.concat(channelDb);
+    setSearchSuggestions(arr.filter(filterCallback));
+  }, [searchEntry, userDb, header, channelDb]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -71,7 +77,7 @@ function SearchBar(props) {
     } else {
       setResponseMsg("");
       setErrors(false);
-      setChatWith(found);
+      setChat(found);
       setIsActive(false);
     }
   };
@@ -87,15 +93,24 @@ function SearchBar(props) {
   };
   let suggestions = searchSuggestions
     ? searchSuggestions.map((user) => {
-        return (
+        if (user.uid)
+          return (
+            <SearchResult
+              key={user.id}
+              user={user}
+              setSearchEntry={setSearchEntry}
+              submitHandler={submitHandler}
+              setNewMember={setNewMember}
+            />
+          );
+        else if (user.name)
           <SearchResult
             key={user.id}
-            user={user}
+            channel={user}
             setSearchEntry={setSearchEntry}
             submitHandler={submitHandler}
             setNewMember={setNewMember}
-          />
-        );
+          />;
       })
     : null;
   return (

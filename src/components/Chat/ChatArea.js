@@ -1,21 +1,15 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import ChatMsg from "./ChatMsg";
 import * as UserAPI from "../../UserAPI";
 import Headers from "../../Helpers/Headers";
+import { UserDbContext, ChatContext } from "../../Services/UserContexts";
 import "./ChatArea.css";
 import Avatar from "../Avatar/Avatar";
 
 function ChatArea(props) {
-  const {
-    userId,
-    userEmail,
-    convo,
-    setConvo,
-    chatType,
-    userDb,
-    chat,
-    setRecentDms,
-  } = props;
+  const { userId, userEmail, convo, setConvo, chatType, setRecentDms } = props;
+  const [chat, setChat] = useContext(ChatContext);
+  const [userDb, setUserDb] = useContext(UserDbContext);
   const [header] = useState(Headers);
   const msgEnd = useRef(null);
   const [prevLen, setPrevLen] = useState("");
@@ -24,28 +18,28 @@ function ChatArea(props) {
     if (header["access-token"] === undefined || userId === undefined) {
       return;
     }
-    setConvo([]); // reset all messages before going into the next one
-    retrieveMsgs(userId, chatType, false);
-  }, [userId, header, setConvo, chatType]);
-  useEffect(() => {
-    if (header["access-token"] === undefined || userId === undefined) {
-      return;
+    let type = "";
+    if (!chat) return;
+    if (chat["owner_id"] !== undefined) {
+      // if object passed has owner id, set chat type to channel!
+      type = "Channel";
+    } else if (chat["email"] !== undefined) {
+      // if chat has property: email, single user lang siya
+      type = "User";
     }
     setConvo([]); // reset all messages before going into the next one
-    retrieveMsgs(userId, chatType, false);
-
-    let clen = convo.length;
-    if (clen > 1) {
-      setPrevLen(clen);
-    }
-  }, []);
+    if (userId === undefined) console.log("undefined ID at 31");
+    retrieveMsgs(userId, type, false);
+  }, [userId, header, setConvo, chat]);
 
   useEffect(() => {
-    let clen = convo.length;
-    if (clen > 1) {
-      if (prevLen !== clen) {
-        scrollToBottom();
-        setPrevLen(clen);
+    if (convo) {
+      let clen = convo.length;
+      if (clen > 1) {
+        if (prevLen !== clen) {
+          scrollToBottom();
+          setPrevLen(clen);
+        }
       }
     }
   }, [chat, convo]);
@@ -57,7 +51,6 @@ function ChatArea(props) {
     }
 
     const interval = setInterval(() => {
-      retrieveMsgs(userId, chatType, true);
       UserAPI.getRecent(header)
         .then((res) => {
           setRecentDms(res.data.data);
@@ -65,6 +58,8 @@ function ChatArea(props) {
         .catch((e) => {
           console.log(e);
         });
+      if (userId === undefined) console.log("undefined ID at 61");
+      retrieveMsgs(userId, chatType, true);
     }, 3000);
 
     return () => clearInterval(interval);
@@ -111,6 +106,7 @@ function ChatArea(props) {
   };
 
   const retrieveMsgs = (userId, chatType, isChecking = false) => {
+    if (!userId || !chat) return;
     UserAPI.getMsgs(header, userId, chatType).then((res) => {
       let len = res.data.data.length;
       let convoLen = convo.length;
@@ -160,6 +156,7 @@ function ChatArea(props) {
     if (chatType === "Channel" && chat.owner_id) {
       channelOwner = userDb.find((user) => user.id === chat.owner_id).uid;
     }
+    if (chat === undefined) return <div></div>;
     if (userEmail === header.uid)
       return (
         <div className="messages-header">
