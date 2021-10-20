@@ -63,7 +63,11 @@ function ChatHeader({ chat, chatType }) {
           />
         </div>
 
-        {chatType === "User" ? (
+        {!chat ? (
+          <div className="chat-title">
+            <h1>New Message</h1>
+          </div>
+        ) : chatType === "User" ? (
           <div className="chat-title">
             <h1> {chat.uid}</h1>
           </div>

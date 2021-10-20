@@ -30,7 +30,7 @@ import {
 } from "react-icons/bs";
 
 function ChatForm(props) {
-  const { userId, setConvo, chatType } = props;
+  const { userId, setConvo, chatType, newChat } = props;
 
   const [chat, setChat] = useContext(ChatContext);
   const [channelDb, setChannelDb] = useContext(ChannelDbContext);
@@ -65,6 +65,12 @@ function ChatForm(props) {
     let input = chatInput;
     if (chatInput == null || input.trim().length === 0) return;
     if (header["access-token"] === undefined) return;
+    if (!chat) {
+      raw.receiver_id = newChat.id;
+      if (!newChat) alert("Enter a valid receiver first!");
+      setChat(newChat);
+      setConvo([]);
+    }
     UserAPI.sendMsg(header, raw)
       .then((res) => {
         UserAPI.getMsgs(header, userId, chatType)

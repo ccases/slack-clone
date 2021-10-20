@@ -12,6 +12,7 @@ import {
   ChatContext,
 } from "../../Services/UserContexts";
 import "./SearchBar.css";
+import { IoFastFood } from "react-icons/io5";
 
 function SearchBar(props) {
   const { placeholder, searchBarFor, onAddMember, setNewMember } = props;
@@ -50,16 +51,19 @@ function SearchBar(props) {
     return () => document.removeEventListener("click", handleClick);
   }, [handleClick]);
 
+  const filterCallback = (chatObj) => {
+    if (chatObj.uid) return chatObj.uid.includes(searchEntry);
+    else if (chatObj.name) return chatObj.name.includes(searchEntry);
+  };
   useEffect(() => {
     if (header["access-token"] === undefined) return;
     if (userDb[0] === undefined) {
       alert("still loading db");
       return;
     }
-    setSearchSuggestions(
-      userDb.filter((user) => user.uid.includes(searchEntry))
-    );
-  }, [searchEntry, userDb, header]);
+    let arr = userDb.concat(channelDb);
+    setSearchSuggestions(arr.filter(filterCallback));
+  }, [searchEntry, userDb, header, channelDb]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -89,15 +93,24 @@ function SearchBar(props) {
   };
   let suggestions = searchSuggestions
     ? searchSuggestions.map((user) => {
-        return (
+        if (user.uid)
+          return (
+            <SearchResult
+              key={user.id}
+              user={user}
+              setSearchEntry={setSearchEntry}
+              submitHandler={submitHandler}
+              setNewMember={setNewMember}
+            />
+          );
+        else if (user.name)
           <SearchResult
             key={user.id}
-            user={user}
+            channel={user}
             setSearchEntry={setSearchEntry}
             submitHandler={submitHandler}
             setNewMember={setNewMember}
-          />
-        );
+          />;
       })
     : null;
   return (

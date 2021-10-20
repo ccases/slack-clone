@@ -93,7 +93,12 @@ function Sidebar(props) {
             <div className="sidebar-info">
               <div className="sidebar-h2">
                 Slack Clone{" "}
-                <div>
+                <div
+                  className="sidebar-newmsg"
+                  onClick={() => {
+                    setChat("");
+                  }}
+                >
                   <RiPencilFill
                     style={{
                       padding: "3px",
