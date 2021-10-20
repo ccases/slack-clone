@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
 import ChatArea from "./ChatArea";
 import ChatForm from "./ChatForm";
+import { UserDbContext, ChatContext } from "../../Services/UserContexts";
 import "./Chat.css";
 import ChatHeader from "./ChatHeader";
+import { useContext } from "react/cjs/react.development";
 
 function Chat(props) {
-  const { chat, recentDms, userDb, setRecentDms, setUserDb } = props;
+  const { recentDms, setRecentDms } = props;
   const [chatWith, setChatWith] = useState("");
   const [convo, setConvo] = useState([]);
   const [chatType, setChatType] = useState("User"); // can be Channel, CAPITALIZE FIRST LETTER!
+
+  const [chat, setChat] = useContext(ChatContext);
+  const [userDb, setUserDb] = useContext(UserDbContext);
 
   useEffect(() => {
     if (!chat) return;
@@ -26,12 +31,7 @@ function Chat(props) {
   return (
     <div className="chat">
       <div className="chat-header">
-        <ChatHeader
-          chat={chat}
-          chatType={chatType}
-          userDb={userDb}
-          setUserDb={setUserDb}
-        />
+        <ChatHeader chat={chat} chatType={chatType} />
       </div>
       <ChatArea
         userId={chatWith.id}
@@ -41,8 +41,6 @@ function Chat(props) {
         chatType={chatType}
         recentDms={recentDms}
         setRecentDms={setRecentDms}
-        chat={chat}
-        userDb={userDb}
       />
       <ChatForm
         userId={chatWith.id}

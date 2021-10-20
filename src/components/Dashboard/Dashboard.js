@@ -4,6 +4,11 @@ import Chat from "../Chat/Chat";
 import Headers from "../../Helpers/Headers";
 import Header from "../Header/Header";
 import * as UserAPI from "../../UserAPI";
+import {
+  ChannelDbContext,
+  UserDbContext,
+  ChatContext,
+} from "../../Services/UserContexts";
 import "./Dashboard.css";
 
 function Dashboard() {
@@ -99,12 +104,11 @@ function Dashboard() {
     if (channelsAreLoaded) n++;
 
     if (n === dependencies) setLoadingComplete(true);
-
-    let found = userDb.find((user) => user.uid === headers.uid);
-    setChat(found);
+    if (userDb) {
+      let found = userDb.find((user) => user.uid === headers.uid);
+      setChat(found);
+    }
   }, [usersAreLoaded, recentsAreLoaded, channelsAreLoaded]);
-
-  useEffect(() => {}, [filteredRecents, channelDb]);
 
   const displayErrorMsg = () => {
     return <div>Please log in again to continue</div>;
@@ -112,42 +116,25 @@ function Dashboard() {
   return (
     <div className="dashboard">
       {isErrorLoading ? displayErrorMsg() : null}
-
-      <div className="main-container">
-        <div className="header-container">
-          {loadingComplete && (
-            <Header
-              userDb={userDb}
-              setUserDb={setUserDb}
-              channelDb={channelDb}
-              setChat={setChat}
-            />
-          )}
-        </div>
-        <div className="sidebar-dashboard">
-          {loadingComplete && (
-            <Sidebar
-              userDb={userDb}
-              recentDms={filteredRecents}
-              channelDb={channelDb}
-              chat={chat}
-              setChat={setChat}
-              setChannelDb={setChannelDb}
-            />
-          )}
-        </div>
-        <div className="chat-dashboard">
-          {loadingComplete && (
-            <Chat
-              userDb={userDb}
-              chat={chat}
-              recentDms={recentDms}
-              setRecentDms={setRecentDms}
-              setUserDb={setUserDb}
-            />
-          )}
-        </div>
-      </div>
+      <ChatContext.Provider value={[chat, setChat]}>
+        <ChannelDbContext.Provider value={[channelDb, setChannelDb]}>
+          <UserDbContext.Provider value={[userDb, setUserDb]}>
+            <div className="main-container">
+              <div className="header-container">
+                {loadingComplete && <Header />}
+              </div>
+              <div className="sidebar-dashboard">
+                {loadingComplete && <Sidebar recentDms={filteredRecents} />}
+              </div>
+              <div className="chat-dashboard">
+                {loadingComplete && (
+                  <Chat recentDms={recentDms} setRecentDms={setRecentDms} />
+                )}
+              </div>
+            </div>
+          </UserDbContext.Provider>
+        </ChannelDbContext.Provider>
+      </ChatContext.Provider>
     </div>
   );
 }

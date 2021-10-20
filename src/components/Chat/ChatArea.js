@@ -1,21 +1,15 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import ChatMsg from "./ChatMsg";
 import * as UserAPI from "../../UserAPI";
 import Headers from "../../Helpers/Headers";
+import { UserDbContext, ChatContext } from "../../Services/UserContexts";
 import "./ChatArea.css";
 import Avatar from "../Avatar/Avatar";
 
 function ChatArea(props) {
-  const {
-    userId,
-    userEmail,
-    convo,
-    setConvo,
-    chatType,
-    userDb,
-    chat,
-    setRecentDms,
-  } = props;
+  const { userId, userEmail, convo, setConvo, chatType, setRecentDms } = props;
+  const [chat, setChat] = useContext(ChatContext);
+  const [userDb, setUserDb] = useContext(UserDbContext);
   const [header] = useState(Headers);
   const msgEnd = useRef(null);
   const [prevLen, setPrevLen] = useState("");

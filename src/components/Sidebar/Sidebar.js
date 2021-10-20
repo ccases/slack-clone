@@ -16,12 +16,17 @@ import {
   RiArrowRightSFill,
   RiAddFill,
 } from "react-icons/ri";
+import { ChannelDbContext, ChatContext } from "../../Services/UserContexts";
 import SidebarOptions from "./SidebarOptions";
 import DirectMessages from "../DirectMessages/DirectMessages";
-import { useEffect } from "react/cjs/react.development";
+import { useContext, useEffect } from "react/cjs/react.development";
 
 function Sidebar(props) {
-  const { recentDms, channelDb, setChat, chat } = props;
+  const { recentDms } = props;
+
+  const [chat, setChat] = useContext(ChatContext);
+  const [channelDb, setChannelDb] = useContext(ChannelDbContext);
+
   const [setUserChannels] = useState([]);
   const [setUserName] = useState([]);
   const [dmsExpanded, setDmsExpanded] = useState(true);
@@ -65,7 +70,7 @@ function Sidebar(props) {
               setChat(selectedChannel);
             }}
             className={"channel-name " + (isActive ? "isActiveChat" : "")}
-            key={channel.id}
+            key={channel.name}
           >
             <RiLockLine /> &nbsp; {channel.name}
           </div>
@@ -88,16 +93,18 @@ function Sidebar(props) {
             <div className="sidebar-info">
               <div className="sidebar-h2">
                 Slack Clone{" "}
-                <RiPencilFill
-                  style={{
-                    padding: "3px",
-                    marginRight: "20px",
-                    backgroundColor: "white",
-                    fontSize: "1.5rem",
-                    color: "#49274b",
-                    borderRadius: "999px",
-                  }}
-                />
+                <div>
+                  <RiPencilFill
+                    style={{
+                      padding: "3px",
+                      marginRight: "20px",
+                      backgroundColor: "white",
+                      fontSize: "1.5rem",
+                      color: "#49274b",
+                      borderRadius: "999px",
+                    }}
+                  />
+                </div>
               </div>
               <div className="user-name">
                 <h3 className="sidebar-h3">

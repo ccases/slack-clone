@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import * as UserAPI from "../../UserAPI";
 import Headers from "../../Helpers/Headers";
 import "./ChatForm.css";
+import {
+  ChannelDbContext,
+  UserDbContext,
+  ChatContext,
+} from "../../Services/UserContexts";
 import {
   IoAtOutline,
   IoSend,
@@ -9,6 +14,7 @@ import {
   IoVideocamOutline,
   IoMicOutline,
 } from "react-icons/io5";
+
 import {
   BsEmojiSmile,
   BsFillLightningFill,
@@ -25,6 +31,11 @@ import {
 
 function ChatForm(props) {
   const { userId, setConvo, chatType } = props;
+
+  const [chat, setChat] = useContext(ChatContext);
+  const [channelDb, setChannelDb] = useContext(ChannelDbContext);
+  const [userDb, setUserDb] = useContext(UserDbContext);
+
   const [header] = useState(Headers);
   const [chatInput, setChatInput] = useState("");
 
