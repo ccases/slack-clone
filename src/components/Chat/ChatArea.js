@@ -51,8 +51,6 @@ function ChatArea(props) {
     }
 
     const interval = setInterval(() => {
-      if (userId === undefined) console.log("undefined ID at 31");
-      retrieveMsgs(userId, chatType, true);
       UserAPI.getRecent(header)
         .then((res) => {
           setRecentDms(res.data.data);
@@ -60,6 +58,8 @@ function ChatArea(props) {
         .catch((e) => {
           console.log(e);
         });
+      if (userId === undefined) console.log("undefined ID at 61");
+      retrieveMsgs(userId, chatType, true);
     }, 3000);
 
     return () => clearInterval(interval);
